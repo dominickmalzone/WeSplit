@@ -1,0 +1,14 @@
+//===================================================================
+//  CLEARFIX
+//===================================================================
+
+// Micro clearfix for containing floats.
+// @see: http://goo.gl/zcbtis
+//
+@mixin clearfix {
+  &:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+}

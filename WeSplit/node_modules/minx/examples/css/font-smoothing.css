@@ -1,0 +1,7 @@
+/*===================================================================
+   EXAMPLE : FONT-SMOOTHING
+===================================================================*/
+.example-1 {
+  /* @include font-smoothing; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }

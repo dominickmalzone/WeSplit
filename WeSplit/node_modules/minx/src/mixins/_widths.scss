@@ -1,0 +1,37 @@
+//===================================================================
+//  WIDTHS
+//===================================================================
+
+$width-delimiter: \/ !default;
+$width-prefix: w- !default;
+$width-util-denominators: (2, 3, 4, 5) !default;
+
+
+// @param {number} $denominator
+// @param {string} $prefix [$width-prefix]
+// @param {boolean} $inclusive [true]
+//
+@mixin width-classes($denominator, $prefix: $width-prefix, $delimiter: $width-delimiter, $inclusive: true) {
+  @for $numerator from 1 through $denominator {
+    @if $numerator < $denominator or $inclusive {
+      .#{$prefix}#{$numerator}#{$delimiter}#{$denominator} {
+        width: percentage($numerator / $denominator);
+      }
+    }
+  }
+}
+
+
+// @param {string} $prefix [$width-prefix]
+// @param {list} $denominators [$width-util-denominators]
+//
+@mixin width-util-classes($prefix: $width-prefix, $delimiter: $width-delimiter, $denominators: $width-util-denominators) {
+  .#{$prefix}1#{$width-delimiter}1,
+  .#{$prefix}full {
+    width: 100%;
+  }
+
+  @each $denominator in $denominators {
+    @include width-classes($denominator, $prefix, $delimiter, false);
+  }
+}

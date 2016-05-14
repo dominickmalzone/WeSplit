@@ -1,0 +1,30 @@
+//===================================================================
+//  UTILS : TEXT
+//===================================================================
+
+.u-txt-break {
+  word-wrap: break-word;
+}
+
+
+.u-txt-center {
+  text-align: center;
+}
+
+
+.u-txt-left {
+  text-align: left;
+}
+
+
+.u-txt-right {
+  text-align: right;
+}
+
+
+.u-txt-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}

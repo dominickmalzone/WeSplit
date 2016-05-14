@@ -1,0 +1,21 @@
+//===================================================================
+//  UTILS : ACCESSIBILITY
+//===================================================================
+
+// Control how numerals are spoken by screen readers.
+// Numerals "237" will be spoken as "Two Three Seven".
+// Useful for phone numbers, PIN numbers, etc.
+//
+.a11y-digits {
+  speak-numeral: digits;
+}
+
+
+// Make an element visible to screen readers only.
+.a11y-reader-only {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

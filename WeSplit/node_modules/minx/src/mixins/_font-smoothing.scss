@@ -1,0 +1,11 @@
+//===================================================================
+//  FONT-SMOOTHING
+//===================================================================
+
+// Make font rendering behaviour on OSX more consistent with
+// other systems that do not use sub-pixel anti-aliasing.
+//
+@mixin font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

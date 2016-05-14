@@ -1,0 +1,25 @@
+/*===================================================================
+   EXAMPLE : EM
+===================================================================*/
+@import "imports";
+
+
+.example-1 {
+  /* font-size: em(0) => 0 */
+  font-size: em(0);
+}
+
+.example-2 {
+  /* font-size: em(0px) => 0 */
+  font-size: em(0px);
+}
+
+.example-3 {
+  /* font-size: em(12px) => 0.75em */
+  font-size: em(12px);
+}
+
+.example-3 {
+  /* font-size: em(18px, 12px) => 1.5em */
+  font-size: em(18px, 12px);
+}

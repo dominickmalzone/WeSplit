@@ -1,0 +1,17 @@
+/*===================================================================
+   EXAMPLE : FLEXBOX
+===================================================================*/
+.example-1 {
+  /* @include flex-center-all(column) */
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; }

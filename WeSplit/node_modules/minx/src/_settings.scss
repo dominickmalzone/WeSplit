@@ -1,0 +1,60 @@
+//===================================================================
+//  DEFAULT SETTINGS
+//===================================================================
+
+$root-font-size: 16px !default;
+
+$base-background-color: #fff !default;
+$base-font-color: #333 !default;
+$base-font-family: Helvetica Neue, Arial, sans-serif !default;
+$base-font-size: $root-font-size !default;
+$base-line-height: 21px !default;
+
+
+//===============================================
+//  GRID
+//===============================================
+//$grid-max-width: 1000px !default;
+//$grid-total-columns: 12 !default;
+//$grid-gutter-size: 30px !default;
+
+//$grid-row-class: g-row !default;
+//$grid-column-class: g-col !default;
+//$grid-offset-class: offset- !default;
+//$grid-pull-class: pull- !default;
+//$grid-push-class: push- !default;
+
+//$grid-include-row: true !default;
+//$grid-include-column: true !default;
+//$grid-include-offset: true !default;
+//$grid-include-pull: true !default;
+//$grid-include-push: true !default;
+//$grid-include-responsive: true !default;
+
+
+//===============================================
+//  MEDIA-QUERY
+//===============================================
+
+//$breakpoints: (
+//  small  : 0,
+//  medium : 740px,
+//  large  : 980px,
+//  xlarge : 1300px
+//) !default;
+
+
+//$breakpoint-prefixes: (
+//  small  : sm-,
+//  medium : md-,
+//  large  : lg-,
+//  xlarge : xl-
+//) !default;
+
+
+//===============================================
+//  Widths
+//===============================================
+//$width-delimiter: \/ !default;
+//$width-prefix: w- !default;
+//$width-util-denominators: (2, 3, 4, 5) !default;

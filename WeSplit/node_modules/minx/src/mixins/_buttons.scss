@@ -1,0 +1,17 @@
+//===================================================================
+//  BUTTONS
+//===================================================================
+
+// 1. Reset default cursor for disabled elements.
+//
+// 2. Normalize styles for <a> elements styled as buttons.
+//
+@mixin button-base {
+  &[disabled] {
+    cursor: default; // [1]
+  }
+
+  display: inline-block; // [2]
+  text-align: center;    // [2]
+  text-decoration: none; // [2]
+}

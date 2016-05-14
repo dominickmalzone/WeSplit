@@ -1,0 +1,19 @@
+//===================================================================
+//  BUTTON
+//===================================================================
+
+// 1. Address `overflow` set to `hidden` in IE 8/9/10/11.
+//
+// 2. Make it obvious that button is clickable.
+//
+// 3. Remove inner padding and border in Firefox 4+.
+//
+button {
+  overflow: visible; // [1]
+  cursor: pointer;   // [2]
+
+  &::-moz-focus-inner {
+    border: 0;  // [3]
+    padding: 0; // [3]
+  }
+}

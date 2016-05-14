@@ -1,0 +1,58 @@
+/*===================================================================
+   EXAMPLE : GRID
+===================================================================*/
+.example-1 {
+  /* @include grid-row */
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1000px; }
+  .example-1:before, .example-1:after {
+    content: '';
+    display: table; }
+  .example-1:after {
+    clear: both; }
+  .example-1 .example-1 {
+    margin: 0 -15px;
+    width: auto; }
+
+.example-2 {
+  /* @include grid-row(600px) */
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px; }
+  .example-2:before, .example-2:after {
+    content: '';
+    display: table; }
+  .example-2:after {
+    clear: both; }
+  .example-2 .example-2 {
+    margin: 0 -15px;
+    width: auto; }
+
+.example-3 {
+  /* @include grid-column */
+  float: left;
+  position: relative;
+  padding-left: 15px;
+  padding-right: 15px; }
+
+.example-4 {
+  /* @include grid-column($gutter: 40px) */
+  float: left;
+  position: relative;
+  padding-left: 20px;
+  padding-right: 20px; }
+
+.example-5 {
+  /* @include grid-offset(3) */
+  margin-left: 50%; }
+
+.example-6 {
+  /* @include grid-pull(3) */
+  left: auto;
+  right: 50%; }
+
+.example-7 {
+  /* @include grid-push(3) */
+  left: 50%;
+  right: auto; }

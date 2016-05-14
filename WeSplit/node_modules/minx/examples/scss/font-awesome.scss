@@ -1,0 +1,28 @@
+/*===================================================================
+   EXAMPLE : FONT-AWESOME
+===================================================================*/
+@import "imports";
+
+
+/* @include fa-icon-base; */
+.icon {
+  @include fa-icon-base;
+}
+
+
+/* @include fa-icon(twitter) */
+.icon--twitter {
+  @include fa-icon(twitter);
+}
+
+
+/* @include fa-icon(github, $position: after) */
+.icon--github {
+  @include fa-icon(github, $position: after);
+}
+
+
+/* @include fa-icon(google, true) */
+.google-icon {
+  @include fa-icon(google, true);
+}

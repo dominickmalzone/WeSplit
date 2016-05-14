@@ -1,0 +1,10 @@
+//===================================================================
+//  STRIP-UNIT
+//===================================================================
+
+// @param {number} $value
+// @returns {number} $value with unit removed
+//
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}

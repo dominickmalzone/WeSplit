@@ -1,0 +1,35 @@
+@charset "UTF-8";
+/*===================================================================
+   EXAMPLE : FONT-AWESOME
+===================================================================*/
+/* @include fa-icon-base; */
+.icon {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  text-decoration: none;
+  -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+          transform: translate(0, 0); }
+
+/* @include fa-icon(twitter) */
+.icon--twitter:before {
+  content: ""; }
+
+/* @include fa-icon(github, $position: after) */
+.icon--github:after {
+  content: ""; }
+
+/* @include fa-icon(google, true) */
+.google-icon {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  text-decoration: none;
+  -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+          transform: translate(0, 0); }
+  .google-icon:before {
+    content: ""; }

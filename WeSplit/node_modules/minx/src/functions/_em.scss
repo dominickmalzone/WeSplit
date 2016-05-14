@@ -1,0 +1,21 @@
+//===================================================================
+//  EM
+//===================================================================
+
+// @requires settings
+// @requires {function} strip-unit
+//
+// @param {number} $value - desired value in pixels
+// @param {number} $base [$root-font-size] - base font-size in pixels
+//
+// @returns {number} $value converted to em, or 0
+//
+@function em($value, $base: $root-font-size) {
+  $value: strip-unit($value);
+
+  @if $value == 0 {
+    @return $value;
+  }
+
+  @return $value / strip-unit($base) * 1em;
+}

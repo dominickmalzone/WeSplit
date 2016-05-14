@@ -1,0 +1,15 @@
+//===================================================================
+//  IMAGE
+//===================================================================
+
+// 1. Remove border when inside <a> element in IE 8/9/10.
+//
+// 2. Fluid-width for responsive layouts.
+//
+// 3. Remove whitespace that appears below <img> elements.
+//
+img {
+  border: 0;              // [1]
+  max-width: 100%;        // [2]
+  vertical-align: middle; // [3]
+}

@@ -1,0 +1,59 @@
+/*===================================================================
+   EXAMPLE : MEDIA-QUERY
+===================================================================*/
+/* @include media-query { ... } */
+@media screen {
+  .example-1 {
+    font-size: 14px; } }
+
+/* @include media-query(medium) { ... } */
+@media screen and (min-width: 46.25em) {
+  .example-2 {
+    font-size: 14px; } }
+
+/* @include media-query($max: medium) { ... } */
+@media screen and (max-width: 46.24em) {
+  .example-3 {
+    font-size: 14px; } }
+
+/* @include media-query(medium, large) { ... } */
+@media screen and (min-width: 46.25em) and (max-width: 61.24em) {
+  .example-4 {
+    font-size: 14px; } }
+
+/* @include media-query(600, 800px) { ... } */
+@media screen and (min-width: 37.5em) and (max-width: 49.99em) {
+  .example-5 {
+    font-size: 14px; } }
+
+/* @include media-query(medium, large, $orientation: landscape) { ... } */
+@media screen and (min-width: 46.25em) and (max-width: 61.24em) and (orientation: landscape) {
+  .example-6 {
+    font-size: 14px; } }
+
+/* @include media-query($orientation: portrait) { ... } */
+@media screen and (orientation: portrait) {
+  .example-7 {
+    font-size: 14px; } }
+
+/* @include media-query(medium, $pixel-ratio: 1.3) { ... } */
+@media screen and (-webkit-min-device-pixel-ratio: 1.3) and (min-width: 46.25em), screen and (min-resolution: 1.3dppx) and (min-width: 46.25em) {
+  .example-8 {
+    font-size: 14px; } }
+
+/* @include media-query($type: print) { ... } */
+@media print {
+  .example-9 {
+    color: #000; } }
+
+/*
+  .example-10 {
+    font-size: 17px
+    @include media-query(small) { font-size: 14px; }
+  }
+*/
+.example-10 {
+  font-size: 17px; }
+  @media screen {
+    .example-10 {
+      font-size: 14px; } }

@@ -1,0 +1,72 @@
+//===================================================================
+//  MEDIA-QUERY
+//===================================================================
+
+// @type {list}
+$breakpoints: (
+  small  : 0,
+  medium : 740px,
+  large  : 980px,
+  xlarge : 1300px
+) !default;
+
+
+// @type {list}
+$breakpoint-prefixes: (
+  small  : sm-,
+  medium : md-,
+  large  : lg-,
+  xlarge : xl-
+) !default;
+
+
+// @requires {function} em
+//
+// @param {number} $value
+//
+@function media-query-width($value) {
+  @if map-has-key($breakpoints, $value) {
+    $value: map-get($breakpoints, $value);
+  }
+
+  @if $value == 0 {
+    @return $value;
+  }
+
+  @return em($value);
+}
+
+
+// @param {number|null} $min [null]
+// @param {number|null} $max [null]
+// @param {string} $orientation [null]
+// @param {number} $pixel-ratio [null] - @see http://bjango.com/articles/min-device-pixel-ratio/
+// @param {string} $type [null]
+//
+@mixin media-query($min: null, $max: null, $orientation: null, $pixel-ratio: null, $type: 'screen') {
+  $query: $type;
+
+  @if $pixel-ratio {
+    $query: $query + ' and (min-resolution: #{$pixel-ratio * 1dppx})';
+  }
+
+  @if $min {
+    $min-width: media-query-width($min);
+    @if $min-width > 0 {
+      $query: $query + ' and (min-width: #{$min-width})';
+    }
+  }
+
+  @if $max {
+    $max-width: media-query-width($max) - .01em;
+    $query: $query + ' and (max-width: #{$max-width})';
+  }
+
+  @if $orientation {
+    $query: $query + ' and (orientation: #{$orientation})';
+  }
+
+  @media #{$query} {
+    @content;
+  }
+}

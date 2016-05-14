@@ -1,0 +1,20 @@
+/*===================================================================
+   EXAMPLE : REM
+===================================================================*/
+@import "imports";
+
+
+.example-1 {
+  /* font-size: rem(0) => 0 */
+  font-size: rem(0);
+}
+
+.example-2 {
+  /* font-size: rem(0px) => 0 */
+  font-size: rem(0px);
+}
+
+.example-3 {
+  /* font-size: rem(12px) => 0.75rem */
+  font-size: rem(12px);
+}

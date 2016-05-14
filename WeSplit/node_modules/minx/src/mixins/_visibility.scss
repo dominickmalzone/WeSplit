@@ -1,0 +1,20 @@
+//===================================================================
+//  VISIBILITY
+//===================================================================
+
+@mixin visibility-classes() {
+  @each $key, $value in $breakpoints {
+    $min: if($value == 0, null, $key);
+    $prefix: map-get($breakpoint-prefixes, $key);
+
+    @include media-query($min) {
+      .#{$prefix}hide {
+        display: none;
+      }
+
+      .#{$prefix}show {
+        display: inherit;
+      }
+    }
+  }
+}

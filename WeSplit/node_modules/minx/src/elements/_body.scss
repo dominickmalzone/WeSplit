@@ -1,0 +1,10 @@
+//===================================================================
+//  BODY
+//===================================================================
+
+body {
+  font-family: $base-font-family;
+  font-size: ($base-font-size / $root-font-size) * 1rem;
+  line-height: $base-line-height / $base-font-size;
+  color: $base-font-color;
+}

@@ -1,0 +1,110 @@
+/*===================================================================
+   EXAMPLE : MEDIA-QUERY
+===================================================================*/
+//===============================================
+//  Default settings
+//-----------------------------------------------
+$breakpoints: (
+  small  : 0,
+  medium : 740px,
+  large  : 980px,
+  xlarge : 1300px
+) !default;
+
+
+$breakpoint-prefixes: (
+  small  : sm-,
+  medium : md-,
+  large  : lg-,
+  xlarge : xl-
+) !default;
+
+
+@import "imports";
+
+
+/* @include media-query { ... } */
+@include media-query {
+  .example-1 {
+    font-size: 14px;
+  }
+};
+
+
+/* @include media-query(medium) { ... } */
+@include media-query(medium) {
+  .example-2 {
+    font-size: 14px;
+  }
+};
+
+
+/* @include media-query($max: medium) { ... } */
+@include media-query($max: medium) {
+  .example-3 {
+    font-size: 14px;
+  }
+};
+
+
+/* @include media-query(medium, large) { ... } */
+@include media-query(medium, large) {
+  .example-4 {
+    font-size: 14px;
+  }
+};
+
+
+/* @include media-query(600, 800px) { ... } */
+@include media-query(600, 800px) {
+  .example-5 {
+    font-size: 14px;
+  }
+};
+
+
+/* @include media-query(medium, large, $orientation: landscape) { ... } */
+@include media-query(medium, large, $orientation: landscape) {
+  .example-6 {
+    font-size: 14px;
+  }
+};
+
+
+/* @include media-query($orientation: portrait) { ... } */
+@include media-query($orientation: portrait) {
+  .example-7 {
+    font-size: 14px;
+  }
+};
+
+
+/* @include media-query(medium, $pixel-ratio: 1.3) { ... } */
+@include media-query(medium, $pixel-ratio: 1.3) {
+  .example-8 {
+    font-size: 14px;
+  }
+}
+
+
+/* @include media-query($type: print) { ... } */
+@include media-query($type: print) {
+  .example-9 {
+    color: #000;
+  }
+};
+
+
+/*
+  .example-10 {
+    font-size: 17px
+    @include media-query(small) { font-size: 14px; }
+  }
+*/
+.example-10 {
+  font-size: 17px;
+
+  @include media-query(small) {
+    font-size: 14px;
+  };
+}

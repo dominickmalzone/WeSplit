@@ -1,0 +1,20 @@
+//===================================================================
+//  REM
+//===================================================================
+
+// @requires settings
+// @requires {function} strip-unit
+//
+// @param {number} $value - desired value in pixels
+//
+// @returns {number} $value converted to em, or 0
+//
+@function rem($value) {
+  $value: strip-unit($value);
+
+  @if $value == 0 {
+    @return $value;
+  }
+
+  @return $value / strip-unit($root-font-size) * 1rem;
+}

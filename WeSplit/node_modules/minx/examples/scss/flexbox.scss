@@ -1,0 +1,10 @@
+/*===================================================================
+   EXAMPLE : FLEXBOX
+===================================================================*/
+@import "imports";
+
+
+.example-1 {
+  /* @include flex-center-all(column) */
+  @include flex-center-all(column);
+}

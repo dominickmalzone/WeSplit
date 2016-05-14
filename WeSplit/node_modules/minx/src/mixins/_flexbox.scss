@@ -1,0 +1,16 @@
+//===================================================================
+//  FLEXBOX
+//===================================================================
+
+// Center child elements horizontally and vertically.
+// @param {string} $direction [row] - row | column
+//
+@mixin flex-center-all($direction: null) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @if $direction != null {
+    flex-direction: $direction;
+  }
+}

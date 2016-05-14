@@ -1,0 +1,81 @@
+/*===================================================================
+   EXAMPLE : GRID
+===================================================================*/
+//===============================================
+//  Default settings
+//-----------------------------------------------
+
+$breakpoints: (
+  small  : 0,
+  medium : 740px,
+  large  : 980px
+) !default;
+
+$breakpoint-prefixes: (
+  small  : sm-,
+  medium : md-,
+  large  : lg-,
+  xlarge : xl-
+) !default;
+
+$grid-max-width: 1000px !default;
+$grid-total-columns: 6 !default;
+$grid-gutter-size: 30px !default;
+
+$grid-row-class: g-row !default;
+$grid-column-class: g-col !default;
+$grid-offset-class: offset- !default;
+$grid-pull-class: pull- !default;
+$grid-push-class: push- !default;
+
+$grid-include-row: true !default;
+$grid-include-column: true !default;
+$grid-include-offset: true !default;
+$grid-include-pull: true !default;
+$grid-include-push: true !default;
+$grid-include-responsive: true !default;
+
+
+@import "imports";
+
+
+.example-1 {
+  /* @include grid-row */
+  @include grid-row;
+}
+
+
+.example-2 {
+  /* @include grid-row(600px) */
+  @include grid-row(600px);
+}
+
+
+.example-3 {
+  /* @include grid-column */
+  @include grid-column;
+}
+
+
+.example-4 {
+  /* @include grid-column($gutter: 40px) */
+  @include grid-column($gutter: 40px);
+}
+
+
+.example-5 {
+  /* @include grid-offset(3) */
+  @include grid-offset(3);
+}
+
+
+.example-6 {
+  /* @include grid-pull(3) */
+  @include grid-pull(3);
+}
+
+
+.example-7 {
+  /* @include grid-push(3) */
+  @include grid-push(3);
+}
