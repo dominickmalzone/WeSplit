@@ -10398,18 +10398,16 @@ body {
 .login-page .logo img {
   max-width: 150px; }
 
-.map-page ion-content {
-  background: #e5e3df; }
+.speaker-list ion-card.speaker ion-card-header .item {
+  padding: 12px; }
 
-.map-page #map {
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  -webkit-transition: opacity 150ms ease-in;
-  transition: opacity 150ms ease-in; }
+.speaker-list ion-card.speaker ion-card-content .list {
+  margin: 0; }
 
-.map-page #map.show-map {
-  opacity: 1; }
+.speaker-list ion-card.speaker ion-card-header,
+.speaker-list ion-card.speaker ion-card-content,
+.speaker-list ion-card.speaker ion-card-content .list ion-item-content {
+  padding: 0; }
 
 .schedule ion-item-sliding[track=ionic] ion-label {
   border-left: 2px solid #387ef5;
@@ -10543,14 +10541,3 @@ ion-item[track=navigation] .dot {
 
 .speaker-detail p {
   color: #60646B; }
-
-.speaker-list ion-card.speaker ion-card-header .item {
-  padding: 12px; }
-
-.speaker-list ion-card.speaker ion-card-content .list {
-  margin: 0; }
-
-.speaker-list ion-card.speaker ion-card-header,
-.speaker-list ion-card.speaker ion-card-content,
-.speaker-list ion-card.speaker ion-card-content .list ion-item-content {
-  padding: 0; }

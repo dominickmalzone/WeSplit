@@ -1,7 +1,6 @@
 import {Page, NavParams} from 'ionic-angular';
 import {SchedulePage} from '../schedule/schedule';
-import {SpeakerListPage} from '../speaker-list/speaker-list';
-import {MapPage} from '../map/map';
+import {ListPage} from '../list/list';
 import {AccountPage} from '../account/account';
 
 
@@ -18,8 +17,9 @@ export class TabsPage {
 
     // set the root pages for each tab
     
-    this.tab1Root = SpeakerListPage;
-    this.tab2Root = SchedulePage;
+    
+    this.tab1Root = SchedulePage;
+    this.tab2Root = ListPage;
     // this.tab3Root = MapPage;
     this.tab3Root = AccountPage;
   }

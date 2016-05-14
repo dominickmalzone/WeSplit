@@ -5,9 +5,9 @@ import {SessionDetailPage} from '../session-detail/session-detail';
 
 
 @Page({
-  templateUrl: 'build/pages/speaker-list/speaker-list.html'
+  templateUrl: 'build/pages/list/list.html'
 })
-export class SpeakerListPage {
+export class ListPage {
   static get parameters() {
     return [[NavController], [ConferenceData]];
   }
