@@ -1,140 +1,144 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.MyApp = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _dec, _class;
-
-var _ionicAngular = require('ionic-angular');
-
-var _ionicNative = require('ionic-native');
-
-var _tabs = require('./pages/tabs/tabs');
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-// http://ionicframework.com/docs/v2/api/config/Config/
-var MyApp = exports.MyApp = (_dec = (0, _ionicAngular.App)({
-  template: '<ion-nav [root]="rootPage"></ion-nav>',
-  config: {} }), _dec(_class = function () {
-  _createClass(MyApp, null, [{
-    key: 'parameters',
-    get: function get() {
-      return [[_ionicAngular.Platform]];
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var ionic_angular_1 = require('ionic-angular');
+var ionic_native_1 = require('ionic-native');
+var tabs_1 = require('./pages/tabs/tabs');
+var MyApp = (function () {
+    function MyApp(platform) {
+        this.rootPage = tabs_1.TabsPage;
+        platform.ready().then(function () {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            ionic_native_1.StatusBar.styleDefault();
+        });
     }
-  }]);
-
-  function MyApp(platform) {
-    _classCallCheck(this, MyApp);
-
-    this.rootPage = _tabs.TabsPage;
-
-    platform.ready().then(function () {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      _ionicNative.StatusBar.styleDefault();
-    });
-  }
-
-  return MyApp;
-}()) || _class);
+    MyApp = __decorate([
+        ionic_angular_1.App({
+            template: '<ion-nav [root]="rootPage"></ion-nav>',
+            config: {} // http://ionicframework.com/docs/v2/api/config/Config/
+        }), 
+        __metadata('design:paramtypes', [ionic_angular_1.Platform])
+    ], MyApp);
+    return MyApp;
+}());
+exports.MyApp = MyApp;
 
 },{"./pages/tabs/tabs":5,"ionic-angular":339,"ionic-native":361}],2:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Page1 = undefined;
-
-var _dec, _class;
-
-var _ionicAngular = require('ionic-angular');
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Page1 = exports.Page1 = (_dec = (0, _ionicAngular.Page)({
-  templateUrl: 'build/pages/page1/page1.html'
-}), _dec(_class = function Page1() {
-  _classCallCheck(this, Page1);
-}) || _class);
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var ionic_angular_1 = require('ionic-angular');
+var Page1 = (function () {
+    function Page1() {
+    }
+    Page1 = __decorate([
+        ionic_angular_1.Page({
+            templateUrl: 'build/pages/page1/page1.html',
+        }), 
+        __metadata('design:paramtypes', [])
+    ], Page1);
+    return Page1;
+}());
+exports.Page1 = Page1;
 
 },{"ionic-angular":339}],3:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Page2 = undefined;
-
-var _dec, _class;
-
-var _ionicAngular = require('ionic-angular');
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Page2 = exports.Page2 = (_dec = (0, _ionicAngular.Page)({
-  templateUrl: 'build/pages/page2/page2.html'
-}), _dec(_class = function Page2() {
-  _classCallCheck(this, Page2);
-}) || _class);
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var ionic_angular_1 = require('ionic-angular');
+var Page2 = (function () {
+    function Page2() {
+    }
+    Page2 = __decorate([
+        ionic_angular_1.Page({
+            templateUrl: 'build/pages/page2/page2.html',
+        }), 
+        __metadata('design:paramtypes', [])
+    ], Page2);
+    return Page2;
+}());
+exports.Page2 = Page2;
 
 },{"ionic-angular":339}],4:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Page3 = undefined;
-
-var _dec, _class;
-
-var _ionicAngular = require('ionic-angular');
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Page3 = exports.Page3 = (_dec = (0, _ionicAngular.Page)({
-  templateUrl: 'build/pages/page3/page3.html'
-}), _dec(_class = function Page3() {
-  _classCallCheck(this, Page3);
-}) || _class);
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var ionic_angular_1 = require('ionic-angular');
+var Page3 = (function () {
+    function Page3() {
+    }
+    Page3 = __decorate([
+        ionic_angular_1.Page({
+            templateUrl: 'build/pages/page3/page3.html'
+        }), 
+        __metadata('design:paramtypes', [])
+    ], Page3);
+    return Page3;
+}());
+exports.Page3 = Page3;
 
 },{"ionic-angular":339}],5:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.TabsPage = undefined;
-
-var _dec, _class;
-
-var _ionicAngular = require('ionic-angular');
-
-var _page = require('../page1/page1');
-
-var _page2 = require('../page2/page2');
-
-var _page3 = require('../page3/page3');
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var TabsPage = exports.TabsPage = (_dec = (0, _ionicAngular.Page)({
-  templateUrl: 'build/pages/tabs/tabs.html'
-}), _dec(_class = function TabsPage() {
-  _classCallCheck(this, TabsPage);
-
-  // this tells the tabs component which Pages
-  // should be each tab's root Page
-  this.tab1Root = _page.Page1;
-  this.tab2Root = _page2.Page2;
-  this.tab3Root = _page3.Page3;
-}) || _class);
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var ionic_angular_1 = require('ionic-angular');
+var page1_1 = require('../page1/page1');
+var page2_1 = require('../page2/page2');
+var page3_1 = require('../page3/page3');
+var TabsPage = (function () {
+    function TabsPage() {
+        // this tells the tabs component which Pages
+        // should be each tab's root Page
+        this.tab1Root = page1_1.Page1;
+        this.tab2Root = page2_1.Page2;
+        this.tab3Root = page3_1.Page3;
+    }
+    TabsPage = __decorate([
+        ionic_angular_1.Page({
+            templateUrl: 'build/pages/tabs/tabs.html'
+        }), 
+        __metadata('design:paramtypes', [])
+    ], TabsPage);
+    return TabsPage;
+}());
+exports.TabsPage = TabsPage;
 
 },{"../page1/page1":2,"../page2/page2":3,"../page3/page3":4,"ionic-angular":339}],6:[function(require,module,exports){
 'use strict';"use strict";
@@ -70553,7 +70557,9 @@ function tryCatch(fn) {
 exports.tryCatch = tryCatch;
 ;
 
-},{"./errorObject":427}]},{},[1])
+},{"./errorObject":427}],435:[function(require,module,exports){
+
+},{}]},{},[1,435])
 
 
 //# sourceMappingURL=app.bundle.js.map
