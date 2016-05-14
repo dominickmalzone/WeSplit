@@ -5,40 +5,36 @@ export class DebugDomRootRenderer {
         this._delegate = _delegate;
     }
     renderComponent(componentProto) {
-        return new DebugDomRenderer(this, this._delegate.renderComponent(componentProto));
+        return new DebugDomRenderer(this._delegate.renderComponent(componentProto));
     }
 }
 export class DebugDomRenderer {
-    constructor(_rootRenderer, _delegate) {
-        this._rootRenderer = _rootRenderer;
+    constructor(_delegate) {
         this._delegate = _delegate;
     }
-    renderComponent(componentType) {
-        return this._rootRenderer.renderComponent(componentType);
-    }
-    selectRootElement(selector) {
-        var nativeEl = this._delegate.selectRootElement(selector);
-        var debugEl = new DebugElement(nativeEl, null);
+    selectRootElement(selectorOrNode, debugInfo) {
+        var nativeEl = this._delegate.selectRootElement(selectorOrNode, debugInfo);
+        var debugEl = new DebugElement(nativeEl, null, debugInfo);
         indexDebugNode(debugEl);
         return nativeEl;
     }
-    createElement(parentElement, name) {
-        var nativeEl = this._delegate.createElement(parentElement, name);
-        var debugEl = new DebugElement(nativeEl, getDebugNode(parentElement));
+    createElement(parentElement, name, debugInfo) {
+        var nativeEl = this._delegate.createElement(parentElement, name, debugInfo);
+        var debugEl = new DebugElement(nativeEl, getDebugNode(parentElement), debugInfo);
         debugEl.name = name;
         indexDebugNode(debugEl);
         return nativeEl;
     }
     createViewRoot(hostElement) { return this._delegate.createViewRoot(hostElement); }
-    createTemplateAnchor(parentElement) {
-        var comment = this._delegate.createTemplateAnchor(parentElement);
-        var debugEl = new DebugNode(comment, getDebugNode(parentElement));
+    createTemplateAnchor(parentElement, debugInfo) {
+        var comment = this._delegate.createTemplateAnchor(parentElement, debugInfo);
+        var debugEl = new DebugNode(comment, getDebugNode(parentElement), debugInfo);
         indexDebugNode(debugEl);
         return comment;
     }
-    createText(parentElement, value) {
-        var text = this._delegate.createText(parentElement, value);
-        var debugEl = new DebugNode(text, getDebugNode(parentElement));
+    createText(parentElement, value, debugInfo) {
+        var text = this._delegate.createText(parentElement, value, debugInfo);
+        var debugEl = new DebugNode(text, getDebugNode(parentElement), debugInfo);
         indexDebugNode(debugEl);
         return text;
     }
@@ -88,31 +84,19 @@ export class DebugDomRenderer {
     setElementProperty(renderElement, propertyName, propertyValue) {
         var debugEl = getDebugNode(renderElement);
         if (isPresent(debugEl) && debugEl instanceof DebugElement) {
-            debugEl.properties.set(propertyName, propertyValue);
+            debugEl.properties[propertyName] = propertyValue;
         }
         this._delegate.setElementProperty(renderElement, propertyName, propertyValue);
     }
     setElementAttribute(renderElement, attributeName, attributeValue) {
         var debugEl = getDebugNode(renderElement);
         if (isPresent(debugEl) && debugEl instanceof DebugElement) {
-            debugEl.attributes.set(attributeName, attributeValue);
+            debugEl.attributes[attributeName] = attributeValue;
         }
         this._delegate.setElementAttribute(renderElement, attributeName, attributeValue);
     }
-    /**
-     * Used only in debug mode to serialize property changes to comment nodes,
-     * such as <template> placeholders.
-     */
     setBindingDebugInfo(renderElement, propertyName, propertyValue) {
         this._delegate.setBindingDebugInfo(renderElement, propertyName, propertyValue);
-    }
-    /**
-     * Used only in development mode to set information needed by the DebugNode for this element.
-     */
-    setElementDebugInfo(renderElement, info) {
-        var debugEl = getDebugNode(renderElement);
-        debugEl.setDebugInfo(info);
-        this._delegate.setElementDebugInfo(renderElement, info);
     }
     setElementClass(renderElement, className, isAdd) {
         this._delegate.setElementClass(renderElement, className, isAdd);

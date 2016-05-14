@@ -1,6 +1,5 @@
 {
-  "name": "WeSplit",
+  "name": "ionic-conference-app",
   "app_id": "",
-  "v2": true,
-  "typescript": true
+  "v2": true
 }
