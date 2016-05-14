@@ -137,7 +137,7 @@ var ConferenceApp = (_dec = (0, _ionicAngular.App)({
   return ConferenceApp;
 }()) || _class);
 
-},{"./pages/login/login":4,"./pages/signup/signup":8,"./pages/tabs/tabs":10,"./pages/tutorial/tutorial":11,"./providers/conference-data":12,"./providers/user-data":13,"angular2/core":16,"ionic-angular":353,"ionic-native":375}],2:[function(require,module,exports){
+},{"./pages/login/login":7,"./pages/signup/signup":9,"./pages/tabs/tabs":10,"./pages/tutorial/tutorial":11,"./providers/conference-data":12,"./providers/user-data":13,"angular2/core":16,"ionic-angular":353,"ionic-native":375}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -163,176 +163,47 @@ var AccountPage = exports.AccountPage = (_dec = (0, _ionicAngular.Page)({
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ListPage = undefined;
+exports.SpeakerDetailPage = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _dec, _class;
 
 var _ionicAngular = require('ionic-angular');
-
-var _conferenceData = require('../../providers/conference-data');
-
-var _speakerDetail = require('../speaker-detail/speaker-detail');
 
 var _sessionDetail = require('../session-detail/session-detail');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
-  templateUrl: 'build/pages/list/list.html'
+var SpeakerDetailPage = exports.SpeakerDetailPage = (_dec = (0, _ionicAngular.Page)({
+  templateUrl: 'build/pages/speaker-detail/speaker-detail.html'
 }), _dec(_class = function () {
-  _createClass(ListPage, null, [{
+  _createClass(SpeakerDetailPage, null, [{
     key: 'parameters',
     get: function get() {
-      return [[_ionicAngular.NavController], [_conferenceData.ConferenceData]];
+      return [[_ionicAngular.NavController], [_ionicAngular.NavParams]];
     }
   }]);
 
-  function ListPage(nav, confData) {
-    var _this = this;
-
-    _classCallCheck(this, ListPage);
+  function SpeakerDetailPage(nav, navParams) {
+    _classCallCheck(this, SpeakerDetailPage);
 
     this.nav = nav;
-    this.confData = confData;
-    this.speakers = [];
-
-    confData.getSpeakers().then(function (speakers) {
-      _this.speakers = speakers;
-    });
+    this.navParams = navParams;
+    this.speaker = this.navParams.data;
   }
 
-  _createClass(ListPage, [{
+  _createClass(SpeakerDetailPage, [{
     key: 'goToSessionDetail',
     value: function goToSessionDetail(session) {
       this.nav.push(_sessionDetail.SessionDetailPage, session);
     }
-  }, {
-    key: 'goToSpeakerDetail',
-    value: function goToSpeakerDetail(speakerName) {
-      this.nav.push(_speakerDetail.SpeakerDetailPage, speakerName);
-    }
-  }, {
-    key: 'goToSpeakerTwitter',
-    value: function goToSpeakerTwitter(speaker) {
-      window.open('https://twitter.com/' + speaker.twitter);
-    }
-  }, {
-    key: 'openSpeakerShare',
-    value: function openSpeakerShare(speaker) {
-      var actionSheet = _ionicAngular.ActionSheet.create({
-        title: 'Share ' + speaker.name,
-        buttons: [{
-          text: 'Copy Link',
-          handler: function handler() {
-            console.log("Copy link clicked on https://twitter.com/" + speaker.twitter);
-            if (window.cordova && window.cordova.plugins.clipboard) {
-              window.cordova.plugins.clipboard.copy("https://twitter.com/" + speaker.twitter);
-            }
-          }
-        }, {
-          text: 'Share via ...',
-          handler: function handler() {
-            console.log("Share via clicked");
-          }
-        }, {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: function handler() {
-            console.log("Cancel clicked");
-          }
-        }]
-      });
-
-      this.nav.present(actionSheet);
-    }
   }]);
 
-  return ListPage;
+  return SpeakerDetailPage;
 }()) || _class);
 
-},{"../../providers/conference-data":12,"../session-detail/session-detail":7,"../speaker-detail/speaker-detail":9,"ionic-angular":353}],4:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.LoginPage = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _dec, _class;
-
-var _ionicAngular = require('ionic-angular');
-
-var _tabs = require('../tabs/tabs');
-
-var _signup = require('../signup/signup');
-
-var _userData = require('../../providers/user-data');
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
-  templateUrl: 'build/pages/login/login.html'
-}), _dec(_class = function () {
-  _createClass(LoginPage, null, [{
-    key: 'parameters',
-    get: function get() {
-      return [[_ionicAngular.NavController], [_userData.UserData]];
-    }
-  }]);
-
-  function LoginPage(nav, userData) {
-    _classCallCheck(this, LoginPage);
-
-    this.nav = nav;
-    this.userData = userData;
-
-    this.login = {};
-    this.submitted = false;
-
-    this.firebaseUrl = "https://wesplitapp.firebaseio.com";
-    this.authHandler();
-  }
-
-  _createClass(LoginPage, [{
-    key: 'onLogin',
-    value: function onLogin(form) {
-      this.submitted = true;
-
-      if (form.valid) {
-        this.userData.login();
-
-        /* Authenticate User */
-        var ref = new Firebase(this.firebaseUrl);
-        ref.authWithPassword({
-          email: form.controls.username.value,
-          password: form.controls.password.value
-        }, this.authHandler);
-      }
-    }
-  }, {
-    key: 'authHandler',
-    value: function authHandler(error, authData) {
-      if (error) {
-        console.log("Login Failed!", error);
-      } else {
-        this.nav.push(_tabs.TabsPage);
-      }
-    }
-  }, {
-    key: 'onSignup',
-    value: function onSignup() {
-      this.nav.push(_signup.SignupPage);
-    }
-  }]);
-
-  return LoginPage;
-}()) || _class);
-
-},{"../../providers/user-data":13,"../signup/signup":8,"../tabs/tabs":10,"ionic-angular":353}],5:[function(require,module,exports){
+},{"../session-detail/session-detail":8,"ionic-angular":353}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -415,7 +286,7 @@ var ScheduleFilterPage = exports.ScheduleFilterPage = (_dec = (0, _ionicAngular.
   return ScheduleFilterPage;
 }()) || _class);
 
-},{"../../providers/conference-data":12,"ionic-angular":353}],6:[function(require,module,exports){
+},{"../../providers/conference-data":12,"ionic-angular":353}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -433,14 +304,14 @@ var _conferenceData = require('../../providers/conference-data');
 
 var _userData = require('../../providers/user-data');
 
-var _scheduleFilter = require('../schedule-filter/schedule-filter');
+var _buyFilter = require('../buy-filter/buy-filter');
 
-var _sessionDetail = require('../session-detail/session-detail');
+var _buyDetail = require('../buy-detail/buy-detail');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var SchedulePage = exports.SchedulePage = (_dec = (0, _ionicAngular.Page)({
-  templateUrl: 'build/pages/schedule/schedule.html'
+  templateUrl: 'build/pages/buy/buy.html'
 }), _dec(_class = function () {
   _createClass(SchedulePage, null, [{
     key: 'parameters',
@@ -489,7 +360,7 @@ var SchedulePage = exports.SchedulePage = (_dec = (0, _ionicAngular.Page)({
     value: function presentFilter() {
       var _this2 = this;
 
-      var modal = _ionicAngular.Modal.create(_scheduleFilter.ScheduleFilterPage, this.excludeTracks);
+      var modal = _ionicAngular.Modal.create(_buyFilter.ScheduleFilterPage, this.excludeTracks);
       this.nav.present(modal);
 
       modal.onDismiss(function (data) {
@@ -504,7 +375,7 @@ var SchedulePage = exports.SchedulePage = (_dec = (0, _ionicAngular.Page)({
     value: function goToSessionDetail(sessionData) {
       // go to the session detail page
       // and pass in the session data
-      this.nav.push(_sessionDetail.SessionDetailPage, sessionData);
+      this.nav.push(_buyDetail.SessionDetailPage, sessionData);
     }
   }, {
     key: 'addFavorite',
@@ -561,7 +432,180 @@ var SchedulePage = exports.SchedulePage = (_dec = (0, _ionicAngular.Page)({
   return SchedulePage;
 }()) || _class);
 
-},{"../../providers/conference-data":12,"../../providers/user-data":13,"../schedule-filter/schedule-filter":5,"../session-detail/session-detail":7,"ionic-angular":353}],7:[function(require,module,exports){
+},{"../../providers/conference-data":12,"../../providers/user-data":13,"../buy-detail/buy-detail":3,"../buy-filter/buy-filter":4,"ionic-angular":353}],6:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ListPage = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dec, _class;
+
+var _ionicAngular = require('ionic-angular');
+
+var _conferenceData = require('../../providers/conference-data');
+
+var _buyDetail = require('../buy-detail/buy-detail');
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
+  templateUrl: 'build/pages/list/list.html'
+}), _dec(_class = function () {
+  _createClass(ListPage, null, [{
+    key: 'parameters',
+    get: function get() {
+      return [[_ionicAngular.NavController], [_conferenceData.ConferenceData]];
+    }
+  }]);
+
+  function ListPage(nav, confData) {
+    var _this = this;
+
+    _classCallCheck(this, ListPage);
+
+    this.nav = nav;
+    this.confData = confData;
+    this.speakers = [];
+
+    confData.getSpeakers().then(function (speakers) {
+      _this.speakers = speakers;
+    });
+  }
+
+  _createClass(ListPage, [{
+    key: 'goToSessionDetail',
+    value: function goToSessionDetail(session) {
+      this.nav.push(_buyDetail.SessionDetailPage, session);
+    }
+  }, {
+    key: 'goToSpeakerDetail',
+    value: function goToSpeakerDetail(speakerName) {
+      this.nav.push(_buyDetail.SpeakerDetailPage, speakerName);
+    }
+  }, {
+    key: 'goToSpeakerTwitter',
+    value: function goToSpeakerTwitter(speaker) {
+      window.open('https://twitter.com/' + speaker.twitter);
+    }
+  }, {
+    key: 'openSpeakerShare',
+    value: function openSpeakerShare(speaker) {
+      var actionSheet = _ionicAngular.ActionSheet.create({
+        title: 'Share ' + speaker.name,
+        buttons: [{
+          text: 'Copy Link',
+          handler: function handler() {
+            console.log("Copy link clicked on https://twitter.com/" + speaker.twitter);
+            if (window.cordova && window.cordova.plugins.clipboard) {
+              window.cordova.plugins.clipboard.copy("https://twitter.com/" + speaker.twitter);
+            }
+          }
+        }, {
+          text: 'Share via ...',
+          handler: function handler() {
+            console.log("Share via clicked");
+          }
+        }, {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: function handler() {
+            console.log("Cancel clicked");
+          }
+        }]
+      });
+
+      this.nav.present(actionSheet);
+    }
+  }]);
+
+  return ListPage;
+}()) || _class);
+
+},{"../../providers/conference-data":12,"../buy-detail/buy-detail":3,"ionic-angular":353}],7:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LoginPage = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dec, _class;
+
+var _ionicAngular = require('ionic-angular');
+
+var _tabs = require('../tabs/tabs');
+
+var _signup = require('../signup/signup');
+
+var _userData = require('../../providers/user-data');
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
+  templateUrl: 'build/pages/login/login.html'
+}), _dec(_class = function () {
+  _createClass(LoginPage, null, [{
+    key: 'parameters',
+    get: function get() {
+      return [[_ionicAngular.NavController], [_userData.UserData]];
+    }
+  }]);
+
+  function LoginPage(nav, userData) {
+    _classCallCheck(this, LoginPage);
+
+    this.nav = nav;
+    this.userData = userData;
+
+    this.login = {};
+    this.submitted = false;
+
+    this.firebaseUrl = "https://wesplitapp.firebaseio.com";
+    this.authHandler();
+  }
+
+  _createClass(LoginPage, [{
+    key: 'onLogin',
+    value: function onLogin(form) {
+      this.submitted = true;
+
+      if (form.valid) {
+        this.userData.login();
+
+        /* Authenticate User */
+        var ref = new Firebase(this.firebaseUrl);
+        ref.authWithPassword({
+          email: form.controls.username.value,
+          password: form.controls.password.value
+        }, this.authHandler);
+      }
+    }
+  }, {
+    key: 'authHandler',
+    value: function authHandler(error, authData) {
+      if (error) {
+        console.log("Login Failed!", error);
+      } else {
+        this.nav.push(_tabs.TabsPage);
+      }
+    }
+  }, {
+    key: 'onSignup',
+    value: function onSignup() {
+      this.nav.push(_signup.SignupPage);
+    }
+  }]);
+
+  return LoginPage;
+}()) || _class);
+
+},{"../../providers/user-data":13,"../signup/signup":9,"../tabs/tabs":10,"ionic-angular":353}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -597,7 +641,7 @@ var SessionDetailPage = exports.SessionDetailPage = (_dec = (0, _ionicAngular.Pa
   return SessionDetailPage;
 }()) || _class);
 
-},{"ionic-angular":353}],8:[function(require,module,exports){
+},{"ionic-angular":353}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -697,53 +741,7 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
   return SignupPage;
 }()) || _class);
 
-},{"../../providers/user-data":13,"../tabs/tabs":10,"ionic-angular":353}],9:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.SpeakerDetailPage = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _dec, _class;
-
-var _ionicAngular = require('ionic-angular');
-
-var _sessionDetail = require('../session-detail/session-detail');
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var SpeakerDetailPage = exports.SpeakerDetailPage = (_dec = (0, _ionicAngular.Page)({
-  templateUrl: 'build/pages/speaker-detail/speaker-detail.html'
-}), _dec(_class = function () {
-  _createClass(SpeakerDetailPage, null, [{
-    key: 'parameters',
-    get: function get() {
-      return [[_ionicAngular.NavController], [_ionicAngular.NavParams]];
-    }
-  }]);
-
-  function SpeakerDetailPage(nav, navParams) {
-    _classCallCheck(this, SpeakerDetailPage);
-
-    this.nav = nav;
-    this.navParams = navParams;
-    this.speaker = this.navParams.data;
-  }
-
-  _createClass(SpeakerDetailPage, [{
-    key: 'goToSessionDetail',
-    value: function goToSessionDetail(session) {
-      this.nav.push(_sessionDetail.SessionDetailPage, session);
-    }
-  }]);
-
-  return SpeakerDetailPage;
-}()) || _class);
-
-},{"../session-detail/session-detail":7,"ionic-angular":353}],10:[function(require,module,exports){
+},{"../../providers/user-data":13,"../tabs/tabs":10,"ionic-angular":353}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -757,7 +755,7 @@ var _dec, _class;
 
 var _ionicAngular = require('ionic-angular');
 
-var _schedule = require('../schedule/schedule');
+var _buy = require('../buy/buy');
 
 var _list = require('../list/list');
 
@@ -782,7 +780,7 @@ var TabsPage = exports.TabsPage = (_dec = (0, _ionicAngular.Page)({
 
     // set the root pages for each tab
 
-    this.tab1Root = _schedule.SchedulePage;
+    this.tab1Root = _buy.SchedulePage;
     this.tab2Root = _list.ListPage;
     // this.tab3Root = MapPage;
     this.tab3Root = _account.AccountPage;
@@ -791,7 +789,7 @@ var TabsPage = exports.TabsPage = (_dec = (0, _ionicAngular.Page)({
   return TabsPage;
 }()) || _class);
 
-},{"../account/account":2,"../list/list":3,"../schedule/schedule":6,"ionic-angular":353}],11:[function(require,module,exports){
+},{"../account/account":2,"../buy/buy":5,"../list/list":6,"ionic-angular":353}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -870,7 +868,7 @@ var TutorialPage = exports.TutorialPage = (_dec = (0, _ionicAngular.Page)({
   return TutorialPage;
 }()) || _class);
 
-},{"../signup/signup":8,"../tabs/tabs":10,"ionic-angular":353}],12:[function(require,module,exports){
+},{"../signup/signup":9,"../tabs/tabs":10,"ionic-angular":353}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

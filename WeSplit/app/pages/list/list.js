@@ -1,7 +1,7 @@
 import {NavController, Page, ActionSheet} from 'ionic-angular';
 import {ConferenceData} from '../../providers/conference-data';
-import {SpeakerDetailPage} from '../speaker-detail/speaker-detail';
-import {SessionDetailPage} from '../session-detail/session-detail';
+import {SpeakerDetailPage} from '../buy-detail/buy-detail';
+import {SessionDetailPage} from '../buy-detail/buy-detail';
 
 
 @Page({

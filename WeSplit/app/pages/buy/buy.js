@@ -1,12 +1,12 @@
 import {IonicApp, Page, Modal, Alert, NavController} from 'ionic-angular';
 import {ConferenceData} from '../../providers/conference-data';
 import {UserData} from '../../providers/user-data';
-import {ScheduleFilterPage} from '../schedule-filter/schedule-filter';
-import {SessionDetailPage} from '../session-detail/session-detail';
+import {ScheduleFilterPage} from '../buy-filter/buy-filter';
+import {SessionDetailPage} from '../buy-detail/buy-detail';
 
 
 @Page({
-  templateUrl: 'build/pages/schedule/schedule.html'
+  templateUrl: 'build/pages/buy/buy.html'
 })
 export class SchedulePage {
   static get parameters() {
