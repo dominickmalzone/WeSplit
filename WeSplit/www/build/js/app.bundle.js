@@ -44,18 +44,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var ionic_angular_1 = require('ionic-angular');
-var Page1 = (function () {
-    function Page1() {
+var Account = (function () {
+    function Account() {
     }
-    Page1 = __decorate([
+    Account = __decorate([
         ionic_angular_1.Page({
-            templateUrl: 'build/pages/page1/page1.html',
+            templateUrl: 'build/pages/account/account.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], Page1);
-    return Page1;
+    ], Account);
+    return Account;
 }());
-exports.Page1 = Page1;
+exports.Account = Account;
 
 },{"ionic-angular":339}],3:[function(require,module,exports){
 "use strict";
@@ -69,18 +69,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var ionic_angular_1 = require('ionic-angular');
-var Page2 = (function () {
-    function Page2() {
+var Buy = (function () {
+    function Buy() {
     }
-    Page2 = __decorate([
+    Buy = __decorate([
         ionic_angular_1.Page({
-            templateUrl: 'build/pages/page2/page2.html',
+            templateUrl: 'build/pages/buy/buy.html',
         }), 
         __metadata('design:paramtypes', [])
-    ], Page2);
-    return Page2;
+    ], Buy);
+    return Buy;
 }());
-exports.Page2 = Page2;
+exports.Buy = Buy;
 
 },{"ionic-angular":339}],4:[function(require,module,exports){
 "use strict";
@@ -94,18 +94,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var ionic_angular_1 = require('ionic-angular');
-var Page3 = (function () {
-    function Page3() {
+var List = (function () {
+    function List() {
     }
-    Page3 = __decorate([
+    List = __decorate([
         ionic_angular_1.Page({
-            templateUrl: 'build/pages/page3/page3.html'
+            templateUrl: 'build/pages/list/list.html',
         }), 
         __metadata('design:paramtypes', [])
-    ], Page3);
-    return Page3;
+    ], List);
+    return List;
 }());
-exports.Page3 = Page3;
+exports.List = List;
 
 },{"ionic-angular":339}],5:[function(require,module,exports){
 "use strict";
@@ -119,16 +119,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var ionic_angular_1 = require('ionic-angular');
-var page1_1 = require('../page1/page1');
-var page2_1 = require('../page2/page2');
-var page3_1 = require('../page3/page3');
+var buy_1 = require('../buy/buy');
+var list_1 = require('../list/list');
+var account_1 = require('../account/account');
 var TabsPage = (function () {
     function TabsPage() {
         // this tells the tabs component which Pages
         // should be each tab's root Page
-        this.tab1Root = page1_1.Page1;
-        this.tab2Root = page2_1.Page2;
-        this.tab3Root = page3_1.Page3;
+        this.tab1Root = buy_1.Buy;
+        this.tab2Root = list_1.List;
+        this.tab3Root = account_1.Account;
     }
     TabsPage = __decorate([
         ionic_angular_1.Page({
@@ -140,7 +140,7 @@ var TabsPage = (function () {
 }());
 exports.TabsPage = TabsPage;
 
-},{"../page1/page1":2,"../page2/page2":3,"../page3/page3":4,"ionic-angular":339}],6:[function(require,module,exports){
+},{"../account/account":2,"../buy/buy":3,"../list/list":4,"ionic-angular":339}],6:[function(require,module,exports){
 'use strict';"use strict";
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
