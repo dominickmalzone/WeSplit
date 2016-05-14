@@ -622,7 +622,6 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
       this.submitted = true;
 
       console.log(form);
-
       console.log(form.email, form.password, this.firebaseUrl, "email, password, and firebase");
 
       if (form.valid) {
@@ -649,12 +648,22 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
             console.log("Successfully created user account with uid:", userData.uid);
           }
         }).then(function (regUser) {
+          var username = form.controls.username.value;
+          var email = form.controls.email.value;
+          var groupName = username + "group";
           var regRef = new Firebase("https://wesplitapp.firebaseio.com/" + "users").child(regUser.uid).set({
             date: Firebase.ServerValue.TIMESTAMP,
-            username: form.controls.username.value,
-            group: form.controls.username.value + "group",
-            email: form.controls.email.value
+            username: username,
+            group: groupName,
+            email: email
           });
+
+          var groupRef = new Firebase("https://wesplitapp.firebaseio.com/" + "groups").child(groupName).set({
+            items: {
+              item: "item1"
+            }
+          });
+
           console.log(regUser.uid, "in createUser");
         });
 
