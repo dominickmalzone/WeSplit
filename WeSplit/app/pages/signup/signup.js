@@ -31,7 +31,7 @@ export class SignupPage {
     console.log(form);
     console.log(this.firebaseUrl, "email, password, and firebase");
 
-    var groupName = form.controls.userName.value + "group";
+    var groupName = form.controls.userName.value + "'s group";
     this.userData.setGroupName(groupName);
 
     var userName = form.controls.userName.value;
@@ -62,7 +62,7 @@ export class SignupPage {
       }).then(function(regUser) {
          var userName = form.controls.userName.value;
          var email = form.controls.email.value;
-         var groupName = userName + "group";
+         // var groupName = userName + "group";
          var regRef = new Firebase("https://wesplitapp.firebaseio.com/" + "users")
          .child(regUser.uid).set({
           date: Firebase.ServerValue.TIMESTAMP,
@@ -73,15 +73,12 @@ export class SignupPage {
 
         console.log(regUser.uid, "in createUser");
 
-        var items = {
-          // below line necessary to create groupName // need to fix
-          1: {
-            name: "firstItem",
-            cost: 0
-          }
-          
+        var items = [];
+        items[0] = {
+          name: "firstItem",
+          cost: 0
         }
-
+          // below line necessary to create groupName // need to fix
 
         var groupRef = new Firebase("https://wesplitapp.firebaseio.com/" + "groups")
         .child(groupName).set({

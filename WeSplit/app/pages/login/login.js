@@ -3,8 +3,6 @@ import {TabsPage} from '../tabs/tabs';
 import {SignupPage} from '../signup/signup';
 import {UserData} from '../../providers/user-data';
 
-
-
 @Page({
   templateUrl: 'build/pages/login/login.html'
 })
@@ -22,15 +20,12 @@ export class LoginPage {
     this.submitted = false;
     
     this.firebaseUrl = "https://wesplitapp.firebaseio.com";
-    // this.authHandler();
   }
 
   onLogin(form) {
     this.submitted = true;
     var email = form.controls.email.value;
     var password = form.controls.password.value
-
-    // console.log()
 
     if (form.valid) {
       this.userData.login();
@@ -44,12 +39,10 @@ export class LoginPage {
       
     }
 
-
-
     var userName = form.controls.userName.value;
     this.userData.setuserName(userName);
 
-    var groupName = userName + "group";
+    var groupName = userName + "'s group";
     this.userData.setGroupName(groupName);
 
     console.log("login", userName, groupName);
@@ -68,3 +61,11 @@ export class LoginPage {
     this.nav.push(SignupPage);
   }
 }
+
+
+// ******* TODO *******
+//  // later simply access the groupName by the email + password
+    // later implement local storage
+    // later give feedback to user if they use the incorrect email or password or username
+    // otherwise user will misunderstand reason for breakage
+
