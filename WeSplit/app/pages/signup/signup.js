@@ -64,14 +64,22 @@ export class SignupPage {
             email: email
           });
 
-          var groupRef = new Firebase("https://wesplitapp.firebaseio.com/" + "groups")
-          .child(groupName).set({
+          console.log(regUser.uid, "in createUser");
+
+          var firstGrouplist = {
             items: {
               item: "item1"
             }
+          }
+
+
+          var groupRef = new Firebase("https://wesplitapp.firebaseio.com/" + "groups")
+          .child(groupName).set({
+            firstGrouplist
           });
 
-          console.log(regUser.uid, "in createUser");
+          this.userData.setGroupList(firstGrouplist);
+          
         });
 
       this.nav.push(TabsPage);

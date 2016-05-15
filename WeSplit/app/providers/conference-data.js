@@ -15,6 +15,8 @@ export class ConferenceData {
     this.user = user;
   }
 
+  // need a method to return the group data object based on the groupName == userName
+
   load() {
     if (this.data) {
       // already loaded data

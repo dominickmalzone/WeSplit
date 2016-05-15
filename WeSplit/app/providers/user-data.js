@@ -9,13 +9,23 @@ export class UserData {
   }
 
   constructor(events) {
-    this._favorites = [];
+    this._groupList = [];
     this.storage = new Storage(LocalStorage);
     this.events = events;
     this.HAS_LOGGED_IN = 'hasLoggedIn';
     this.username = '';
     this.password = '';
+    this.groupId = '';
   }
+
+  setGroupList(groupList) {
+    this._groupList = groupList;
+  }
+
+  getGroupList() {
+    return this._groupList;
+  }
+
 
   hasFavorite(sessionName) {
     return (this._favorites.indexOf(sessionName) > -1);

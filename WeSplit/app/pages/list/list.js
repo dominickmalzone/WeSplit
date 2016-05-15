@@ -2,25 +2,43 @@ import {NavController, Page, ActionSheet} from 'ionic-angular';
 import {ConferenceData} from '../../providers/conference-data';
 import {SpeakerDetailPage} from '../buy-detail/buy-detail';
 import {SessionDetailPage} from '../buy-detail/buy-detail';
+import {UserData} from '../../providers/user-data';
 
 
 @Page({
   templateUrl: 'build/pages/list/list.html'
 })
+
 export class ListPage {
   static get parameters() {
-    return [[NavController], [ConferenceData]];
+    return [[NavController], [ConferenceData], [UserData]];
   }
 
-  constructor(nav, confData) {
+  constructor(nav, confData, userData) {
     this.nav = nav;
     this.confData = confData;
-    this.speakers = [];
+    // this.speakers = [];
+    this.groupList = [];
+    this.userData = userData;
+    this.groupId = userData.groupId;
 
-    confData.getSpeakers().then(speakers => {
-      this.speakers = speakers;
-    });
+
+    // confData.getSpeakers().then(speakers => {
+    //   this.speakers = speakers;
+    // });
   }
+
+  getGroupList() {
+    // first log the groupId
+    // console.log(this.groupId);
+    console.log("userData", this.userData, "groupId", this.groupId);
+  }
+
+
+
+
+
+
 
   goToSessionDetail(session) {
     this.nav.push(SessionDetailPage, session);

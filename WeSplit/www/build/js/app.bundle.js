@@ -67,7 +67,8 @@ var ConferenceApp = (_dec = (0, _ionicAngular.App)({
     confData.load();
 
     // We plan to add auth to only show the login page if not logged in
-    this.root = _tutorial.TutorialPage;
+    // this.root = TutorialPage;
+    this.root = _login.LoginPage;
 
     // create an list of pages that can be navigated to from the left menu
     // the left menu only works after login
@@ -450,6 +451,8 @@ var _conferenceData = require('../../providers/conference-data');
 
 var _buyDetail = require('../buy-detail/buy-detail');
 
+var _userData = require('../../providers/user-data');
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
@@ -458,25 +461,33 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
   _createClass(ListPage, null, [{
     key: 'parameters',
     get: function get() {
-      return [[_ionicAngular.NavController], [_conferenceData.ConferenceData]];
+      return [[_ionicAngular.NavController], [_conferenceData.ConferenceData], [_userData.UserData]];
     }
   }]);
 
-  function ListPage(nav, confData) {
-    var _this = this;
-
+  function ListPage(nav, confData, userData) {
     _classCallCheck(this, ListPage);
 
     this.nav = nav;
     this.confData = confData;
-    this.speakers = [];
+    // this.speakers = [];
+    this.groupList = [];
+    this.userData = userData;
+    this.groupId = userData.groupId;
 
-    confData.getSpeakers().then(function (speakers) {
-      _this.speakers = speakers;
-    });
+    // confData.getSpeakers().then(speakers => {
+    //   this.speakers = speakers;
+    // });
   }
 
   _createClass(ListPage, [{
+    key: 'getGroupList',
+    value: function getGroupList() {
+      // first log the groupId
+      // console.log(this.groupId);
+      console.log("userData", this.userData, "groupId", this.groupId);
+    }
+  }, {
     key: 'goToSessionDetail',
     value: function goToSessionDetail(session) {
       this.nav.push(_buyDetail.SessionDetailPage, session);
@@ -525,7 +536,7 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
   return ListPage;
 }()) || _class);
 
-},{"../../providers/conference-data":12,"../buy-detail/buy-detail":3,"ionic-angular":353}],7:[function(require,module,exports){
+},{"../../providers/conference-data":12,"../../providers/user-data":13,"../buy-detail/buy-detail":3,"ionic-angular":353}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -724,13 +735,19 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
             email: email
           });
 
-          var groupRef = new Firebase("https://wesplitapp.firebaseio.com/" + "groups").child(groupName).set({
+          console.log(regUser.uid, "in createUser");
+
+          var firstGrouplist = {
             items: {
               item: "item1"
             }
+          };
+
+          var groupRef = new Firebase("https://wesplitapp.firebaseio.com/" + "groups").child(groupName).set({
+            firstGrouplist: firstGrouplist
           });
 
-          console.log(regUser.uid, "in createUser");
+          this.userData.setGroupList(firstGrouplist);
         });
 
         this.nav.push(_tabs.TabsPage);
@@ -903,6 +920,8 @@ var ConferenceData = exports.ConferenceData = (_dec = (0, _core.Injectable)(), _
     this.http = http;
     this.user = user;
   }
+
+  // need a method to return the group data object based on the groupName == userName
 
   _createClass(ConferenceData, [{
     key: 'load',
@@ -1113,15 +1132,26 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
   function UserData(events) {
     _classCallCheck(this, UserData);
 
-    this._favorites = [];
+    this._groupList = [];
     this.storage = new _ionicAngular.Storage(_ionicAngular.LocalStorage);
     this.events = events;
     this.HAS_LOGGED_IN = 'hasLoggedIn';
     this.username = '';
     this.password = '';
+    this.groupId = '';
   }
 
   _createClass(UserData, [{
+    key: 'setGroupList',
+    value: function setGroupList(groupList) {
+      this._groupList = groupList;
+    }
+  }, {
+    key: 'getGroupList',
+    value: function getGroupList() {
+      return this._groupList;
+    }
+  }, {
     key: 'hasFavorite',
     value: function hasFavorite(sessionName) {
       return this._favorites.indexOf(sessionName) > -1;
