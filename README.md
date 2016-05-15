@@ -1,6 +1,7 @@
 # WeSplit
 AngularAttack 2016 Project
-![picture alt](WeSplit/www/img/logo.jpg "WeSplit Logo")
+
+![picture alt](WeSplit/www/img/logo.jpg =100x100"WeSplit Logo")
 
 ##Inspiration
 We all know the cost of living in major cities is extremely expensive which is why most find it practical to live with roommates. This keeps costs down as you split bills but since recently moving into an apartment with multiple people, we noticed it is difficult to manage the grocery bill and split things evenly. We knew there should be a better solution than spamming the group chats so we decided to build WeSplit.
