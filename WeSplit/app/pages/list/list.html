@@ -2,7 +2,7 @@
   <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
-  <ion-title>speaker-list</ion-title>
+  <ion-title>Item List</ion-title>
 </ion-navbar>
 
 <ion-content class="outer-content speaker-list">
@@ -45,12 +45,18 @@
 
     <!-- <ion-item-group *ngFor="#group of groups" [hidden]="group.hide"> -->
 
-      <ion-item-divider sticky>
-        {{groupName}}
-      </ion-item-divider>
+      <button (click)="getItems(groupName)">
+          <h3>Load {{groupName}}'s list</h3>
+          <!-- <p> -->
+            <!-- {{session.timeStart}} &mdash; -->
+            <!-- {{session.timeEnd}}: -->
+            <!-- {{session.location}} -->
+          <!-- </p> -->
+      </button>
 
       <ion-item *ngFor="#item of items">
-        
+        <h3>{{item.name}}</h3>
+        <h3>{{item.cost}}</h3>
       </ion-item>
 
       <!-- <ion-item-sliding *ngFor="#session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase" [hidden]="session.hide"> -->
@@ -74,7 +80,7 @@
       
     <!-- </ion-item-group> -->
     <button (click)="getGroupName()">
-          <h3>Test method to setVars</h3>
+          <h3>Test method to see items</h3>
           <!-- <p> -->
             <!-- {{session.timeStart}} &mdash; -->
             <!-- {{session.timeEnd}}: -->

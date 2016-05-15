@@ -521,6 +521,12 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
     // confData.getSpeakers().then(speakers => {
     //   this.speakers = speakers;
     // });
+    this.items = [
+      // 1: {
+      //   name: "bread",
+      //   cost: 3.99
+      // }
+    ];
   }
 
   _createClass(ListPage, [{
@@ -530,30 +536,73 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
       // console.log(this.groupId);
       console.log("userData", this.userData);
       console.log("groupName", this.groupName);
+      console.log("items", this.items);
       return this.groupName;
     }
 
     //goal update groupList according to fireBase and groupName
+    // getItems(groupName) {
+    //   var items;
+    //   if (groupName) {
+    //     var groupRef = new Firebase(this.firebaseUrl + "groups/" + groupName);
+    //     if (groupRef) {
+    //       groupRef.once("value", function(snapshot) {
+    //         if (snapshot.exists()) {
+    //           items = snapshot.val()["items"];
+    //         }
+    //       }, function(errorObject) {
+    //         console.log("The snapshot failed: ", errorObject.code);
+    //       });
+    //     }
+    //   }
+    //   this.items = items;
+    //   return items;
+    // }
 
   }, {
     key: 'getItems',
     value: function getItems(groupName) {
-      var items;
-      if (groupName) {
-        var groupRef = new Firebase(this.firebaseUrl + "groups/" + groupName);
-        if (groupRef) {
-          groupRef.once("value", function (snapshot) {
-            if (snapshot.exists()) {
-              items = snapshot.val()["items"];
-            }
-          }, function (errorObject) {
-            console.log("The snapshot failed: ", errorObject.code);
-          });
-        }
-      }
-      this.items = items;
-      return items;
+      this.items = this.getGroupItems(groupName);
+      console.log(this.items, "items");
     }
+
+    // getGroupItems(groupName) {
+    //   var items;
+    //   if (groupName) {
+    //     var groupRef = new Firebase(this.firebaseUrl + "groups/" + groupName);
+    //     // var groupRef = new Firebase(this.firebaseUrl + "groups/" + "test59group");
+    //     console.log("groupName", groupName, "firebaseUrl", this.firebaseUrl, "groupRef", groupRef);
+    //     if (groupRef) {
+    //       groupRef.once("value", function(snapshot) {
+    //         if (snapshot.exists()) {
+    //           items = snapshot.val()["items"];
+    //           // this.items = items;
+    //           return items;
+    //           console.log("items:", items);
+    //         }
+    //       }, function(errorObject) {
+    //         console.log("The snapshot failed: ", errorObject.code);
+    //       });
+    //     }
+    //   }
+
+    // }
+    // getAllData() {
+    //   var groupRef = new Firebase(this.firebaseUrl + "groups/" + "test59group")
+    //   return Observable.create((observer) => {
+    //     firebaseRef.on("value", function (snapshot) {
+    //         console.log(snapshot.val());
+    //         observer.next(snapshot.val());
+
+    //     });
+    //   });
+    // }
+
+    // ngOnInit():any {
+    //   this._dataService.getAllData().subscribe(data => {
+    //     this.items = data;
+    //   });
+    // }
 
     // auth.$onAuth(function(authUser) {
     //     if (authUser) {
