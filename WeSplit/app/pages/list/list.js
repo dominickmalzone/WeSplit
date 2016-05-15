@@ -131,6 +131,45 @@ export class ListPage {
       }
     }
   }
+
+  addItem(newItemName, newItemCost, groupName) {
+    console.log("newItemName", newItemName, "newItemCost", newItemCost);
+    if (groupName) {
+      var items;
+      var groupRef = new Firebase(this.firebaseUrl + "groups/" + groupName);
+      // var groupRef = new Firebase(this.firebaseUrl + "groups/" + "test59group");
+      // console.log("groupName", groupName, "firebaseUrl", this.firebaseUrl, "groupRef", groupRef);
+
+      if (groupRef) {
+        groupRef.once("value", snapshot => {
+          if (snapshot.exists()) {
+            items = snapshot.val()["items"];
+
+            items.push({
+              name: newItemName,
+              cost: newItemCost
+            })
+
+            console.log("updated Items:", items);
+
+            groupRef.set(
+              {
+                items: items
+              }  
+            );
+
+
+            this.items = items;
+            // return items;
+            console.log("items:", items);
+          }
+        }, function(errorObject) {
+          console.log("The snapshot failed: ", errorObject.code);
+        });
+      }
+    }
+
+  }
     
     
   // }

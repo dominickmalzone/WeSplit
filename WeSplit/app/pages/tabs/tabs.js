@@ -16,11 +16,9 @@ export class TabsPage {
     this.mySelectedIndex = navParams.data.tabIndex || 0;
 
     // set the root pages for each tab
-    
-    
-    this.tab1Root = SchedulePage;
-    this.tab2Root = ListPage;
+    this.tab1Root = ListPage;
+    this.tab2Root = AccountPage;
     // this.tab3Root = MapPage;
-    this.tab3Root = AccountPage;
+    // this.tab3Root = AccountPage;
   }
 }

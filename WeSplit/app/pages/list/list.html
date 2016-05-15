@@ -2,24 +2,33 @@
   <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
-  <ion-title>{{userName}}</ion-title>
+  <ion-title>{{groupName}}</ion-title>
+  
 </ion-navbar>
 
 <ion-content class="outer-content speaker-list">
 
-    <ion-toolbar>
+    
+
+    <ion-list>
+      <ion-toolbar>
       <ion-searchbar 
 
                  placeholder="Search">
 
       </ion-searchbar>
     </ion-toolbar>
-
-    <ion-list>
-
-      <button (click)="getGroupItems(groupName)">
-        <h3>Load {{groupName}} list</h3>
-      </button>
+      <button (click)="getGroupItems(groupName)" class="right">
+    <p>Load</p>
+  </button>
+      <!-- <ion-item>
+        <h3>
+          {{New Item}}
+        </h3>
+        <button (click)="getGroupItems(groupName)">
+          <h3>Load list</h3>
+        </button>
+      </ion-item> -->
 
       <ion-item *ngFor="#item of items">
         <!-- <button> -->
@@ -30,19 +39,24 @@
         <!-- </button> -->
 
       </ion-item>
+      
+      <ion-item>
+        <ion-input type="text" placeholder="New Item Name" [(ngModel)]="newItemName"></ion-input>
+        <ion-input type="number" placeholder="Cost" [(ngModel)]="newItemCost"></ion-input>
+      </ion-item>
+      <ion-item>
+         <button (click)="addItem(newItemName, newItemCost, groupName)" >Add
+        </button>
+      </ion-item>
 
 
 
   </ion-list>
-  <ion-list>
+  <!-- <ion-list> -->
 
-    <ion-item>
-      <ion-input type="text" placeholder="New Item Name"></ion-input>
-      <ion-input type="text" placeholder="New Item Cost"></ion-input>
-      
-    </ion-item>
-    <button ion-item (click)="addItem(newitem)">Add
-    </button>
+    
+    <!-- <button ion-item (click)="addItem(newitem)">Add -->
+    <!-- </button> -->
     <!-- <ion-item> -->
       <!-- <ion-input type="text" placeholder="New Item"></ion-input> -->
       <!-- <ion-input type="text" placeholder="New Item" [(ngModel)]="item.cost"></ion-input> -->
@@ -50,7 +64,7 @@
       <!-- </button> -->
     <!-- </ion-item> -->
 
-  </ion-list>
+  <!-- </ion-list> -->
 
  <!--  <form #newItemForm="ngForm" novalidate>
       

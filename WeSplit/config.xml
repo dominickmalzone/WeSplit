@@ -2,10 +2,10 @@
 <widget id="io.ionic.conference" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>WeSplit</name>
   <description>
-        An Ionic Framework application for the Ionic Conference.
+        We Split application for roommates and people who need to share lists.
   </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="15Dkatz@shcp.edu" href="http://davidtkatz.com/">
+    David Katz and DominickMalzone
   </author>
   <content src="index.html"/>
   <access origin="*"/>

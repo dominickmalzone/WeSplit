@@ -629,6 +629,44 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
         }
       }
     }
+  }, {
+    key: 'addItem',
+    value: function addItem(newItemName, newItemCost, groupName) {
+      var _this2 = this;
+
+      console.log("newItemName", newItemName, "newItemCost", newItemCost);
+      if (groupName) {
+        var items;
+        var groupRef = new Firebase(this.firebaseUrl + "groups/" + groupName);
+        // var groupRef = new Firebase(this.firebaseUrl + "groups/" + "test59group");
+        // console.log("groupName", groupName, "firebaseUrl", this.firebaseUrl, "groupRef", groupRef);
+
+        if (groupRef) {
+          groupRef.once("value", function (snapshot) {
+            if (snapshot.exists()) {
+              items = snapshot.val()["items"];
+
+              items.push({
+                name: newItemName,
+                cost: newItemCost
+              });
+
+              console.log("updated Items:", items);
+
+              groupRef.set({
+                items: items
+              });
+
+              _this2.items = items;
+              // return items;
+              console.log("items:", items);
+            }
+          }, function (errorObject) {
+            console.log("The snapshot failed: ", errorObject.code);
+          });
+        }
+      }
+    }
 
     // }
     // getAllData() {
@@ -1015,11 +1053,10 @@ var TabsPage = exports.TabsPage = (_dec = (0, _ionicAngular.Page)({
     this.mySelectedIndex = navParams.data.tabIndex || 0;
 
     // set the root pages for each tab
-
-    this.tab1Root = _buy.SchedulePage;
-    this.tab2Root = _list.ListPage;
+    this.tab1Root = _list.ListPage;
+    this.tab2Root = _account.AccountPage;
     // this.tab3Root = MapPage;
-    this.tab3Root = _account.AccountPage;
+    // this.tab3Root = AccountPage;
   }
 
   return TabsPage;
