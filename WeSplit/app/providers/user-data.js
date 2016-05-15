@@ -15,7 +15,7 @@ export class UserData {
     this.HAS_LOGGED_IN = 'hasLoggedIn';
     this.username = '';
     this.password = '';
-    this.groupId = '';
+    this.groupName = '';
   }
 
   setGroupList(groupList) {
@@ -23,9 +23,8 @@ export class UserData {
   }
 
   getGroupList() {
-    return this._groupList;
+    return this.groupName;
   }
-
 
   hasFavorite(sessionName) {
     return (this._favorites.indexOf(sessionName) > -1);
@@ -47,8 +46,10 @@ export class UserData {
     this.events.publish('user:login');
   }
 
-  signup(username, password) {
+  signup(username, password, groupName) {
     this.storage.set(this.HAS_LOGGED_IN, true);
+    this.groupName = groupName;
+    console.log("groupName", groupName);
     this.events.publish('user:signup');
   }
 

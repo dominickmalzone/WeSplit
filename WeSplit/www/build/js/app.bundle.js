@@ -473,7 +473,7 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
     // this.speakers = [];
     this.groupList = [];
     this.userData = userData;
-    this.groupId = userData.groupId;
+    // this.groupName = userData.getGroupList();
 
     // confData.getSpeakers().then(speakers => {
     //   this.speakers = speakers;
@@ -485,7 +485,7 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
     value: function getGroupList() {
       // first log the groupId
       // console.log(this.groupId);
-      console.log("userData", this.userData, "groupId", this.groupId);
+      console.log("userData", this.userData);
     }
   }, {
     key: 'goToSessionDetail',
@@ -702,7 +702,6 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
       console.log(form.email, form.password, this.firebaseUrl, "email, password, and firebase");
 
       if (form.valid) {
-        this.userData.signup();
 
         var weSplitRef = new Firebase(this.firebaseUrl);
 
@@ -738,16 +737,15 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
           console.log(regUser.uid, "in createUser");
 
           var firstGrouplist = {
-            items: {
-              item: "item1"
-            }
+            item: "item1"
           };
 
           var groupRef = new Firebase("https://wesplitapp.firebaseio.com/" + "groups").child(groupName).set({
             firstGrouplist: firstGrouplist
           });
 
-          this.userData.setGroupList(firstGrouplist);
+          // this.userData.setGroupList(firstGrouplist);
+          this.userData.signup(username, form.controls.password.value, groupName);
         });
 
         this.nav.push(_tabs.TabsPage);
@@ -1138,7 +1136,7 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
     this.HAS_LOGGED_IN = 'hasLoggedIn';
     this.username = '';
     this.password = '';
-    this.groupId = '';
+    this.groupName = '';
   }
 
   _createClass(UserData, [{
@@ -1149,7 +1147,7 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
   }, {
     key: 'getGroupList',
     value: function getGroupList() {
-      return this._groupList;
+      return this.groupName;
     }
   }, {
     key: 'hasFavorite',
@@ -1177,8 +1175,10 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
     }
   }, {
     key: 'signup',
-    value: function signup(username, password) {
+    value: function signup(username, password, groupName) {
       this.storage.set(this.HAS_LOGGED_IN, true);
+      this.groupName = groupName;
+      console.log("groupName", groupName);
       this.events.publish('user:signup');
     }
   }, {

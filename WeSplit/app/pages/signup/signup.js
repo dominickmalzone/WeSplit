@@ -30,7 +30,7 @@ export class SignupPage {
     console.log(form.email, form.password, this.firebaseUrl, "email, password, and firebase");
 
     if (form.valid) {
-      this.userData.signup();
+      
       
         var weSplitRef = new Firebase(this.firebaseUrl);
 
@@ -67,9 +67,7 @@ export class SignupPage {
           console.log(regUser.uid, "in createUser");
 
           var firstGrouplist = {
-            items: {
-              item: "item1"
-            }
+            item: "item1"
           }
 
 
@@ -78,8 +76,9 @@ export class SignupPage {
             firstGrouplist
           });
 
-          this.userData.setGroupList(firstGrouplist);
-          
+          // this.userData.setGroupList(firstGrouplist);
+          this.userData.signup(username, form.controls.password.value, groupName);
+
         });
 
       this.nav.push(TabsPage);
