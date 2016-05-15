@@ -148,6 +148,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.AccountPage = undefined;
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _dec, _class;
 
 var _ionicAngular = require('ionic-angular');
@@ -158,9 +160,42 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var AccountPage = exports.AccountPage = (_dec = (0, _ionicAngular.Page)({
   templateUrl: 'build/pages/account/account.html'
-}), _dec(_class = function AccountPage() {
-  _classCallCheck(this, AccountPage);
-}) || _class);
+}), _dec(_class = function () {
+  _createClass(AccountPage, null, [{
+    key: 'parameters',
+    get: function get() {
+      return [[_ionicAngular.NavController], [_userData.UserData]];
+    }
+  }]);
+
+  function AccountPage(nav, userData) {
+    _classCallCheck(this, AccountPage);
+
+    this.nav = nav;
+    // this.speakers = [];
+
+    this.userData = userData;
+    this.userName = userData.userName;
+    this.groupName = userData.groupName;
+
+    // this.items = this.getItems(this.groupName);
+
+    this.firebaseUrl = "https://wesplitapp.firebaseio.com/";
+    // confData.getSpeakers().then(speakers => {
+    //   this.speakers = speakers;
+    // });
+  }
+
+  _createClass(AccountPage, [{
+    key: 'getGroupName',
+    value: function getGroupName() {
+      console.log("getGroupName function worked with", this.groupName);
+      return this.groupName;
+    }
+  }]);
+
+  return AccountPage;
+}()) || _class);
 
 },{"../../providers/user-data":13,"ionic-angular":353}],3:[function(require,module,exports){
 'use strict';
@@ -465,15 +500,15 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
   _createClass(ListPage, null, [{
     key: 'parameters',
     get: function get() {
-      return [[_ionicAngular.NavController], [_conferenceData.ConferenceData], [_userData.UserData]];
+      return [[_ionicAngular.NavController], [_userData.UserData]];
     }
   }]);
 
-  function ListPage(nav, confData, userData) {
+  function ListPage(nav, userData) {
     _classCallCheck(this, ListPage);
 
     this.nav = nav;
-    this.confData = confData;
+    // this.confData = confData;
     // this.speakers = [];
 
     this.userData = userData;

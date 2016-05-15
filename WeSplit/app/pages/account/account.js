@@ -1,4 +1,3 @@
-import {Page} from 'ionic-angular';
 import {IonicApp, Page, NavController} from 'ionic-angular';
 import {UserData} from '../../providers/user-data';
 
@@ -7,7 +6,7 @@ import {UserData} from '../../providers/user-data';
   templateUrl: 'build/pages/account/account.html'
 })
 export class AccountPage {
-	static get parameters() {
+   static get parameters() {
     return [[NavController], [UserData]];
   }
 
