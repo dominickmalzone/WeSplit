@@ -13,8 +13,7 @@ export class UserData {
     this.storage = new Storage(LocalStorage);
     this.events = events;
     this.HAS_LOGGED_IN = 'hasLoggedIn';
-    this.username = '';
-    this.password = '';
+    this.userName = '';
     this.groupName = '';
   }
 
@@ -22,8 +21,16 @@ export class UserData {
     this._groupList = groupList;
   }
 
-  getGroupList() {
+  getGroupName() {
     return this.groupName;
+  }
+
+  setGroupName(newGroupName) {
+    this.groupName = newGroupName;
+  }
+
+  setuserName(newuserName) {
+    this.userName = newuserName;
   }
 
   hasFavorite(sessionName) {
@@ -41,12 +48,12 @@ export class UserData {
     }
   }
 
-  login(username, password) {
+  login(userName, password) {
     this.storage.set(this.HAS_LOGGED_IN, true);
     this.events.publish('user:login');
   }
 
-  signup(username, password, groupName) {
+  signup(userName, password, groupName) {
     this.storage.set(this.HAS_LOGGED_IN, true);
     this.groupName = groupName;
     console.log("groupName in signup", groupName);

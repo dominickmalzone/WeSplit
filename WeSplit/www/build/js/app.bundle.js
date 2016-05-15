@@ -475,7 +475,8 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
     // this.speakers = [];
     this.groupList = [];
     this.userData = userData;
-    // this.groupName = userData.getGroupList();
+    this.userName = userData.userName;
+    this.groupName = userData.groupName;
 
     // confData.getSpeakers().then(speakers => {
     //   this.speakers = speakers;
@@ -483,11 +484,13 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
   }
 
   _createClass(ListPage, [{
-    key: 'getGroupList',
-    value: function getGroupList() {
+    key: 'getGroupName',
+    value: function getGroupName() {
       // first log the groupId
       // console.log(this.groupId);
       console.log("userData", this.userData);
+      // return this.groupList;
+      console.log("groupName", this.groupName);
     }
   }, {
     key: 'goToSessionDetail',
@@ -594,7 +597,7 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
         /* Authenticate User */
         var ref = new Firebase(this.firebaseUrl);
         ref.authWithPassword({
-          email: form.controls.username.value,
+          email: form.controls.userName.value,
           password: form.controls.password.value
         }, this.authHandler);
       }
@@ -705,17 +708,29 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
     this.testString = "testString";
   }
 
-  // getTestString() {
-  //   return this.testString;
-  // }
-
   _createClass(SignupPage, [{
+    key: 'changeGroupName',
+    value: function changeGroupName(newGroupName) {
+      console.log(this.userData);
+    }
+
+    // getTestString() {
+    //   return this.testString;
+    // }
+
+  }, {
     key: 'onSignup',
     value: function onSignup(form) {
       this.submitted = true;
 
       console.log(form);
-      console.log(form.email, form.password, this.firebaseUrl, "email, password, and firebase");
+      console.log(this.firebaseUrl, "email, password, and firebase");
+
+      var groupName = form.controls.userName.value + "group";
+      this.userData.setGroupName(groupName);
+
+      var userName = form.controls.userName.value;
+      this.userData.setuserName(userName);
 
       if (form.valid) {
 
@@ -740,32 +755,35 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
             console.log("Successfully created user account with uid:", userData.uid);
           }
         }).then(function (regUser) {
-          var username = form.controls.username.value;
+          var userName = form.controls.userName.value;
           var email = form.controls.email.value;
-          var groupName = username + "group";
+          var groupName = userName + "group";
           var regRef = new Firebase("https://wesplitapp.firebaseio.com/" + "users").child(regUser.uid).set({
             date: Firebase.ServerValue.TIMESTAMP,
-            username: username,
+            userName: userName,
             group: groupName,
             email: email
           });
 
           console.log(regUser.uid, "in createUser");
 
-          var firstGrouplist = {
+          var items = {
             item: "item1"
+            // uncomment above if items stops setting
           };
 
           var groupRef = new Firebase("https://wesplitapp.firebaseio.com/" + "groups").child(groupName).set({
-            firstGrouplist: firstGrouplist
+            items: items
           });
 
           // passedGroupName = groupName;
 
+          // console.log("attempting to call changeGroupName");
+          // changeGroupName(groupName);
           // console.log("passedGroupName", passedGroupName);
 
           // this.userData.setGroupList(firstGrouplist);
-          // this.userData.signup(username, form.controls.password.value, passedGroupName);
+          // this.userData.signup(userName, form.controls.password.value, passedGroupName);
           // console.log(getTestString());
         });
 
@@ -1155,8 +1173,7 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
     this.storage = new _ionicAngular.Storage(_ionicAngular.LocalStorage);
     this.events = events;
     this.HAS_LOGGED_IN = 'hasLoggedIn';
-    this.username = '';
-    this.password = '';
+    this.userName = '';
     this.groupName = '';
   }
 
@@ -1166,9 +1183,19 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
       this._groupList = groupList;
     }
   }, {
-    key: 'getGroupList',
-    value: function getGroupList() {
+    key: 'getGroupName',
+    value: function getGroupName() {
       return this.groupName;
+    }
+  }, {
+    key: 'setGroupName',
+    value: function setGroupName(newGroupName) {
+      this.groupName = newGroupName;
+    }
+  }, {
+    key: 'setuserName',
+    value: function setuserName(newuserName) {
+      this.userName = newuserName;
     }
   }, {
     key: 'hasFavorite',
@@ -1190,13 +1217,13 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
     }
   }, {
     key: 'login',
-    value: function login(username, password) {
+    value: function login(userName, password) {
       this.storage.set(this.HAS_LOGGED_IN, true);
       this.events.publish('user:login');
     }
   }, {
     key: 'signup',
-    value: function signup(username, password, groupName) {
+    value: function signup(userName, password, groupName) {
       this.storage.set(this.HAS_LOGGED_IN, true);
       this.groupName = groupName;
       console.log("groupName in signup", groupName);

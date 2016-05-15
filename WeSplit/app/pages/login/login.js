@@ -27,13 +27,15 @@ export class LoginPage {
   onLogin(form) {
     this.submitted = true;
 
+    
+    
     if (form.valid) {
       this.userData.login();
       
       /* Authenticate User */ 
       var ref = new Firebase(this.firebaseUrl);
       ref.authWithPassword({
-        email    : form.controls.username.value,
+        email    : form.controls.userName.value,
         password : form.controls.password.value
       }, this.authHandler);
       

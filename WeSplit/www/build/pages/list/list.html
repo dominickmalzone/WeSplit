@@ -67,10 +67,15 @@
         </ion-item-options>
 
       </ion-item-sliding> -->
-
+      <ion-item>
+        Test userName: {{userName}}
+      </ion-item>
+      <ion-item>
+        Test GroupName: {{groupName}}
+      </ion-item>
     <!-- </ion-item-group> -->
-    <button (click)="getGroupList()">
-          <h3>testing Group Id</h3>
+    <button (click)="getGroupName()">
+          <h3>Test method to setVars</h3>
           <!-- <p> -->
             <!-- {{session.timeStart}} &mdash; -->
             <!-- {{session.timeEnd}}: -->
@@ -79,10 +84,10 @@
     </button>
 
   </ion-list>
-
+<!-- 
   <ion-list-header [hidden]="shownSessions > 0">
       No Sessions Found
-  </ion-list-header>
+  </ion-list-header> -->
 
 
 </ion-content>

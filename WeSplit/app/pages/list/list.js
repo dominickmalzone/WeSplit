@@ -20,7 +20,8 @@ export class ListPage {
     // this.speakers = [];
     this.groupList = [];
     this.userData = userData;
-    // this.groupName = userData.getGroupList();
+    this.userName = userData.userName;
+    this.groupName = userData.groupName;
 
 
     // confData.getSpeakers().then(speakers => {
@@ -28,12 +29,12 @@ export class ListPage {
     // });
   }
 
-  getGroupList() {
+  getGroupName() {
     // first log the groupId
     // console.log(this.groupId);
     console.log("userData", this.userData);
-
-
+    // return this.groupList;
+    console.log("groupName", this.groupName);
   }
 
 
