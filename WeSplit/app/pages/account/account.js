@@ -17,6 +17,7 @@ export class AccountPage {
     this.userData = userData;
     this.userName = userData.userName;
     this.groupName = userData.groupName;
+   
 
     // this.items = this.getItems(this.groupName);
 
