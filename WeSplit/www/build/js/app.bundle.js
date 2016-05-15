@@ -524,10 +524,10 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
     this.items = [];
 
     // testing
-    this.items[0] = {
-      name: "test: griffin meat",
-      cost: 3.99
-    };
+    // this.items[0] = {
+    //   name: "test: griffin meat",
+    //   cost: 3.99
+    // }
 
     this.groupData;
 
@@ -772,7 +772,6 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
     this.submitted = false;
 
     this.firebaseUrl = "https://wesplitapp.firebaseio.com";
-    // this.authHandler();
   }
 
   _createClass(LoginPage, [{
@@ -781,8 +780,6 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
       this.submitted = true;
       var email = form.controls.email.value;
       var password = form.controls.password.value;
-
-      // console.log()
 
       if (form.valid) {
         this.userData.login();
@@ -798,7 +795,7 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
       var userName = form.controls.userName.value;
       this.userData.setuserName(userName);
 
-      var groupName = userName + "group";
+      var groupName = userName + "'s group";
       this.userData.setGroupName(groupName);
 
       console.log("login", userName, groupName);
@@ -821,6 +818,12 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
 
   return LoginPage;
 }()) || _class);
+
+// ******* TODO *******
+//  // later simply access the groupName by the email + password
+// later implement local storage
+// later give feedback to user if they use the incorrect email or password or username
+// otherwise user will misunderstand reason for breakage
 
 },{"../../providers/user-data":13,"../signup/signup":9,"../tabs/tabs":10,"ionic-angular":353}],8:[function(require,module,exports){
 'use strict';

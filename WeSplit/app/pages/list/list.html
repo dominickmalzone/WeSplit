@@ -2,149 +2,76 @@
   <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
-  <ion-title>Item List</ion-title>
+  <ion-title>{{userName}}</ion-title>
 </ion-navbar>
 
 <ion-content class="outer-content speaker-list">
-<!--   <ion-card *ngFor="#speaker of speakers" class="speaker">
 
-    <ion-card-header>
-      <ion-item>
-        <ion-avatar item-left>
-          <img [src]="speaker.profilePic">
-        </ion-avatar>
-        {{speaker.name}}
-      </ion-item>
-    </ion-card-header>
+    <ion-toolbar>
+      <ion-searchbar 
 
-    <ion-card-content class="outer-content">
-      <ion-list>
-        <button ion-item *ngFor="#session of speaker.sessions" (click)="goToSessionDetail(session)">
-          <h3>{{session.name}}</h3>
-        </button>
-        <button ion-item (click)="goToSpeakerDetail(speaker)">
-          <h3>About {{speaker.name}}</h3>
-        </button>
-      </ion-list>
-    </ion-card-content>
+                 placeholder="Search">
 
-    <ion-item>
-      <button (click)="goToSpeakerTwitter(speaker)" clear item-left>
-        <ion-icon name="logo-twitter"></ion-icon>
-        Tweet
-      </button>
-      <button (click)="openSpeakerShare(speaker)" clear item-right>
-        <ion-icon name="share"></ion-icon>
-        Share
-      </button>
-    </ion-item>
-
-  </ion-card> -->
+      </ion-searchbar>
+    </ion-toolbar>
 
     <ion-list>
 
-    <!-- <ion-item-group *ngFor="#group of groups" [hidden]="group.hide"> -->
-
       <button (click)="getGroupItems(groupName)">
-          <h3>Load {{groupName}} list</h3>
-          <!-- <p> -->
-            <!-- {{session.timeStart}} &mdash; -->
-            <!-- {{session.timeEnd}}: -->
-            <!-- {{session.location}} -->
-          <!-- </p> -->
+        <h3>Load {{groupName}} list</h3>
       </button>
 
       <ion-item *ngFor="#item of items">
         <!-- <button> -->
           <h3>{{item.name}}</h3>
-          <p>
+          <h3>
             {{item.cost}}
-          </p>
+          </h3>
         <!-- </button> -->
 
       </ion-item>
 
-      <!-- <ion-item-sliding *ngFor="#session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase" [hidden]="session.hide"> -->
 
-        <!-- <button ion-item (click)="goToSessionDetail(session)"> -->
-          <!-- <h3>{{session.name}}</h3> -->
-          <!-- <p> -->
-            <!-- {{session.timeStart}} &mdash; -->
-            <!-- {{session.timeEnd}}: -->
-            <!-- {{session.location}} -->
-          <!-- </p> -->
-        <!-- </button> -->
 
-    <!--     <ion-item-options>
-          <button favorite (click)="addFavorite(slidingItem, session)" *ngIf="segment === 'all'">
-            Favorite
-          </button>
-        </ion-item-options>
-
-      </ion-item-sliding> -->
-      
-    <!-- </ion-item-group> -->
-    <button (click)="getGroupName()">
-          <h3>Test method to see items</h3>
-          <!-- <p> -->
-            <!-- {{session.timeStart}} &mdash; -->
-            <!-- {{session.timeEnd}}: -->
-            <!-- {{session.location}} -->
-          <!-- </p> -->
-    </button>
+  </ion-list>
+  <ion-list>
 
     <ion-item>
-        Test userName: {{userName}}
+      <ion-input type="text" placeholder="New Item Name"></ion-input>
+      <ion-input type="text" placeholder="New Item Cost"></ion-input>
+      
+    </ion-item>
+    <button ion-item (click)="addItem(newitem)">Add
+    </button>
+    <!-- <ion-item> -->
+      <!-- <ion-input type="text" placeholder="New Item"></ion-input> -->
+      <!-- <ion-input type="text" placeholder="New Item" [(ngModel)]="item.cost"></ion-input> -->
+      <!-- <button ion-item (click)="addItem(item.name, item.cost)"> -->
+      <!-- </button> -->
+    <!-- </ion-item> -->
+
+  </ion-list>
+
+ <!--  <form #newItemForm="ngForm" novalidate>
+      
+
+      <ion-item>
+        <ion-label floating primary>Name</ion-label>
+        <ion-input [(ngModel)]="newItem.name" ngControl="name" type="text" #name="ngForm" required>
+        </ion-input>
       </ion-item>
       <ion-item>
-        Test GroupName: {{groupName}}
+        <ion-label floating primary>Cost</ion-label>
+        <ion-input [(ngModel)]="newItem.cost" ngControl="cost" type="password" #cost="ngForm" required>
+        </ion-input>
+
       </ion-item>
-
-  </ion-list>
-<!-- 
-  <ion-list-header [hidden]="shownSessions > 0">
-      No Sessions Found
-  </ion-list-header> -->
-
-
-</ion-content>
-<!-- 
-
-  <ion-list [hidden]="shownSessions === 0">
-
-    <ion-item-group *ngFor="#group of groups" [hidden]="group.hide">
-
-      <ion-item-divider sticky>
-        {{group.time}}
-      </ion-item-divider>
-
-      <ion-item-sliding *ngFor="#session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase" [hidden]="session.hide">
-
-        <button ion-item (click)="goToSessionDetail(session)">
-          <h3>{{session.name}}</h3>
-          <p>
-            {{session.timeStart}} &mdash;
-            {{session.timeEnd}}:
-            {{session.location}}
-          </p>
-        </button>
-
-        <ion-item-options>
-          <button favorite (click)="addFavorite(slidingItem, session)" *ngIf="segment === 'all'">
-            Favorite
-          </button>
-        </ion-item-options>
-
-      </ion-item-sliding>
-
-    </ion-item-group>
-
-  </ion-list>
-
-  <ion-list-header [hidden]="shownSessions > 0">
-      No Sessions Found
-  </ion-list-header>
-
-
-</ion-content>
+      <ion-row responsive-sm>
+        <ion-col>
+          <button (click)="onAddItem(newItemForm)" type="submit" primary block>Login</button>
+        </ion-col>
+      </ion-row>
+    </form>
  -->
+
+</ion-content>

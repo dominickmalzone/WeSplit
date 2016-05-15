@@ -32,10 +32,10 @@ export class ListPage {
     this.items = [];
 
     // testing
-    this.items[0] = {
-      name: "test: griffin meat",
-      cost: 3.99
-    }
+    // this.items[0] = {
+    //   name: "test: griffin meat",
+    //   cost: 3.99
+    // }
 
     this.groupData;
 
