@@ -13,9 +13,7 @@ export class SignupPage {
     return [[NavController], [UserData]];
   }
 
-  // static passedGroupName;
 
-  // var groupName;
 
   constructor(nav, userData) {
     this.nav = nav;
@@ -25,18 +23,9 @@ export class SignupPage {
     this.submitted = false;
     this.firebaseUrl = "https://wesplitapp.firebaseio.com/";
 
+    // debugging sake
     this.testString = "testString";
   }
-
-  changeGroupName(newGroupName) {
-    console.log(this.userData);
-    
-  }
-
-
-  // getTestString() {
-  //   return this.testString;
-  // }
 
   onSignup(form) {
     this.submitted = true;
@@ -87,8 +76,8 @@ export class SignupPage {
         console.log(regUser.uid, "in createUser");
 
         var items = {
+          // below line necessary to create groupName // need to fix
           item: "item1"
-          // uncomment above if items stops setting
         }
 
 
@@ -97,15 +86,6 @@ export class SignupPage {
           items
         });
 
-        // passedGroupName = groupName;
-
-        // console.log("attempting to call changeGroupName");
-        // changeGroupName(groupName);
-        // console.log("passedGroupName", passedGroupName);
-
-        // this.userData.setGroupList(firstGrouplist);
-        // this.userData.signup(userName, form.controls.password.value, passedGroupName);
-        // console.log(getTestString());
 
       });
 

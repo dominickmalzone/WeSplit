@@ -45,9 +45,9 @@
 
     <!-- <ion-item-group *ngFor="#group of groups" [hidden]="group.hide"> -->
 
-  <!--     <ion-item-divider sticky>
-        {{group.time}}
-      </ion-item-divider> -->
+      <ion-item-divider sticky>
+        {{groupName}}
+      </ion-item-divider>
 
       <!-- <ion-item-sliding *ngFor="#session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase" [hidden]="session.hide"> -->
 
@@ -67,12 +67,7 @@
         </ion-item-options>
 
       </ion-item-sliding> -->
-      <ion-item>
-        Test userName: {{userName}}
-      </ion-item>
-      <ion-item>
-        Test GroupName: {{groupName}}
-      </ion-item>
+      
     <!-- </ion-item-group> -->
     <button (click)="getGroupName()">
           <h3>Test method to setVars</h3>
@@ -82,6 +77,13 @@
             <!-- {{session.location}} -->
           <!-- </p> -->
     </button>
+
+    <ion-item>
+        Test userName: {{userName}}
+      </ion-item>
+      <ion-item>
+        Test GroupName: {{groupName}}
+      </ion-item>
 
   </ion-list>
 <!-- 

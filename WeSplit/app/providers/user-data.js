@@ -53,10 +53,8 @@ export class UserData {
     this.events.publish('user:login');
   }
 
-  signup(userName, password, groupName) {
+  signup(userName, password) {
     this.storage.set(this.HAS_LOGGED_IN, true);
-    this.groupName = groupName;
-    console.log("groupName in signup", groupName);
     this.events.publish('user:signup');
   }
 
