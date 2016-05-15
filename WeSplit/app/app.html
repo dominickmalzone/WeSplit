@@ -10,16 +10,6 @@
 
     <ion-list>
       <ion-list-header>
-        Navigate
-      </ion-list-header>
-      <button ion-item menuClose *ngFor="#p of appPages" (click)="openPage(p)">
-        <ion-icon item-left [name]="p.icon"></ion-icon>
-        {{p.title}}
-      </button>
-    </ion-list>
-
-    <ion-list>
-      <ion-list-header>
         Account
       </ion-list-header>
       <button ion-item menuClose *ngFor="#p of loggedOutPages" (click)="openPage(p)">
@@ -39,17 +29,6 @@
   </ion-toolbar>
 
   <ion-content class="outer-content">
-
-    <ion-list>
-      <ion-list-header>
-        Navigate
-      </ion-list-header>
-      <button ion-item menuClose *ngFor="#p of appPages" (click)="openPage(p)">
-        <ion-icon item-left [name]="p.icon"></ion-icon>
-        {{p.title}}
-      </button>
-    </ion-list>
-
     <ion-list>
       <ion-list-header>
         Account
