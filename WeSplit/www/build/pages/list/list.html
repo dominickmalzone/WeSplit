@@ -34,7 +34,7 @@
         <!-- <button> -->
           <h3>{{item.name}}</h3>
           <h3>
-            {{item.cost}}
+            Cost: {{item.cost}}
           </h3>
         <!-- </button> -->
 
@@ -46,6 +46,13 @@
       </ion-item>
       <ion-item>
          <button (click)="addItem(newItemName, newItemCost, groupName)" >Add
+        </button>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" placeholder="Join a friend's group" [(ngModel)]="newGroupName"></ion-input>
+      </ion-item>
+      <ion-item>
+         <button (click)="changeGroup(newGroupName)" >Change
         </button>
       </ion-item>
 

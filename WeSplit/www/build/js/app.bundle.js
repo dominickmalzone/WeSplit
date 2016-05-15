@@ -579,6 +579,11 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
       console.log("groupData", this.groupData);
       return this.groupName;
     }
+  }, {
+    key: 'changeGroup',
+    value: function changeGroup(otherName) {
+      this.groupName = otherName + "'s group";
+    }
 
     //goal update groupList according to fireBase and groupName
     // getItems(groupName) {
@@ -997,8 +1002,8 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
 
           var items = [];
           items[0] = {
-            name: "firstItem",
-            cost: 0
+            name: "Example item: bread",
+            cost: 3.99
           };
           // below line necessary to create groupName // need to fix
 

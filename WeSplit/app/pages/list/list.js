@@ -87,6 +87,10 @@ export class ListPage {
     return this.groupName;
   }
 
+  changeGroup(otherName) {
+    this.groupName = otherName + "'s group";
+  }
+
   //goal update groupList according to fireBase and groupName
   // getItems(groupName) {
   //   var items;
