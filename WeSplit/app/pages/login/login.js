@@ -19,7 +19,7 @@ export class LoginPage {
     this.login = {};
     this.submitted = false;
     
-    this.firebaseUrl = "https://wesplitapp.firebaseio.com";
+    this.firebaseUrl = "https://wesplitapp.firebaseio.com/";
   }
 
   onLogin(form) {
@@ -35,17 +35,50 @@ export class LoginPage {
       ref.authWithPassword({
         email    : email,
         password : password
-      }, this.authHandler());
+      }, (error, authData) => {
+        if (error) {
+          console.log("Login Failed!", error);
+        } else {
+          console.log("Authenticated successfully with payload:", authData);
+          console.log("groupName", authData);
+
+          var groupName;
+          // var uid = authData.uid;
+          // console.log(this.firebaseUrl, "fbu, authData.uid" authData.uid);
+          console.log("uid", authData.uid);
+
+          var groupNameRef = new Firebase(this.firebaseUrl + "users/" + authData.uid);
+          if (groupNameRef) {
+            groupNameRef.once("value", snapshot => {
+              if (snapshot.exists()) {
+                groupName = snapshot.val()["groupName"];
+
+
+                this.userData.changeGroupName(groupName, authData.uid);
+                this.userData.setUid(authData.uid);
+          //       // // return items;
+                console.log("groupName:", groupName);
+              }
+              // , function(errorObject) {
+              // console.log("The snapshot failed: ", errorObject.code);
+            });
+          }
+
+        }
+
+      }, 
+      this.authHandler()
+      );
       
     }
 
-    var userName = form.controls.userName.value;
-    this.userData.setuserName(userName);
+    // var userName = form.controls.userName.value;
+    // this.userData.setuserName(userName);
 
-    var groupName = userName + "'s group";
-    this.userData.setGroupName(groupName);
+    // var groupName = userName + "'s group";
+    // this.userData.setGroupName(groupName);
 
-    console.log("login", userName, groupName);
+    // console.log("login", userName, groupName);
 
   }
   

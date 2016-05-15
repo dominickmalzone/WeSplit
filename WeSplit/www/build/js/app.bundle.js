@@ -518,6 +518,7 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
     // this.items = this.getItems(this.groupName);
 
     this.firebaseUrl = "https://wesplitapp.firebaseio.com/";
+    this.userId;
     // confData.getSpeakers().then(speakers => {
     //   this.speakers = speakers;
     // });
@@ -583,6 +584,7 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
     key: 'changeGroup',
     value: function changeGroup(otherName) {
       this.groupName = otherName + "'s group";
+      this.userData.setGroupName(this.groupName);
     }
 
     //goal update groupList according to fireBase and groupName
@@ -814,12 +816,14 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
     this.login = {};
     this.submitted = false;
 
-    this.firebaseUrl = "https://wesplitapp.firebaseio.com";
+    this.firebaseUrl = "https://wesplitapp.firebaseio.com/";
   }
 
   _createClass(LoginPage, [{
     key: 'onLogin',
     value: function onLogin(form) {
+      var _this = this;
+
       this.submitted = true;
       var email = form.controls.email.value;
       var password = form.controls.password.value;
@@ -832,16 +836,44 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
         ref.authWithPassword({
           email: email,
           password: password
+        }, function (error, authData) {
+          if (error) {
+            console.log("Login Failed!", error);
+          } else {
+            console.log("Authenticated successfully with payload:", authData);
+            console.log("groupName", authData);
+
+            var groupName;
+            // var uid = authData.uid;
+            // console.log(this.firebaseUrl, "fbu, authData.uid" authData.uid);
+            console.log("uid", authData.uid);
+
+            var groupNameRef = new Firebase(_this.firebaseUrl + "users/" + authData.uid);
+            if (groupNameRef) {
+              groupNameRef.once("value", function (snapshot) {
+                if (snapshot.exists()) {
+                  groupName = snapshot.val()["groupName"];
+
+                  _this.userData.changeGroupName(groupName, authData.uid);
+                  _this.userData.setUid(authData.uid);
+                  //       // // return items;
+                  console.log("groupName:", groupName);
+                }
+                // , function(errorObject) {
+                // console.log("The snapshot failed: ", errorObject.code);
+              });
+            }
+          }
         }, this.authHandler());
       }
 
-      var userName = form.controls.userName.value;
-      this.userData.setuserName(userName);
+      // var userName = form.controls.userName.value;
+      // this.userData.setuserName(userName);
 
-      var groupName = userName + "'s group";
-      this.userData.setGroupName(groupName);
+      // var groupName = userName + "'s group";
+      // this.userData.setGroupName(groupName);
 
-      console.log("login", userName, groupName);
+      // console.log("login", userName, groupName);
     }
   }, {
     key: 'authHandler',
@@ -994,7 +1026,7 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
           var regRef = new Firebase("https://wesplitapp.firebaseio.com/" + "users").child(regUser.uid).set({
             date: Firebase.ServerValue.TIMESTAMP,
             userName: userName,
-            group: groupName,
+            groupName: groupName,
             email: email
           });
 
@@ -1002,7 +1034,7 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
 
           var items = [];
           items[0] = {
-            name: "Example item: bread",
+            name: "bread",
             cost: 3.99
           };
           // below line necessary to create groupName // need to fix
@@ -1399,6 +1431,8 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
     this.HAS_LOGGED_IN = 'hasLoggedIn';
     this.userName = '';
     this.groupName = '';
+    this.uid = '';
+    this.firebaseUrl = "https://wesplitapp.firebaseio.com/";
   }
 
   _createClass(UserData, [{
@@ -1411,10 +1445,41 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
     value: function getGroupName() {
       return this.groupName;
     }
+
+    // initial set
+
   }, {
     key: 'setGroupName',
     value: function setGroupName(newGroupName) {
       this.groupName = newGroupName;
+      var userRef = new Firebase(this.firebaseUrl + "users/" + this.uid);
+      // var userRef = new Firebase(this.firebaseUrl + "users/" + authId);
+      userRef.update({
+        groupName: newGroupName
+      });
+    }
+  }, {
+    key: 'setUid',
+    value: function setUid(newId) {
+      this.uid = newId;
+    }
+  }, {
+    key: 'getUid',
+    value: function getUid() {
+      return this.uid;
+    }
+
+    // withAuth
+
+  }, {
+    key: 'changeGroupName',
+    value: function changeGroupName(newGroupName, authId) {
+      console.log("ngn", newGroupName, "uid", authId);
+      this.groupName = newGroupName;
+      var userRef = new Firebase(this.firebaseUrl + "users/" + authId);
+      userRef.update({
+        groupName: newGroupName
+      });
     }
   }, {
     key: 'setuserName',

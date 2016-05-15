@@ -15,6 +15,8 @@ export class UserData {
     this.HAS_LOGGED_IN = 'hasLoggedIn';
     this.userName = '';
     this.groupName = '';
+    this.uid = '';
+    this.firebaseUrl = "https://wesplitapp.firebaseio.com/"
   }
 
   setGroupList(groupList) {
@@ -25,8 +27,32 @@ export class UserData {
     return this.groupName;
   }
 
+  // initial set
   setGroupName(newGroupName) {
     this.groupName = newGroupName;
+    var userRef = new Firebase(this.firebaseUrl + "users/" + this.uid);
+    // var userRef = new Firebase(this.firebaseUrl + "users/" + authId);
+    userRef.update({
+      groupName: newGroupName
+    });
+  }
+
+  setUid(newId) {
+    this.uid = newId;
+  }
+
+  getUid() {
+    return this.uid;
+  }
+
+  // withAuth
+  changeGroupName(newGroupName, authId) {
+    console.log("ngn", newGroupName, "uid", authId);
+    this.groupName = newGroupName;
+    var userRef = new Firebase(this.firebaseUrl + "users/" + authId);
+    userRef.update({
+      groupName: newGroupName
+    })
   }
 
   setuserName(newuserName) {

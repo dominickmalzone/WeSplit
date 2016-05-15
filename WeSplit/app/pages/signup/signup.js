@@ -67,7 +67,7 @@ export class SignupPage {
          .child(regUser.uid).set({
           date: Firebase.ServerValue.TIMESTAMP,
           userName: userName,
-          group: groupName,
+          groupName: groupName,
           email: email
         });
 
@@ -75,7 +75,7 @@ export class SignupPage {
 
         var items = [];
         items[0] = {
-          name: "Example item: bread",
+          name: "bread",
           cost: 3.99
         }
           // below line necessary to create groupName // need to fix

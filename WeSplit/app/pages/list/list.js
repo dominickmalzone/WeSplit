@@ -26,6 +26,7 @@ export class ListPage {
     // this.items = this.getItems(this.groupName);
 
     this.firebaseUrl = "https://wesplitapp.firebaseio.com/";
+    this.userId;
     // confData.getSpeakers().then(speakers => {
     //   this.speakers = speakers;
     // });
@@ -89,6 +90,7 @@ export class ListPage {
 
   changeGroup(otherName) {
     this.groupName = otherName + "'s group";
+    this.userData.setGroupName(this.groupName);
   }
 
   //goal update groupList according to fireBase and groupName
