@@ -152,6 +152,8 @@ var _dec, _class;
 
 var _ionicAngular = require('ionic-angular');
 
+var _userData = require('../../providers/user-data');
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var AccountPage = exports.AccountPage = (_dec = (0, _ionicAngular.Page)({
@@ -160,7 +162,7 @@ var AccountPage = exports.AccountPage = (_dec = (0, _ionicAngular.Page)({
   _classCallCheck(this, AccountPage);
 }) || _class);
 
-},{"ionic-angular":353}],3:[function(require,module,exports){
+},{"../../providers/user-data":13,"ionic-angular":353}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -514,6 +516,7 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
           });
         }
       }
+      this.items = items;
       return items;
     }
 
@@ -825,7 +828,11 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
 
           var items = {
             // below line necessary to create groupName // need to fix
-            item: "item1"
+            1: {
+              name: "firstItem",
+              cost: 0
+            }
+
           };
 
           var groupRef = new Firebase("https://wesplitapp.firebaseio.com/" + "groups").child(groupName).set({

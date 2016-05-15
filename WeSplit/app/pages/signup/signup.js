@@ -75,7 +75,11 @@ export class SignupPage {
 
         var items = {
           // below line necessary to create groupName // need to fix
-          item: "item1"
+          1: {
+            name: "firstItem",
+            cost: 0
+          }
+          
         }
 
 

@@ -11,12 +11,12 @@ import {UserData} from '../../providers/user-data';
 
 export class ListPage {
   static get parameters() {
-    return [[NavController], [ConferenceData], [UserData]];
+    return [[NavController], [UserData]];
   }
 
-  constructor(nav, confData, userData) {
+  constructor(nav, userData) {
     this.nav = nav;
-    this.confData = confData;
+    // this.confData = confData;
     // this.speakers = [];
     
     this.userData = userData;
@@ -54,6 +54,7 @@ export class ListPage {
         });
       }
     }
+    this.items = items;
     return items;
   }
 
