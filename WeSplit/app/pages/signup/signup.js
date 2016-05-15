@@ -13,8 +13,6 @@ export class SignupPage {
     return [[NavController], [UserData]];
   }
 
-
-
   constructor(nav, userData) {
     this.nav = nav;
     this.userData = userData;

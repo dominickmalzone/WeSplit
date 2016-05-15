@@ -70,7 +70,7 @@ var ConferenceApp = (_dec = (0, _ionicAngular.App)({
 
     // We plan to add auth to only show the login page if not logged in
     // this.root = TutorialPage;
-    this.root = _login.LoginPage;
+    this.root = _list.ListPage;
 
     // create an list of pages that can be navigated to from the left menu
     // the left menu only works after login
@@ -473,11 +473,14 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
     this.nav = nav;
     this.confData = confData;
     // this.speakers = [];
-    this.groupList = [];
+
     this.userData = userData;
     this.userName = userData.userName;
     this.groupName = userData.groupName;
 
+    // this.items = this.getItems(this.groupName);
+
+    this.firebaseUrl = "https://wesplitapp.firebaseio.com/";
     // confData.getSpeakers().then(speakers => {
     //   this.speakers = speakers;
     // });
@@ -489,53 +492,108 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
       // first log the groupId
       // console.log(this.groupId);
       console.log("userData", this.userData);
-      // return this.groupList;
       console.log("groupName", this.groupName);
+      return this.groupName;
     }
-  }, {
-    key: 'goToSessionDetail',
-    value: function goToSessionDetail(session) {
-      this.nav.push(_buyDetail.SessionDetailPage, session);
-    }
-  }, {
-    key: 'goToSpeakerDetail',
-    value: function goToSpeakerDetail(speakerName) {
-      this.nav.push(_buyDetail.SpeakerDetailPage, speakerName);
-    }
-  }, {
-    key: 'goToSpeakerTwitter',
-    value: function goToSpeakerTwitter(speaker) {
-      window.open('https://twitter.com/' + speaker.twitter);
-    }
-  }, {
-    key: 'openSpeakerShare',
-    value: function openSpeakerShare(speaker) {
-      var actionSheet = _ionicAngular.ActionSheet.create({
-        title: 'Share ' + speaker.name,
-        buttons: [{
-          text: 'Copy Link',
-          handler: function handler() {
-            console.log("Copy link clicked on https://twitter.com/" + speaker.twitter);
-            if (window.cordova && window.cordova.plugins.clipboard) {
-              window.cordova.plugins.clipboard.copy("https://twitter.com/" + speaker.twitter);
-            }
-          }
-        }, {
-          text: 'Share via ...',
-          handler: function handler() {
-            console.log("Share via clicked");
-          }
-        }, {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: function handler() {
-            console.log("Cancel clicked");
-          }
-        }]
-      });
 
-      this.nav.present(actionSheet);
+    //goal update groupList according to fireBase and groupName
+
+  }, {
+    key: 'getItems',
+    value: function getItems(groupName) {
+      var items;
+      if (groupName) {
+        var groupRef = new Firebase(this.firebaseUrl + "groups/" + groupName);
+        if (groupRef) {
+          groupRef.once("value", function (snapshot) {
+            if (snapshot.exists()) {
+              items = snapshot.val()["items"];
+            }
+          }, function (errorObject) {
+            console.log("The snapshot failed: ", errorObject.code);
+          });
+        }
+      }
+      return items;
     }
+
+    // auth.$onAuth(function(authUser) {
+    //     if (authUser) {
+    //       tasksListRef = new Firebase(FIREBASE_URL + 'users/' + $rootScope.currentUser.$id + '/tasks');
+    //       if (tasksListRef) {
+    //         tasksListRef.once("value", function(snapshot) {
+    //             if (snapshot.exists()) {
+    //                 tasksList = snapshot.val()["tasksList"];
+    //                 completedTasksList = snapshot.val()["completedTasksList"];
+    //                 // userName = snapshot.val()[""]
+    //                 // console.log("exerciseList:", $scope.exerciseList);
+    //                 // showLoginContent = false;
+    //             }
+    //         }, function(errorObject) {
+    //             console.log("The read failed: ", errorObject.code);
+    //         });
+    //       }
+    //       userRef = new Firebase(FIREBASE_URL + 'users/' + $rootScope.currentUser.$id);
+    //       if (userRef) {
+    //         userRef.once("value", function(snapshot) {
+    //             if (snapshot.exists()) {
+    //                 // exerciseList = snapshot.val()["exerciseList"];
+    //                 firstname = snapshot.val()["firstname"];
+    //                 lastname = snapshot.val()["lastname"];
+    //                 email = snapshot.val()["email"];
+    //                 // console.log("exerciseList:", $scope.exerciseList);
+    //             }
+    //         }, function(errorObject) {
+    //             console.log("The read failed: ", errorObject.code);
+    //         });
+    //       }
+    //     }
+    // })
+
+    // goToSessionDetail(session) {
+    //   this.nav.push(SessionDetailPage, session);
+    // }
+
+    // goToSpeakerDetail(speakerName) {
+    //   this.nav.push(SpeakerDetailPage, speakerName);
+    // }
+
+    // goToSpeakerTwitter(speaker) {
+    //   window.open(`https://twitter.com/${speaker.twitter}`);
+    // }
+
+    // openSpeakerShare(speaker) {
+    //   let actionSheet = ActionSheet.create({
+    //     title: 'Share ' + speaker.name,
+    //     buttons: [
+    //       {
+    //         text: 'Copy Link',
+    //         handler: () => {
+    //           console.log("Copy link clicked on https://twitter.com/" + speaker.twitter);
+    //           if (window.cordova && window.cordova.plugins.clipboard) {
+    //             window.cordova.plugins.clipboard.copy("https://twitter.com/" + speaker.twitter);
+    //           }
+    //         }
+    //       },
+    //       {
+    //         text: 'Share via ...',
+    //         handler: () => {
+    //           console.log("Share via clicked");
+    //         }
+    //       },
+    //       {
+    //         text: 'Cancel',
+    //         role: 'cancel',
+    //         handler: () => {
+    //           console.log("Cancel clicked");
+    //         }
+    //       },
+    //     ]
+    //   });
+
+    //   this.nav.present(actionSheet);
+    // }
+
   }]);
 
   return ListPage;
@@ -583,13 +641,17 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
     this.submitted = false;
 
     this.firebaseUrl = "https://wesplitapp.firebaseio.com";
-    this.authHandler();
+    // this.authHandler();
   }
 
   _createClass(LoginPage, [{
     key: 'onLogin',
     value: function onLogin(form) {
       this.submitted = true;
+      var email = form.controls.email.value;
+      var password = form.controls.password.value;
+
+      // console.log()
 
       if (form.valid) {
         this.userData.login();
@@ -597,10 +659,18 @@ var LoginPage = exports.LoginPage = (_dec = (0, _ionicAngular.Page)({
         /* Authenticate User */
         var ref = new Firebase(this.firebaseUrl);
         ref.authWithPassword({
-          email: form.controls.userName.value,
-          password: form.controls.password.value
-        }, this.authHandler);
+          email: email,
+          password: password
+        }, this.authHandler());
       }
+
+      var userName = form.controls.userName.value;
+      this.userData.setuserName(userName);
+
+      var groupName = userName + "group";
+      this.userData.setGroupName(groupName);
+
+      console.log("login", userName, groupName);
     }
   }, {
     key: 'authHandler',
@@ -688,11 +758,6 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
     get: function get() {
       return [[_ionicAngular.NavController], [_userData.UserData]];
     }
-
-    // static passedGroupName;
-
-    // var groupName;
-
   }]);
 
   function SignupPage(nav, userData) {
@@ -705,20 +770,11 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
     this.submitted = false;
     this.firebaseUrl = "https://wesplitapp.firebaseio.com/";
 
+    // debugging sake
     this.testString = "testString";
   }
 
   _createClass(SignupPage, [{
-    key: 'changeGroupName',
-    value: function changeGroupName(newGroupName) {
-      console.log(this.userData);
-    }
-
-    // getTestString() {
-    //   return this.testString;
-    // }
-
-  }, {
     key: 'onSignup',
     value: function onSignup(form) {
       this.submitted = true;
@@ -768,23 +824,13 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
           console.log(regUser.uid, "in createUser");
 
           var items = {
+            // below line necessary to create groupName // need to fix
             item: "item1"
-            // uncomment above if items stops setting
           };
 
           var groupRef = new Firebase("https://wesplitapp.firebaseio.com/" + "groups").child(groupName).set({
             items: items
           });
-
-          // passedGroupName = groupName;
-
-          // console.log("attempting to call changeGroupName");
-          // changeGroupName(groupName);
-          // console.log("passedGroupName", passedGroupName);
-
-          // this.userData.setGroupList(firstGrouplist);
-          // this.userData.signup(userName, form.controls.password.value, passedGroupName);
-          // console.log(getTestString());
         });
 
         this.nav.push(_tabs.TabsPage);
@@ -1223,10 +1269,8 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
     }
   }, {
     key: 'signup',
-    value: function signup(userName, password, groupName) {
+    value: function signup(userName, password) {
       this.storage.set(this.HAS_LOGGED_IN, true);
-      this.groupName = groupName;
-      console.log("groupName in signup", groupName);
       this.events.publish('user:signup');
     }
   }, {

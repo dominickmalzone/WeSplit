@@ -8,6 +8,7 @@ import {UserData} from '../../providers/user-data';
 @Page({
   templateUrl: 'build/pages/login/login.html'
 })
+
 export class LoginPage {
   static get parameters() {
     return [[NavController], [UserData]];
@@ -21,25 +22,37 @@ export class LoginPage {
     this.submitted = false;
     
     this.firebaseUrl = "https://wesplitapp.firebaseio.com";
-    this.authHandler();
+    // this.authHandler();
   }
 
   onLogin(form) {
     this.submitted = true;
+    var email = form.controls.email.value;
+    var password = form.controls.password.value
 
-    
-    
+    // console.log()
+
     if (form.valid) {
       this.userData.login();
       
       /* Authenticate User */ 
       var ref = new Firebase(this.firebaseUrl);
       ref.authWithPassword({
-        email    : form.controls.userName.value,
-        password : form.controls.password.value
-      }, this.authHandler);
+        email    : email,
+        password : password
+      }, this.authHandler());
       
     }
+
+
+
+    var userName = form.controls.userName.value;
+    this.userData.setuserName(userName);
+
+    var groupName = userName + "group";
+    this.userData.setGroupName(groupName);
+
+    console.log("login", userName, groupName);
 
   }
   
