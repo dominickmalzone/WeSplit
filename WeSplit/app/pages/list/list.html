@@ -45,8 +45,8 @@
 
     <!-- <ion-item-group *ngFor="#group of groups" [hidden]="group.hide"> -->
 
-      <button (click)="getItems(groupName)">
-          <h3>Load {{groupName}}'s list</h3>
+      <button (click)="getGroupItems(groupName)">
+          <h3>Load {{groupName}} list</h3>
           <!-- <p> -->
             <!-- {{session.timeStart}} &mdash; -->
             <!-- {{session.timeEnd}}: -->
@@ -55,8 +55,13 @@
       </button>
 
       <ion-item *ngFor="#item of items">
-        <h3>{{item.name}}</h3>
-        <h3>{{item.cost}}</h3>
+        <!-- <button> -->
+          <h3>{{item.name}}</h3>
+          <p>
+            {{item.cost}}
+          </p>
+        <!-- </button> -->
+
       </ion-item>
 
       <!-- <ion-item-sliding *ngFor="#session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase" [hidden]="session.hide"> -->

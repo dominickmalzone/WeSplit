@@ -521,13 +521,52 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
     // confData.getSpeakers().then(speakers => {
     //   this.speakers = speakers;
     // });
-    this.items = [
-      // 1: {
-      //   name: "bread",
-      //   cost: 3.99
-      // }
-    ];
+    this.items = [];
+
+    // testing
+    this.items[0] = {
+      name: "test: griffin meat",
+      cost: 3.99
+    };
+
+    this.groupData;
+
+    //  $scope.sideEffects = [];
+    // $scope.sideEffects[0] = {
+    //     name: "Side Effects",
+    //     items: [
+    //         "Accidentally learning music theory.",
+    //         "Extreme thumb strengthening.",
+    //         "Having the time of your life."
+    //     ]
+    // }
   }
+
+  // ngOnInit() {
+
+  //   this.userData = this._dataService.getAllData() // My Observable
+  //     .subscribe(
+  //         data => {
+  //             this.groupData = data;
+  //         }
+  //     );
+  // }
+  // this.userForm = this._formBuilder.group({
+  //               // below the default value
+  //     'username': [this.userData.username, Validators.compose([
+  //         this.usernameValid
+  //     ])]
+
+  // getAllData() {
+  //   let groupRef = new Firebase(this.firebaseUrl + "groups/" + this.groupName);
+  //   return Observable.create((observer) => {
+  //     groupRef.on("value", function (snapshot) {
+  //         console.log(snapshot.val());
+  //         observer.next(snapshot.val());
+
+  //     });
+  //   });
+  // }
 
   _createClass(ListPage, [{
     key: 'getGroupName',
@@ -537,6 +576,7 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
       console.log("userData", this.userData);
       console.log("groupName", this.groupName);
       console.log("items", this.items);
+      console.log("groupData", this.groupData);
       return this.groupName;
     }
 
@@ -562,29 +602,33 @@ var ListPage = exports.ListPage = (_dec = (0, _ionicAngular.Page)({
   }, {
     key: 'getItems',
     value: function getItems(groupName) {
-      this.items = this.getGroupItems(groupName);
-      console.log(this.items, "items");
+      // this.items = this.getGroupItems(groupName);
+      // console.log(this.items, "items");
     }
+  }, {
+    key: 'getGroupItems',
+    value: function getGroupItems(groupName) {
+      var _this = this;
 
-    // getGroupItems(groupName) {
-    //   var items;
-    //   if (groupName) {
-    //     var groupRef = new Firebase(this.firebaseUrl + "groups/" + groupName);
-    //     // var groupRef = new Firebase(this.firebaseUrl + "groups/" + "test59group");
-    //     console.log("groupName", groupName, "firebaseUrl", this.firebaseUrl, "groupRef", groupRef);
-    //     if (groupRef) {
-    //       groupRef.once("value", function(snapshot) {
-    //         if (snapshot.exists()) {
-    //           items = snapshot.val()["items"];
-    //           // this.items = items;
-    //           return items;
-    //           console.log("items:", items);
-    //         }
-    //       }, function(errorObject) {
-    //         console.log("The snapshot failed: ", errorObject.code);
-    //       });
-    //     }
-    //   }
+      var items;
+      if (groupName) {
+        var groupRef = new Firebase(this.firebaseUrl + "groups/" + groupName);
+        // var groupRef = new Firebase(this.firebaseUrl + "groups/" + "test59group");
+        console.log("groupName", groupName, "firebaseUrl", this.firebaseUrl, "groupRef", groupRef);
+        if (groupRef) {
+          groupRef.once("value", function (snapshot) {
+            if (snapshot.exists()) {
+              items = snapshot.val()["items"];
+              _this.items = items;
+              // return items;
+              console.log("items:", items);
+            }
+          }, function (errorObject) {
+            console.log("The snapshot failed: ", errorObject.code);
+          });
+        }
+      }
+    }
 
     // }
     // getAllData() {
@@ -869,7 +913,7 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
       console.log(form);
       console.log(this.firebaseUrl, "email, password, and firebase");
 
-      var groupName = form.controls.userName.value + "group";
+      var groupName = form.controls.userName.value + "'s group";
       this.userData.setGroupName(groupName);
 
       var userName = form.controls.userName.value;
@@ -900,7 +944,7 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
         }).then(function (regUser) {
           var userName = form.controls.userName.value;
           var email = form.controls.email.value;
-          var groupName = userName + "group";
+          // var groupName = userName + "group";
           var regRef = new Firebase("https://wesplitapp.firebaseio.com/" + "users").child(regUser.uid).set({
             date: Firebase.ServerValue.TIMESTAMP,
             userName: userName,
@@ -910,14 +954,12 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
 
           console.log(regUser.uid, "in createUser");
 
-          var items = {
-            // below line necessary to create groupName // need to fix
-            1: {
-              name: "firstItem",
-              cost: 0
-            }
-
+          var items = [];
+          items[0] = {
+            name: "firstItem",
+            cost: 0
           };
+          // below line necessary to create groupName // need to fix
 
           var groupRef = new Firebase("https://wesplitapp.firebaseio.com/" + "groups").child(groupName).set({
             items: items

@@ -29,13 +29,53 @@ export class ListPage {
     // confData.getSpeakers().then(speakers => {
     //   this.speakers = speakers;
     // });
-    this.items = [
-        // 1: {
-        //   name: "bread",
-        //   cost: 3.99
-        // }
-    ];
+    this.items = [];
+
+    // testing
+    this.items[0] = {
+      name: "test: griffin meat",
+      cost: 3.99
+    }
+
+    this.groupData;
+
+    //  $scope.sideEffects = [];
+    // $scope.sideEffects[0] = {
+    //     name: "Side Effects",
+    //     items: [
+    //         "Accidentally learning music theory.",
+    //         "Extreme thumb strengthening.",
+    //         "Having the time of your life."
+    //     ]
+    // }
   }
+
+  // ngOnInit() {
+
+  //   this.userData = this._dataService.getAllData() // My Observable
+  //     .subscribe(
+  //         data => {
+  //             this.groupData = data;
+  //         }
+  //     );
+  // }
+    // this.userForm = this._formBuilder.group({
+    //               // below the default value
+    //     'username': [this.userData.username, Validators.compose([ 
+    //         this.usernameValid
+    //     ])]
+  
+
+  // getAllData() {
+  //   let groupRef = new Firebase(this.firebaseUrl + "groups/" + this.groupName);
+  //   return Observable.create((observer) => {
+  //     groupRef.on("value", function (snapshot) {
+  //         console.log(snapshot.val());
+  //         observer.next(snapshot.val());
+
+  //     });
+  //   });
+  // }
 
   getGroupName() {
     // first log the groupId
@@ -43,6 +83,7 @@ export class ListPage {
     console.log("userData", this.userData);
     console.log("groupName", this.groupName);
     console.log("items", this.items);
+    console.log("groupData", this.groupData);
     return this.groupName;
   }
 
@@ -65,30 +106,31 @@ export class ListPage {
   //   return items;
   // }
   getItems(groupName) {
-    this.items = this.getGroupItems(groupName);
-    console.log(this.items, "items");
+    // this.items = this.getGroupItems(groupName);
+    // console.log(this.items, "items");
   }
 
 
-  // getGroupItems(groupName) {
-  //   var items;
-  //   if (groupName) {
-  //     var groupRef = new Firebase(this.firebaseUrl + "groups/" + groupName);
-  //     // var groupRef = new Firebase(this.firebaseUrl + "groups/" + "test59group");
-  //     console.log("groupName", groupName, "firebaseUrl", this.firebaseUrl, "groupRef", groupRef);
-  //     if (groupRef) {
-  //       groupRef.once("value", function(snapshot) {
-  //         if (snapshot.exists()) {
-  //           items = snapshot.val()["items"];
-  //           // this.items = items;
-  //           return items;
-  //           console.log("items:", items);
-  //         }
-  //       }, function(errorObject) {
-  //         console.log("The snapshot failed: ", errorObject.code);
-  //       });
-  //     }
-  //   }
+  getGroupItems(groupName) {
+    var items;
+    if (groupName) {
+      var groupRef = new Firebase(this.firebaseUrl + "groups/" + groupName);
+      // var groupRef = new Firebase(this.firebaseUrl + "groups/" + "test59group");
+      console.log("groupName", groupName, "firebaseUrl", this.firebaseUrl, "groupRef", groupRef);
+      if (groupRef) {
+        groupRef.once("value", snapshot => {
+          if (snapshot.exists()) {
+            items = snapshot.val()["items"];
+            this.items = items;
+            // return items;
+            console.log("items:", items);
+          }
+        }, function(errorObject) {
+          console.log("The snapshot failed: ", errorObject.code);
+        });
+      }
+    }
+  }
     
     
   // }
