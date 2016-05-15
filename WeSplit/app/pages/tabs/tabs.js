@@ -1,5 +1,5 @@
 import {Page, NavParams} from 'ionic-angular';
-import {SchedulePage} from '../buy/buy';
+// import {SchedulePage} from '../buy/buy';
 import {ListPage} from '../list/list';
 import {AccountPage} from '../account/account';
 

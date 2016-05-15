@@ -1,18 +1,18 @@
 import {ViewChild} from 'angular2/core';
 import {App, IonicApp, Events, Platform, MenuController} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
-import {ConferenceData} from './providers/conference-data';
+// import {ConferenceData} from './providers/conference-data';
 import {UserData} from './providers/user-data';
 import {TabsPage} from './pages/tabs/tabs';
 import {LoginPage} from './pages/login/login';
 import {ListPage} from './pages/list/list';
 import {SignupPage} from './pages/signup/signup';
-import {TutorialPage} from './pages/tutorial/tutorial';
+// import {TutorialPage} from './pages/tutorial/tutorial';
 
 
 @App({
   templateUrl: 'build/app.html',
-  providers: [ConferenceData, UserData],
+  providers: [UserData],
   // Set any config for your app here, see the docs for
   // more ways to configure your app:
   // http://ionicframework.com/docs/v2/api/config/Config/
@@ -29,11 +29,11 @@ import {TutorialPage} from './pages/tutorial/tutorial';
 class ConferenceApp {
   static get parameters() {
     return [
-      [IonicApp], [Events], [ConferenceData], [UserData], [Platform], [MenuController]
+      [IonicApp], [Events], [UserData], [Platform], [MenuController]
     ]
   }
 
-  constructor(app, events, confData, userData, platform, menu) {
+  constructor(app, events, userData, platform, menu) {
     this.app = app;
     this.userData = userData;
     this.events = events;
@@ -45,7 +45,7 @@ class ConferenceApp {
     });
 
     // load the conference data
-    confData.load();
+    // confData.load();
 
     // We plan to add auth to only show the login page if not logged in
     // this.root = TutorialPage;
