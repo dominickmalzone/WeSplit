@@ -19,6 +19,8 @@ var _tabs = require('./pages/tabs/tabs');
 
 var _login = require('./pages/login/login');
 
+var _list = require('./pages/list/list');
+
 var _signup = require('./pages/signup/signup');
 
 var _tutorial = require('./pages/tutorial/tutorial');
@@ -138,7 +140,7 @@ var ConferenceApp = (_dec = (0, _ionicAngular.App)({
   return ConferenceApp;
 }()) || _class);
 
-},{"./pages/login/login":7,"./pages/signup/signup":9,"./pages/tabs/tabs":10,"./pages/tutorial/tutorial":11,"./providers/conference-data":12,"./providers/user-data":13,"angular2/core":16,"ionic-angular":353,"ionic-native":375}],2:[function(require,module,exports){
+},{"./pages/list/list":6,"./pages/login/login":7,"./pages/signup/signup":9,"./pages/tabs/tabs":10,"./pages/tutorial/tutorial":11,"./providers/conference-data":12,"./providers/user-data":13,"angular2/core":16,"ionic-angular":353,"ionic-native":375}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -677,9 +679,17 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
 }), _dec(_class = function () {
   _createClass(SignupPage, null, [{
     key: 'parameters',
+
+
+    // private
     get: function get() {
       return [[_ionicAngular.NavController], [_userData.UserData]];
     }
+
+    // static passedGroupName;
+
+    // var groupName;
+
   }]);
 
   function SignupPage(nav, userData) {
@@ -691,7 +701,13 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
     this.signup = {};
     this.submitted = false;
     this.firebaseUrl = "https://wesplitapp.firebaseio.com/";
+
+    this.testString = "testString";
   }
+
+  // getTestString() {
+  //   return this.testString;
+  // }
 
   _createClass(SignupPage, [{
     key: 'onSignup',
@@ -744,8 +760,13 @@ var SignupPage = exports.SignupPage = (_dec = (0, _ionicAngular.Page)({
             firstGrouplist: firstGrouplist
           });
 
+          // passedGroupName = groupName;
+
+          // console.log("passedGroupName", passedGroupName);
+
           // this.userData.setGroupList(firstGrouplist);
-          this.userData.signup(username, form.controls.password.value, groupName);
+          // this.userData.signup(username, form.controls.password.value, passedGroupName);
+          // console.log(getTestString());
         });
 
         this.nav.push(_tabs.TabsPage);
@@ -1178,7 +1199,7 @@ var UserData = exports.UserData = (_dec = (0, _core.Injectable)(), _dec(_class =
     value: function signup(username, password, groupName) {
       this.storage.set(this.HAS_LOGGED_IN, true);
       this.groupName = groupName;
-      console.log("groupName", groupName);
+      console.log("groupName in signup", groupName);
       this.events.publish('user:signup');
     }
   }, {

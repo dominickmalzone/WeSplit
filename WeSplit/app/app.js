@@ -5,6 +5,7 @@ import {ConferenceData} from './providers/conference-data';
 import {UserData} from './providers/user-data';
 import {TabsPage} from './pages/tabs/tabs';
 import {LoginPage} from './pages/login/login';
+import {ListPage} from './pages/list/list';
 import {SignupPage} from './pages/signup/signup';
 import {TutorialPage} from './pages/tutorial/tutorial';
 

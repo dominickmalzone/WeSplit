@@ -7,11 +7,15 @@ import {UserData} from '../../providers/user-data';
   templateUrl: 'build/pages/signup/signup.html'
 })
 export class SignupPage {
+
+  // private 
   static get parameters() {
     return [[NavController], [UserData]];
   }
 
-  
+  // static passedGroupName;
+
+  // var groupName;
 
   constructor(nav, userData) {
     this.nav = nav;
@@ -20,8 +24,13 @@ export class SignupPage {
     this.signup = {};
     this.submitted = false;
     this.firebaseUrl = "https://wesplitapp.firebaseio.com/";
-    
+
+    this.testString = "testString";
   }
+
+  // getTestString() {
+  //   return this.testString;
+  // }
 
   onSignup(form) {
     this.submitted = true;
@@ -76,8 +85,13 @@ export class SignupPage {
             firstGrouplist
           });
 
+          // passedGroupName = groupName;
+
+          // console.log("passedGroupName", passedGroupName);
+
           // this.userData.setGroupList(firstGrouplist);
-          this.userData.signup(username, form.controls.password.value, groupName);
+          // this.userData.signup(username, form.controls.password.value, passedGroupName);
+          // console.log(getTestString());
 
         });
 

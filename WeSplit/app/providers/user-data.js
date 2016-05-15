@@ -49,7 +49,7 @@ export class UserData {
   signup(username, password, groupName) {
     this.storage.set(this.HAS_LOGGED_IN, true);
     this.groupName = groupName;
-    console.log("groupName", groupName);
+    console.log("groupName in signup", groupName);
     this.events.publish('user:signup');
   }
 

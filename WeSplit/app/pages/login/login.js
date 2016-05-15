@@ -38,6 +38,7 @@ export class LoginPage {
       }, this.authHandler);
       
     }
+
   }
   
   authHandler(error, authData) {
