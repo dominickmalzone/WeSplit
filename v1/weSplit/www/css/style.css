@@ -1,1 +1,8 @@
 /* Empty. Add your own CSS if you like */
+ .logo{
+  display: block;
+   margin-right: auto;
+   margin-left: auto;
+   height: 250px;
+   width: 250px;
+ }

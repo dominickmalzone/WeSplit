@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngMessages','firebase'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -39,6 +39,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   })
 
   // Each tab has its own nav history stack:
+
+      .state('login', {
+      url: "/login",
+      cache: false,
+      controller: 'LoginCtrl',
+      templateUrl: "templates/login.html"
+    })
+    .state('signup', {
+      url: "/signup",
+      cache: false,
+      controller: 'LoginCtrl',
+      templateUrl: "templates/signup.html"
+    })
 
   .state('tab.dash', {
     url: '/dash',

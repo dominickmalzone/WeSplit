@@ -1,0 +1,63 @@
+<ion-view view-title="Sign Up"
+          hide-back-button="true" >
+
+	<ion-content padding="true"
+	             scroll="false" >
+
+         <div>
+         	<img class="logo" src="img/whitelogo.png">
+         </div>
+         
+		<form  
+			  novalidate="novalidate" 
+			  name="loginForm">
+			<ion-list >
+				<label class="item item-input item-floating-label" 
+				        ng-class="{'has-error':loginForm.email.$invalid}">
+					<span class="input-label">Email</span >
+					<input type="email"
+					       placeholder="USF Email"
+					       ng-model="data.email"
+					       name="email" 
+					       ng-required="true">
+				</label >
+
+				<div class="form-errors"
+					 ng-messages="loginForm.email.$error">
+					 <div ng-messages-include="templates/form-errors.html"></div>
+				</div>
+
+				<label class="item item-input item-floating-label" 
+					    ng-class="{'has-error':loginForm.password.$invalid}">
+					<span class="input-label" >Password</span >
+					<input type="password"
+					       placeholder="Password (at least 6 characters)"
+					       ng-model="data.password" 
+					       ng-required="true" 
+					       name="password"
+					       ng-minlength="6" >
+				</label >
+
+				<div class="form-errors"
+					ng-messages="loginForm.password.$error">
+					<div ng-messages-include="templates/form-errors.html"></div>
+
+					<div class="form-error"
+						ng-message="minlength"> Password too short
+					</div>	
+
+				</div>
+			</ion-list >
+			<button class="button button-royal button-block curv"
+			 ng-click="signupEmail()" >Join
+			</button >
+		</form >
+		<p class="text-center">
+			Already a part of the community?
+			<a nav-direction="enter"
+			   ui-sref="login" >Log In
+			</a>
+		</p >
+
+	</ion-content >
+</ion-view >
