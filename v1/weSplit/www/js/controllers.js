@@ -1,8 +1,13 @@
 var app = angular.module('starter.controllers', [])
 
-.controller('ListCtrl', function($scope) {
+.controller('ListCtrl', function($scope, $ionicModal) {
 
   console.log("hello");
+    $ionicModal.fromTemplateUrl('templates/modal.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
 
 
 })
@@ -11,10 +16,7 @@ app.controller('LoginCtrl', function($scope, $state, $ionicPopup, $rootScope) {
 
   $scope.data = {};
   //$scope.currentUser = StorageService.getAll();
-
-
   $scope.signupEmail = function(){  
-
     var ref = new Firebase("https://wesplitlist.firebaseio.com/");
     var email = $scope.data.email;
     ref.createUser({
@@ -33,13 +35,9 @@ app.controller('LoginCtrl', function($scope, $state, $ionicPopup, $rootScope) {
         console.log("Successfully created user account with uid:", userData.uid);
         var userRef = new Firebase("https://wesplitlist.firebaseio.com/users");
         userRef.push({Email: email, uid: id})
-
-        
-        $scope.currentUser = userData//add email later
-        
+        $scope.currentUser = userData//add email later        
          console.log($scope.currentUser);
          $state.go('tab.dash');
-
       }
     });
     // $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
@@ -47,15 +45,12 @@ app.controller('LoginCtrl', function($scope, $state, $ionicPopup, $rootScope) {
     //     if (toState.name == 'signup' && $localStorage.get($scope.currentUser)) {
     //       $state.go('tab.home')
     //     }
-    // });  
-
-        
+    // });      
 /*        $scope.setLocal = function($localstorage){
         $localStorage.set('currentUser',userData.uid);
         console.log(localstorage.get('currentUser'));
         };
 /*/
-
 
 
 
@@ -88,11 +83,14 @@ app.controller('LoginCtrl', function($scope, $state, $ionicPopup, $rootScope) {
   }; */
 
 
+
+
+
+
+
+
 };
 });
-
-
-
 
 app.controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
