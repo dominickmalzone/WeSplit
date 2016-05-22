@@ -19,14 +19,20 @@ var app = angular.module('starter.controllers', [])
       $scope.modal = modal;
     });
 
-    $scope.createGroup = function(u) {        
-      groupRef.push({ name: u.groupName, pass: u.pass });
+
+    $scope.createGroup = function(u) {
+      var groupRef = new Firebase("https://wesplitlist.firebaseio.com/groups");
+      groupRef.child(u.groupName).set({pass: u.pass, items})       
       $scope.modal.hide();
       $scope.myGroup = u.groupName;
       console.log($scope.myGroup);
     };
 
-
+       var items = [];
+        items[0] = {
+          name: "bread",
+          cost: 3.99
+        }
 
 })
 
