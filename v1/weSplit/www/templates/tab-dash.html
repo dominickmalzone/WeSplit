@@ -17,18 +17,18 @@
         <ion-content class="padding">
           <div class="list">
             <label class="item item-input">
-              <span class="input-label">First Name</span>
-              <input ng-model="newUser.firstName" type="text">
+              <span class="input-label">Group Name</span>
+              <input ng-model="newGroup.groupName" type="text">
             </label>
             <label class="item item-input">
-              <span class="input-label">Last Name</span>
-              <input ng-model="newUser.lastName" type="text">
+              <span class="input-label">Invite Members</span>
+              <input ng-model="newGroup.members" type="text">
             </label>
             <label class="item item-input">
-              <span class="input-label">Email</span>
-              <input ng-model="newUser.email" type="text">
+              <span class="input-label">Password (optional)</span>
+              <input ng-model="newGroup.pass" type="text">
             </label>
-            <button class="button button-full button-balanced" ng-click="createContact(newUser)">Create</button>
+            <button class="button button-full button-balanced" ng-click="createGroup(newGroup)">Create</button>
           </div>
         </ion-content>
       </ion-modal-view>

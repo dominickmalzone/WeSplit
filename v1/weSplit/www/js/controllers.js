@@ -1,14 +1,21 @@
 var app = angular.module('starter.controllers', [])
 
-.controller('ListCtrl', function($scope, $ionicModal) {
+.controller('ListCtrl', function($scope, $ionicModal, $stateParams) {
+
+  var groupRef = new Firebase("https://wesplitlist.firebaseio.com/groups");
+
 
   console.log("hello");
     $ionicModal.fromTemplateUrl('templates/modal.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
+      scope: $scope
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
 
+    $scope.createGroup = function(u) {        
+      groupRef.push({ name: u.groupName, pass: u.pass });
+      $scope.modal.hide();
+    };
 
 })
 
