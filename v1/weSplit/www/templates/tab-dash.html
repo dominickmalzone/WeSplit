@@ -1,10 +1,20 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
     <h2>Welcome to Ionic</h2>
-    <div>
+    
+    <div ng-show="!hasGroup(myGroup)">
       <center><span>Add a group</span>
         <button ng-click="modal.show()">Create Group</button></center>
     </div>
+
+    <div ng-show="hasGroup(myGroup)">
+      <ul>
+        <li>Test</li>
+        <li>Test</li>
+      </ul>
+    </div>
+
+    
   </ion-content>
 
 
