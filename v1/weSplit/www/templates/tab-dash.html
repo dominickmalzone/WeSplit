@@ -1,27 +1,36 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-    <h2>Welcome to Ionic</h2>
+    <h2>Welcome to WeSplit</h2>
     
     <div ng-show="!hasGroup(myGroup)">
-      <center><span>Add a group</span>
-        <button ng-click="modal.show()">Create Group</button></center>
+      <center><span></span>
+        <button class="button button-full button-balanced" ng-click="modal.show()">Create Group</button></center>
     </div>
 
     <div ng-show="hasGroup(myGroup)">
-      <ul>
-        <li>Test</li>
-        <li>Test</li>
-      </ul>
+      <div>
+        <ion-item ng-repeat="item in items">{{item.name}}</ion-item>
+      </div>
     </div>
-
     
+<div ng-show="hasGroup(myGroup)">
+  <ion-footer-bar keyboard-attach class="bar-balanced item-input-inset" >
+    <label class="item-input-wrapper" >
+      <input type="text"
+             placeholder="Add to the group gorcery list"
+             ng-model="item.name" />
+    </label >
+    <button class="button button-clear ion ion-arrow-right-c"
+            ng-click="addItem(item)" >
+    </button>
+  </ion-footer-bar >
+</div>
+
   </ion-content>
-
-
    <script id="templates/modal.html" type="text/ng-template">
       <ion-modal-view>
         <ion-header-bar class="bar bar-header bar-balanced">
-          <h1 class="title">New Group</h1>
+          <h1 class="title">Create Group</h1>
           <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
         </ion-header-bar>
         <ion-content class="padding">
@@ -31,11 +40,7 @@
               <input ng-model="newGroup.groupName" type="text">
             </label>
             <label class="item item-input">
-              <span class="input-label">Invite Members</span>
-              <input ng-model="newGroup.members" type="text">
-            </label>
-            <label class="item item-input">
-              <span class="input-label">Password (optional)</span>
+              <span class="input-label">Password</span>
               <input ng-model="newGroup.pass" type="text">
             </label>
             <button class="button button-full button-balanced" ng-click="createGroup(newGroup)">Create</button>
