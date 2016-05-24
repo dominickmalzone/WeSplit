@@ -13,18 +13,7 @@
       </div>
     </div>
     
-<div ng-show="hasGroup(myGroup)">
-  <ion-footer-bar keyboard-attach class="bar-balanced item-input-inset" >
-    <label class="item-input-wrapper" >
-      <input type="text"
-             placeholder="Add to the group gorcery list"
-             ng-model="item.name" />
-    </label >
-    <button class="button button-clear ion ion-arrow-right-c"
-            ng-click="addItem(item)" >
-    </button>
-  </ion-footer-bar >
-</div>
+
 
   </ion-content>
    <script id="templates/modal.html" type="text/ng-template">
@@ -48,4 +37,17 @@
         </ion-content>
       </ion-modal-view>
     </script>
+<div ng-show="hasGroup(myGroup)">
+  <ion-footer-bar keyboard-attach class="bar-balanced item-input-inset" >
+    <label class="item-input-wrapper" >
+      <input type="text"
+             placeholder="Add to the group gorcery list"
+             ng-model="item.name" />
+    </label >
+    <button class="button button-clear ion ion-arrow-right-c"
+            ng-click="addItem(item)" >
+    </button>
+  </ion-footer-bar >
+</div>
 </ion-view>
+

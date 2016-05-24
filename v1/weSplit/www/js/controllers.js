@@ -1,39 +1,44 @@
 var app = angular.module('starter.controllers', [])
 
-.controller('ListCtrl', function($scope, $ionicModal, $stateParams) {
+.controller('ListCtrl', function($scope, $ionicModal, $stateParams, $firebaseArray, $rootScope) {
 
   var groupRef = new Firebase("https://wesplitlist.firebaseio.com/groups");
+  
   $scope.myGroup = "";
 
-  $scope.hasGroup = function(myGroup){
-    if (myGroup == "")
-      return false;
-    else
-      return true;
-  }
-
-  console.log("hello");
     $ionicModal.fromTemplateUrl('templates/modal.html', {
       scope: $scope
     }).then(function(modal) {
       $scope.modal = modal;
     });
 
+    $scope.hasGroup = function(myGroup){
+      if (myGroup == "")
+        return false;
+      else
+        return true;
+    }
 
     $scope.createGroup = function(u) {
-      var groupRef = new Firebase("https://wesplitlist.firebaseio.com/groups");
       groupRef.child(u.groupName).set({pass: u.pass, items})       
       $scope.modal.hide();
       $scope.myGroup = u.groupName;
-      console.log($scope.myGroup);
+      var groupie = $scope.myGroup;
+      $scope.theItemsRef = new Firebase("https://wesplitlist.firebaseio.com/groups/" + groupie + "/items");
+      //console.log("this is the items:  " + $scope.theItemsRef);
     };
+ 
+      var items = [];
 
-       var items = [];
-        items[0] = {
-          name: "bread",
-          cost: 3.99
+      $scope.addItem = function(item){
+        if($scope.myGroup){
+          console.log($scope.theItemsRef);
+          $scope.theItemsRef.child(item.name).set({bought: 'false'});
+          item.name = "";
+        } else {
+          console.warn('no group');
         }
-
+      }
 })
 
 app.controller('LoginCtrl', function($scope, $state, $ionicPopup, $rootScope) {
@@ -60,8 +65,8 @@ app.controller('LoginCtrl', function($scope, $state, $ionicPopup, $rootScope) {
         var userRef = new Firebase("https://wesplitlist.firebaseio.com/users");
         userRef.push({Email: email, uid: id})
         $scope.currentUser = userData//add email later        
-         console.log($scope.currentUser);
-         $state.go('tab.dash');
+        console.log($scope.currentUser);
+        $state.go('tab.dash');
       }
     });
     // $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
@@ -77,11 +82,8 @@ app.controller('LoginCtrl', function($scope, $state, $ionicPopup, $rootScope) {
 /*/
 
 
-
   $scope.loginEmail = function(){
-
     var ref = new Firebase("https://wesplitlist.firebaseio.com");
-
     ref.authWithPassword({
       email    : $scope.data.email,
       password : $scope.data.password
@@ -107,24 +109,10 @@ app.controller('LoginCtrl', function($scope, $state, $ionicPopup, $rootScope) {
   }; */
 
 
-
-
-
-
-
-
 };
 });
 
 app.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
   $scope.chats = Chats.all();
   $scope.remove = function(chat) {
     Chats.remove(chat);
