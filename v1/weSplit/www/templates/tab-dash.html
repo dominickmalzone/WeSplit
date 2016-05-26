@@ -1,18 +1,31 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-    <h2>Welcome to WeSplit</h2>
+    <h2 ng-show="hasGroup(myGroup)">{{myGroup}}</h2>
+    
     
     <div ng-show="!hasGroup(myGroup)">
-      <center><span></span>
+      <center><h2>Get Started</h2>
         <button class="button button-full button-balanced" ng-click="modal.show()">Create Group</button></center>
+        <button class="button button button-balanced" ng-click="showPopup()">Join Group</button></center>
     </div>
 
     <div ng-show="hasGroup(myGroup)">
       <div>
-        <ion-item ng-repeat="item in items">{{item.name}}</ion-item>
+        <ion-list>
+          <ion-item ng-repeat="(key, value) in items">{{value.$id}}</ion-item>
+        </ion-list>
       </div>
     </div>
     
+    <br>
+    
+
+  
+            <label class="item item-input">
+              <span class="input-label">Join Group</span>
+              <input ng-model="theGroup.groupName" type="text">
+            </label>
+             <button class="button button-full button-positive" ng-click="joinGroup(theGroup)">join group</button>
 
 
   </ion-content>

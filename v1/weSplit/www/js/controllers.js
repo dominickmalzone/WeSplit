@@ -1,6 +1,6 @@
 var app = angular.module('starter.controllers', [])
 
-.controller('ListCtrl', function($scope, $ionicModal, $stateParams, $firebaseArray, $rootScope) {
+.controller('ListCtrl', function($scope, $ionicModal, $ionicPopup, $stateParams, $firebaseArray, $rootScope) {
 
   var groupRef = new Firebase("https://wesplitlist.firebaseio.com/groups");
   
@@ -25,20 +25,70 @@ var app = angular.module('starter.controllers', [])
       $scope.myGroup = u.groupName;
       var groupie = $scope.myGroup;
       $scope.theItemsRef = new Firebase("https://wesplitlist.firebaseio.com/groups/" + groupie + "/items");
+
       //console.log("this is the items:  " + $scope.theItemsRef);
+    };
+
+    $scope.joinGroup = function(u){
+//add loading
+      groupRef.once("value", function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var key = childSnapshot.key();
+
+          if (key == u.groupName){
+            console.log("Group Found");
+            //pass confirm later
+            $scope.myGroup = u.groupName;
+            $scope.theItemsRef = new Firebase("https://wesplitlist.firebaseio.com/groups/" + u.groupName + "/items");
+            $scope.items = $firebaseArray($scope.theItemsRef);
+            return true;
+          } else {
+            //console.log('no match with   ' + key);
+            return false;
+          }
+        });
+      });  
     };
  
       var items = [];
 
       $scope.addItem = function(item){
         if($scope.myGroup){
-          console.log($scope.theItemsRef);
-          $scope.theItemsRef.child(item.name).set({bought: 'false'});
+          $scope.theItemsRef.child(item.name).set({bought: 'False'});
           item.name = "";
+          $scope.items = $firebaseArray($scope.theItemsRef);
+          
         } else {
-          console.warn('no group');
+            console.warn('No Group');
         }
       }
+
+      // $scope.isBought = function(item){
+
+      // }
+
+$scope.showPopup = function() {
+  $scope.data = {};
+
+    var myPopup = $ionicPopup.show({
+      template: '<input type="text" ng-model="theGroup.groupName">',
+      title: 'Join Group',
+      subTitle: 'Your friend will know the name!',
+      scope: $scope,
+      buttons: [
+        { text: 'Cancel' },
+        {
+          text: '<b>Join</b>',
+          type: 'button-positive',
+          onTap: $scope.joinGroup = function(u){
+            
+          }
+        }
+      ]
+    });
+}
+
+
 })
 
 app.controller('LoginCtrl', function($scope, $state, $ionicPopup, $rootScope) {
