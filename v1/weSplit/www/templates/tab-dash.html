@@ -6,7 +6,6 @@
     <div ng-show="!hasGroup(myGroup)">
       <center><h2>Get Started</h2>
         <button class="button button-full button-balanced" ng-click="modal.show()">Create Group</button></center>
-        <button class="button button button-balanced" ng-click="showPopup()">Join Group</button></center>
     </div>
 
     <div ng-show="hasGroup(myGroup)">
@@ -19,8 +18,6 @@
     
     <br>
     
-
-  
             <label class="item item-input">
               <span class="input-label">Join Group</span>
               <input ng-model="theGroup.groupName" type="text">

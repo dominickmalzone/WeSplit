@@ -3,7 +3,7 @@ var app = angular.module('starter.controllers', [])
 .controller('ListCtrl', function($scope, $ionicModal, $ionicPopup, $stateParams, $firebaseArray, $rootScope) {
 
   var groupRef = new Firebase("https://wesplitlist.firebaseio.com/groups");
-  
+
   $scope.myGroup = "";
 
     $ionicModal.fromTemplateUrl('templates/modal.html', {
@@ -66,28 +66,6 @@ var app = angular.module('starter.controllers', [])
       // $scope.isBought = function(item){
 
       // }
-
-$scope.showPopup = function() {
-  $scope.data = {};
-
-    var myPopup = $ionicPopup.show({
-      template: '<input type="text" ng-model="theGroup.groupName">',
-      title: 'Join Group',
-      subTitle: 'Your friend will know the name!',
-      scope: $scope,
-      buttons: [
-        { text: 'Cancel' },
-        {
-          text: '<b>Join</b>',
-          type: 'button-positive',
-          onTap: $scope.joinGroup = function(u){
-            
-          }
-        }
-      ]
-    });
-}
-
 
 })
 
