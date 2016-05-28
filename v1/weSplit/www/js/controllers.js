@@ -30,7 +30,7 @@ var app = angular.module('starter.controllers', [])
     };
 
     $scope.joinGroup = function(u){
-//add loading
+      //add loading
       groupRef.once("value", function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
           var key = childSnapshot.key();
@@ -70,9 +70,9 @@ var app = angular.module('starter.controllers', [])
 })
 
 app.controller('LoginCtrl', function($scope, $state, $ionicPopup, $rootScope, $localStorage) {
-//  $localStorage.user = "";
-//  $localStorage.userNum = "Empty Number";
-  console.log("Initialize localstorage user as empty :" + $localStorage.user);
+  
+  $localStorage.user = "";
+  //console.log("Initialize localstorage user as empty :" + $localStorage.user);
   $scope.data = {};
 
   $scope.signupEmail = function(){  
