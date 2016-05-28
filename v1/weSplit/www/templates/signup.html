@@ -1,26 +1,22 @@
-<ion-view view-title="Sign Up"
-          hide-back-button="true" >
+<ion-view view-title="Sign Up">
 
 	<ion-content padding="true"
 	             scroll="false" >
 
-         <div>
-         	<img class="logo" src="img/whitelogo.png">
-         </div>
-         
-		<form  
-			  novalidate="novalidate" 
+      <img class="logo" src="img/whitelogo.png">
+
+		<form novalidate="novalidate" 
 			  name="loginForm">
 			<ion-list >
 				<label class="item item-input item-floating-label" 
 				        ng-class="{'has-error':loginForm.email.$invalid}">
 					<span class="input-label">Email</span >
 					<input type="email"
-					       placeholder="USF Email"
+					       placeholder="Email"
 					       ng-model="data.email"
 					       name="email" 
 					       ng-required="true">
-				</label >
+				</label>
 
 				<div class="form-errors"
 					 ng-messages="loginForm.email.$error">
@@ -29,7 +25,7 @@
 
 				<label class="item item-input item-floating-label" 
 					    ng-class="{'has-error':loginForm.password.$invalid}">
-					<span class="input-label" >Password</span >
+					<span class="input-label">Password</span >
 					<input type="password"
 					       placeholder="Password (at least 6 characters)"
 					       ng-model="data.password" 
@@ -48,7 +44,7 @@
 
 				</div>
 			</ion-list >
-			<button class="button button-royal button-block curv"
+			<button class="button button-positive button-block curv"
 			 ng-click="signupEmail()" >Join
 			</button >
 		</form >
@@ -57,7 +53,7 @@
 			<a nav-direction="enter"
 			   ui-sref="login" >Log In
 			</a>
-		</p >
+		</p>
 
-	</ion-content >
+	</ion-content>
 </ion-view >
