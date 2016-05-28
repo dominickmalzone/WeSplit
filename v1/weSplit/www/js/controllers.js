@@ -26,7 +26,7 @@ var app = angular.module('starter.controllers', [])
       var groupie = $scope.myGroup;
       $scope.theItemsRef = new Firebase("https://wesplitlist.firebaseio.com/groups/" + groupie + "/items");
 
-      //console.log("this is the items:  " + $scope.theItemsRef);
+      
     };
 
     $scope.joinGroup = function(u){
@@ -69,10 +69,12 @@ var app = angular.module('starter.controllers', [])
 
 })
 
-app.controller('LoginCtrl', function($scope, $state, $ionicPopup, $rootScope) {
-
+app.controller('LoginCtrl', function($scope, $state, $ionicPopup, $rootScope, $localStorage) {
+//  $localStorage.user = "";
+//  $localStorage.userNum = "Empty Number";
+  console.log("Initialize localstorage user as empty :" + $localStorage.user);
   $scope.data = {};
-  //$scope.currentUser = StorageService.getAll();
+
   $scope.signupEmail = function(){  
     var ref = new Firebase("https://wesplitlist.firebaseio.com/");
     var email = $scope.data.email;
@@ -89,25 +91,19 @@ app.controller('LoginCtrl', function($scope, $state, $ionicPopup, $rootScope) {
       } else {
         var email = $scope.data.email;
         var id = userData.uid;
+        var randNum = Math.floor((Math.random() * 10) + 1);
         console.log("Successfully created user account with uid:", userData.uid);
         var userRef = new Firebase("https://wesplitlist.firebaseio.com/users");
-        userRef.push({Email: email, uid: id})
-        $scope.currentUser = userData//add email later        
-        console.log($scope.currentUser);
+        userRef.push({Email: email, uid: id, num: randNum})
+
+        $localStorage.user = userData.uid;
+        $localStorage.myNum = randNum;
+        console.log("User Data is :" + userData.uid);
+        console.log("After signup, localstorage user is :" + $localStorage.user);
+        console.log("this is ther number after login: " + $localStorage.myNum);
         $state.go('tab.dash');
       }
     });
-    // $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-    //    event.preventDefault();  
-    //     if (toState.name == 'signup' && $localStorage.get($scope.currentUser)) {
-    //       $state.go('tab.home')
-    //     }
-    // });      
-/*        $scope.setLocal = function($localstorage){
-        $localStorage.set('currentUser',userData.uid);
-        console.log(localstorage.get('currentUser'));
-        };
-/*/
 
 
   $scope.loginEmail = function(){
@@ -151,8 +147,12 @@ app.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
 });
 
-app.controller('AccountCtrl', function($scope) {
+app.controller('AccountCtrl', function($scope, $localStorage) {
   $scope.settings = {
     enableFriends: true
   };
+  console.log("localstorage called from Acount is:" + $localStorage.user);
+  console.log("LocalStorage mynumber is : " + $localStorage.myNum);
+  $scope.myId = $localStorage.user;
+  $scope.myNum = $localStorage.myNum;
 });
