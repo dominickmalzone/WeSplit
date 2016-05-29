@@ -1,15 +1,27 @@
 <ion-view view-title="Dashboard">
-  <ion-content class="padding">
-    <h2 ng-show="hasGroup(myGroup)">{{myGroup}}</h2>
+      <ion-nav-buttons side="right">
+          <button ng-show="hasGroup(myGroup)" class="button button-icon button-clear ion-more" ng-click="makeitemsshowbutton($event)"></button>
+      </ion-nav-buttons>
+  <ion-content>
     
-    
-    <div ng-show="!hasGroup(myGroup)">
+    <div ng-show="!hasGroup(myGroup)" class="padding">
       <center><h2>Get Started</h2>
         <button class="button button-full button-balanced" ng-click="modal.show()">Create Group</button></center>
+        <center>or</center>
     </div>
 
+      <div ng-show="!hasGroup(myGroup)" class="padding"> 
+        <label class="item item-input">
+          <span class="input-label">Group Name</span>
+          <input ng-model="theGroup.groupName" type="text">
+        </label>
+           <button class="button button-full button-positive" ng-click="joinGroup(theGroup)">Join Group</button>
+      </div>
+
+    <h2 ng-show="hasGroup(myGroup)">{{myGroup}}</h2>
+      
     <div ng-show="hasGroup(myGroup)">
-      <div>
+      <div class="nopad">
         <ion-list>
           <ion-item ng-repeat="(key, value) in items">{{value.$id}}</ion-item>
         </ion-list>
@@ -17,12 +29,17 @@
     </div>
     
     <br>
+
+     <div class="float-button" ng-show="hasGroup(myGroup)">
+       <span class="height-fix">
+         <a class="content">
+         <i class="ion-plus-circled" ng-click="dosomething()"> </i>
+        </a>
+        </span>
+      </div>
     
-            <label class="item item-input">
-              <span class="input-label">Join Group</span>
-              <input ng-model="theGroup.groupName" type="text">
-            </label>
-             <button class="button button-full button-positive" ng-click="joinGroup(theGroup)">join group</button>
+            
+
 
 
   </ion-content>
