@@ -147,12 +147,51 @@ app.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
 });
 
-app.controller('AccountCtrl', function($scope, $localStorage) {
-  $scope.settings = {
-    enableFriends: true
-  };
-  console.log("localstorage called from Acount is:" + $localStorage.user);
-  console.log("LocalStorage mynumber is : " + $localStorage.myNum);
+app.controller('AccountCtrl', function($scope, $state, $localStorage, $ionicPopover, $ionicPopup) {
+ 
+      $ionicPopover.fromTemplateUrl('my-popover.html', {
+        scope: $scope
+      }).then(function(popover) {
+        $scope.popover = popover;
+      });
+
+        $scope.openPopover = function($event) {
+          $scope.popover.show($event);
+        };
+        
+        $scope.closePopover = function() {
+          $scope.popover.hide();
+        };
+
+        $scope.$on('$destroy', function() {
+          $scope.popover.remove();
+        });
+
+          $scope.logout = function(){
+            $localStorage.user = "";
+            $localStorage.myNum = "";
+            console.log("User Logged out"); //lol\
+            $state.go('login');
+          }
+
+
+           $scope.showConfirm = function() {
+             var confirmPopup = $ionicPopup.confirm({
+               title: 'Logout Confirm',
+               template: 'Are you sure you want to logout?'
+             });
+
+             confirmPopup.then(function(res) {
+               if(res) {
+                 $scope.logout();
+                 $scope.popover.remove();
+               } else {
+                 console.log('User clicked cancel');
+               }
+             });
+           };
+  //console.log("localstorage user" + $localStorage.user);
+  //console.log("LocalStorage mynumber is : " + $localStorage.myNum);
   $scope.myId = $localStorage.user;
   $scope.myNum = $localStorage.myNum;
 });
