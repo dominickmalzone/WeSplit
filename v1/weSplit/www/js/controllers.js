@@ -1,10 +1,11 @@
 var app = angular.module('starter.controllers', [])
 
-.controller('ListCtrl', function($scope, $ionicModal, $ionicPopup, $stateParams, $firebaseArray, $rootScope) {
+.controller('ListCtrl', function($scope, $ionicModal, $ionicPopup, $stateParams, $firebaseArray, $rootScope, $localStorage) {
 
   var groupRef = new Firebase("https://wesplitlist.firebaseio.com/groups");
 
   $scope.myGroup = "";
+  
 
     $ionicModal.fromTemplateUrl('templates/modal.html', {
       scope: $scope
@@ -13,7 +14,7 @@ var app = angular.module('starter.controllers', [])
     });
 
     $scope.hasGroup = function(myGroup){
-      if (myGroup == "")
+      if ($localStorage.myGroup == undefined)
         return false;
       else
         return true;
@@ -23,11 +24,21 @@ var app = angular.module('starter.controllers', [])
       groupRef.child(u.groupName).set({pass: u.pass, items})       
       $scope.modal.hide();
       $scope.myGroup = u.groupName;
+      $localStorage.myGroup = u.groupName
       var groupie = $scope.myGroup;
       $scope.theItemsRef = new Firebase("https://wesplitlist.firebaseio.com/groups/" + groupie + "/items");
-
       
     };
+
+    //load items if group recognized
+    if ($localStorage.myGroup == undefined){
+      console.log("Theres no group in ls");
+    } else {
+      console.log("Group from local storage found");
+      $scope.theItemsRef = new Firebase("https://wesplitlist.firebaseio.com/groups/" + $localStorage.myGroup + "/items");
+      $scope.items = $firebaseArray($scope.theItemsRef);
+      $scope.myGroup = $localStorage.myGroup;
+    }
 
     $scope.joinGroup = function(u){
       //add loading
@@ -39,6 +50,7 @@ var app = angular.module('starter.controllers', [])
             console.log("Group Found");
             //pass confirm later
             $scope.myGroup = u.groupName;
+            $localStorage.myGroup = u.groupName;
             $scope.theItemsRef = new Firebase("https://wesplitlist.firebaseio.com/groups/" + u.groupName + "/items");
             $scope.items = $firebaseArray($scope.theItemsRef);
             return true;
@@ -66,6 +78,12 @@ var app = angular.module('starter.controllers', [])
       // $scope.isBought = function(item){
 
       // }
+
+      //show insert div
+      // cordova.plugins.Keyboard.show();
+      //add item,
+      //set to empty
+      //cancel closes then hide div and keyboard
 
 })
 
@@ -170,6 +188,7 @@ app.controller('AccountCtrl', function($scope, $state, $localStorage, $ionicPopo
           $scope.logout = function(){
             $localStorage.user = "";
             $localStorage.myNum = "";
+            $localStorage.myGroup = undefined;
             console.log("User Logged out"); //lol\
             $state.go('login');
           }
