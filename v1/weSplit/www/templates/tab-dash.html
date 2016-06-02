@@ -1,6 +1,6 @@
 <ion-view view-title="Dashboard">
       <ion-nav-buttons side="right">
-          <button ng-show="hasGroup(myGroup)" class="button button-icon button-clear ion-more" ng-click="makeitemsshowbutton($event)"></button>
+          <button ng-show="hasGroup(myGroup)" class="button button-icon button-clear ion-ios-cart-outline" ng-click="makeitemsshowbutton($event)"></button>
       </ion-nav-buttons>
   <ion-content>
     
@@ -19,30 +19,26 @@
       </div>
 
     <h2 ng-show="hasGroup(myGroup)">{{myGroup}}</h2>
-      
+
     <div ng-show="hasGroup(myGroup)">
       <div class="nopad">
         <ion-list>
-          <ion-item ng-repeat="(key, value) in items">{{value.$id}}</ion-item>
+          <ion-item ng-repeat="(key, value) in items | orderBy:'toString()'">{{value.$id}}</ion-item>
         </ion-list>
       </div>
     </div>
-    
-    <br>
+          
+  </ion-content>
 
      <div class="float-button" ng-show="hasGroup(myGroup)">
        <span class="height-fix">
          <a class="content">
-         <i class="ion-plus-circled" ng-click="dosomething()"> </i>
+         <i class="ion-plus-circled"> </i>
         </a>
         </span>
       </div>
+    </div>
     
-            
-
-
-
-  </ion-content>
    <script id="templates/modal.html" type="text/ng-template">
       <ion-modal-view>
         <ion-header-bar class="bar bar-header bar-balanced">
@@ -64,6 +60,7 @@
         </ion-content>
       </ion-modal-view>
     </script>
+    <!--show keyboard on button press
 <div ng-show="hasGroup(myGroup)">
   <ion-footer-bar keyboard-attach class="bar-balanced item-input-inset" >
     <label class="item-input-wrapper" >
@@ -74,7 +71,7 @@
     <button class="button button-clear ion ion-arrow-right-c"
             ng-click="addItem(item)" >
     </button>
-  </ion-footer-bar >
-</div>
+  </ion-footer-bar 
+</div>-->
 </ion-view>
 
