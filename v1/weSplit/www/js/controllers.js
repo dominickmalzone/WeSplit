@@ -1,6 +1,6 @@
 var app = angular.module('starter.controllers', [])
 
-.controller('ListCtrl', function($scope, $ionicModal, $ionicPopup, $stateParams, $firebaseArray, $rootScope, $localStorage) {
+.controller('ListCtrl', function($scope, $ionicModal, $ionicPopup, focus, $stateParams, $firebaseArray, $rootScope, $localStorage) {
 
   var groupRef = new Firebase("https://wesplitlist.firebaseio.com/groups");
 
@@ -12,6 +12,13 @@ var app = angular.module('starter.controllers', [])
     }).then(function(modal) {
       $scope.modal = modal;
     });
+
+    $scope.focusInput = function() {
+      focus('myInput');
+      $scope.focuss = true;
+    };
+
+    
 
     $scope.hasGroup = function(myGroup){
       if ($localStorage.myGroup == undefined)
