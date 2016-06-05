@@ -31,7 +31,11 @@
     </div>
 
 
-    <button ng-click="focusInput()">Focus Test</button>
+    <div ng-show="focuss" ng-click="tapOff()" class="taparea">
+      hi
+    </div>
+
+    <!--<button ng-click="focusInput()">Focus Test</button>-->
     
 
 
@@ -39,9 +43,9 @@
           
   </ion-content>
 
-     <div class="float-button" ng-show="hasGroup(myGroup)">
+     <div class="float-button" ng-show="hasGroup(myGroup) && !focuss">
        <span class="height-fix">
-         <a class="content"  ng-click="testClick()">
+         <a class="content"  ng-click="focusInput()">
          <i class="ion-plus-circled"> </i>
         </a>
         </span>

@@ -18,7 +18,10 @@ var app = angular.module('starter.controllers', [])
       $scope.focuss = true;
     };
 
-    
+    $scope.tapOff = function(){
+      console.log("Tap off was clicked");
+      $scope.focuss = false;
+    }
 
     $scope.hasGroup = function(myGroup){
       if ($localStorage.myGroup == undefined)
