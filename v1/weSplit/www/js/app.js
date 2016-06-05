@@ -1,4 +1,4 @@
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngMessages','firebase','ngStorage'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','wesplit.directives','ngMessages','firebase','ngStorage'])
 
 .run(function($ionicPlatform, $state, $localStorage) {
   $ionicPlatform.ready(function() {
@@ -12,12 +12,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       StatusBar.styleDefault();
     }
 
-    if($localStorage.user == ""){
+    if(localStorage.user == ""){
       console.log("No user logged in");
       $state.go('signup');
     }
+    
   });
 })
+
 
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -81,6 +83,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     }
   });
 
-  $urlRouterProvider.otherwise('tab.dash');
+  $urlRouterProvider.otherwise('tab/dash');
 
 });
