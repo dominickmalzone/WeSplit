@@ -6,7 +6,7 @@ var app = angular.module('starter.controllers', [])
 
   $scope.myGroup = "";
 
-  
+
 
     $ionicModal.fromTemplateUrl('templates/modal.html', {
       scope: $scope
@@ -37,6 +37,8 @@ var app = angular.module('starter.controllers', [])
     }
 
     $scope.createGroup = function(u) {
+      var entry = u.groupName.replace(/\s/g, '');
+      u.groupName = entry;
       groupRef.child(u.groupName).set({pass: u.pass, items})       
       $scope.modal.hide();
       $scope.myGroup = u.groupName;
@@ -46,11 +48,10 @@ var app = angular.module('starter.controllers', [])
       
     };
 
-    //load items if group recognized
     if ($localStorage.myGroup == undefined){
       console.log("Theres no group in ls");
     } else {
-      console.log("Group from local storage found");
+      //console.log("Group from local storage found");
       $scope.theItemsRef = new Firebase("https://wesplitlist.firebaseio.com/groups/" + $localStorage.myGroup + "/items");
       $scope.items = $firebaseArray($scope.theItemsRef);
       $scope.myGroup = $localStorage.myGroup;
@@ -58,6 +59,8 @@ var app = angular.module('starter.controllers', [])
 
     $scope.joinGroup = function(u){
       //add loading
+      var entry = u.groupName.replace(/\s/g, '');
+      u.groupName = entry;
       groupRef.once("value", function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
           var key = childSnapshot.key();
@@ -71,7 +74,7 @@ var app = angular.module('starter.controllers', [])
             $scope.items = $firebaseArray($scope.theItemsRef);
             return true;
           } else {
-            //console.log('no match with   ' + key);
+            console.log('no match with   ' + key);
             return false;
           }
         });
@@ -93,15 +96,26 @@ var app = angular.module('starter.controllers', [])
 
     var today = dd+'/'+mm+'/'+yyyy;
     
-
+    
+  console.log("test to set nynm");
     $scope.addUserToGroup = function(u){
+      $localStorage.myNum = 2;
       $scope.myGroupMembersRef = new Firebase("https://wesplitlist.firebaseio.com/groups/" + $localStorage.myGroup +"/members");
-      $scope.myGroupMembersRef.child(u.memberName).set({Joined: today, uid: $localStorage.user});       
+      $scope.myGroupMembersRef.child(u.memberName).set({Joined: today, uid: $localStorage.user, num: $localStorage.myNum});       
       $scope.myName = u.memberName;
       console.log(u.memberName);
       $localStorage.usersName = u.memberName;
       console.log("added name to group");
     }
+
+    // $scope.thisUserRef = $scope.myGroupMembersRef +"/"+ $scope.myName;
+    // console.log($scope.thisUserRef);
+    
+    // thisUserRef.on("value", function(snapshot) {
+    //   console.log(snapshot.val());
+    // }, function (errorObject) {
+    //   console.log("The read failed: " + errorObject.code);
+    // });
 
     $scope.addedName = function(myName){
       if ($localStorage.usersName == undefined)
@@ -139,7 +153,6 @@ var app = angular.module('starter.controllers', [])
 app.controller('LoginCtrl', function($scope, $state, $ionicPopup, $rootScope, $localStorage) {
   
   $localStorage.user = "";
-  //console.log("Initialize localstorage user as empty :" + $localStorage.user);
   $scope.data = {};
 
   $scope.signupEmail = function(){  
@@ -214,7 +227,7 @@ app.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
 });
 
 app.controller('AccountCtrl', function($scope, $state, $localStorage, $ionicPopover, $ionicPopup, $firebaseArray) {
- 
+
       $ionicPopover.fromTemplateUrl('my-popover.html', {
         scope: $scope
       }).then(function(popover) {
