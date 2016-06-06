@@ -9,24 +9,27 @@
       		<div class="eightcon"><img id="theIcon" src="img/{{myNum}}.png"></div>
 
     	</div>
-      <div class="row"><h2 class="center">Your Name</h2><i class="ion-edit" id="pencil"></i></div>
-      <div ng-show="ifName()"><h2 class="center">{{userName}}</h2></div>
+      <div class="row"><h2 class="center">{{myName}}</h2><i class="ion-edit" id="pencil"></i></div>
+      
   	  </div>
 
       <div class="padding">Group Name: {{groupName}}</div>
-                      
+          <ion-list>
+            <ion-item ng-repeat="(key, value) in myMembers">{{value.$id}}</ion-item>
+          </ion-list>               
           <!--{{myNum}} {{myId}} -->
 
+<!--Coming soon... or later.
     <div class="moved">
       <div class="row nopad">
         <div class="col squared br"><button class="button button-icon icon ion-ios-pulse-strong icenter"><span class="des">Expenses</span></div>
-        <div class="col squared"><button class="button button-icon icon ion-ios-cart icenter"></button><span class="des">Recently Purchased</span></div><!--recently-->
+        <div class="col squared"><button class="button button-icon icon ion-ios-cart icenter"></button><span class="des">Recently Purchased</span></div>
       </div>
       <div class="row nopad">
         <div class="col squared rb"><button class="button button-icon icon ion-person-stalker icenter"></button><span class="des">Group Members</span></div>
         <div class="col squared tl"><button class="button button-icon icon ion-person-add icenter"></button><span class="des">Invite to Group</span></div>
       </div>
-    </div>
+    </div>-->
 
   </ion-content>
         <script id="my-popover.html" type="text/ng-template">

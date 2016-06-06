@@ -95,7 +95,7 @@ var app = angular.module('starter.controllers', [])
     
 
     $scope.addUserToGroup = function(u){
-      $scope.myGroupMembersRef = new Firebase("https://wesplitlist.firebaseio.com/groups/" + $localStorage.myGroup +"/members")
+      $scope.myGroupMembersRef = new Firebase("https://wesplitlist.firebaseio.com/groups/" + $localStorage.myGroup +"/members");
       $scope.myGroupMembersRef.child(u.memberName).set({Joined: today, uid: $localStorage.user});       
       $scope.myName = u.memberName;
       console.log(u.memberName);
@@ -213,7 +213,7 @@ app.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
 });
 
-app.controller('AccountCtrl', function($scope, $state, $localStorage, $ionicPopover, $ionicPopup) {
+app.controller('AccountCtrl', function($scope, $state, $localStorage, $ionicPopover, $ionicPopup, $firebaseArray) {
  
       $ionicPopover.fromTemplateUrl('my-popover.html', {
         scope: $scope
@@ -258,8 +258,10 @@ app.controller('AccountCtrl', function($scope, $state, $localStorage, $ionicPopo
                }
              });
            };
-  //console.log("localstorage user" + $localStorage.user);
-  //console.log("LocalStorage mynumber is : " + $localStorage.myNum);
+  //local $torage 4 lyfe B-)
+  var memRef = new Firebase("https://wesplitlist.firebaseio.com/groups/" + $localStorage.myGroup +"/members");
   $scope.myId = $localStorage.user;
   $scope.myNum = $localStorage.myNum;
+  $scope.myName = $localStorage.usersName;
+  $scope.myMembers = $firebaseArray(memRef);
 });
