@@ -5,6 +5,7 @@ var app = angular.module('starter.controllers', [])
   var groupRef = new Firebase("https://wesplitlist.firebaseio.com/groups");
 
   $scope.myGroup = "";
+
   
 
     $ionicModal.fromTemplateUrl('templates/modal.html', {
@@ -14,8 +15,13 @@ var app = angular.module('starter.controllers', [])
     });
 
     $scope.focusInput = function() {
-      focus('myInput');
       $scope.focuss = true;
+      focus('myInput');
+      // if($scope.focuss == true){
+      //   console.log('Focus scope is true, do it');
+        // focus('#myInput');
+      // }
+      
     };
 
     $scope.tapOff = function(){
@@ -72,6 +78,39 @@ var app = angular.module('starter.controllers', [])
       });  
     };
  
+    var members = [];
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1;
+
+    var yyyy = today.getFullYear();
+        if(dd<10){
+            dd='0'+dd
+        } 
+        if(mm<10){
+            mm='0'+mm
+        } 
+
+    var today = dd+'/'+mm+'/'+yyyy;
+    
+
+    $scope.addUserToGroup = function(u){
+      $scope.myGroupMembersRef = new Firebase("https://wesplitlist.firebaseio.com/groups/" + $localStorage.myGroup +"/members")
+      $scope.myGroupMembersRef.child(u.memberName).set({Joined: today, uid: $localStorage.user});       
+      $scope.myName = u.memberName;
+      console.log(u.memberName);
+      $localStorage.usersName = u.memberName;
+      console.log("added name to group");
+    }
+
+    $scope.addedName = function(myName){
+      if ($localStorage.usersName == undefined)
+        return false;
+      else
+        return true;
+    }
+
+
       var items = [];
 
       $scope.addItem = function(item){
@@ -79,7 +118,7 @@ var app = angular.module('starter.controllers', [])
           $scope.theItemsRef.child(item.name).set({bought: 'False'});
           item.name = "";
           $scope.items = $firebaseArray($scope.theItemsRef);
-          
+          //focus('myInput'); causing keyboard bug
         } else {
             console.warn('No Group');
         }
@@ -123,7 +162,6 @@ app.controller('LoginCtrl', function($scope, $state, $ionicPopup, $rootScope, $l
         console.log("Successfully created user account with uid:", userData.uid);
         var userRef = new Firebase("https://wesplitlist.firebaseio.com/users");
         userRef.push({Email: email, uid: id, num: randNum})
-
         $localStorage.user = userData.uid;
         $localStorage.myNum = randNum;
         console.log("User Data is :" + userData.uid);
@@ -199,6 +237,7 @@ app.controller('AccountCtrl', function($scope, $state, $localStorage, $ionicPopo
             $localStorage.user = "";
             $localStorage.myNum = "";
             $localStorage.myGroup = undefined;
+            $localStorage.usersName = undefined;
             console.log("User Logged out"); //lol\
             $state.go('login');
           }

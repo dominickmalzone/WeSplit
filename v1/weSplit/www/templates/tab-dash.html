@@ -1,6 +1,6 @@
-<ion-view view-title="Dashboard">
+<ion-view view-title="List">
       <ion-nav-buttons side="right">
-          <button ng-show="hasGroup(myGroup)" class="button button-icon button-clear ion-ios-cart-outline" ng-click="makeitemsshowbutton($event)"></button>
+          <button ng-show="hasGroup(myGroup)" class="button button-icon button-clear ion-ios-trash-outline" ng-click="makeitemsshowbutton($event)"></button>
       </ion-nav-buttons>
   <ion-content>
     
@@ -18,9 +18,17 @@
            <button class="button button-full button-positive" ng-click="joinGroup(theGroup)">Join Group</button>
       </div>
 
-    <h2 ng-show="hasGroup(myGroup)">{{myGroup}}</h2>
+      <div ng-show="hasGroup(myGroup) && !addedName(myName)" class="padding"> 
+        <label class="item item-input">
+          <span class="input-label">Add your name to join {{myGroup}}</span>
+          <input ng-model="member.memberName" type="text">
+        </label>
+           <button class="button button-full button-positive" ng-click="addUserToGroup(member)">Enter Group</button>
+      </div>
 
-    <div ng-show="hasGroup(myGroup)">
+    <h2 ng-show="hasGroup(myGroup) && addedName(myName)">{{myGroup}}</h2>
+
+    <div ng-show="hasGroup(myGroup) && addedName(myName)">
       <div class="nopad">
         <ion-list>
           <ion-item ng-repeat="(key, value) in items | orderBy:'toString()'">{{value.$id}}
@@ -31,9 +39,7 @@
     </div>
 
 
-    <div ng-show="focuss" ng-click="tapOff()" class="taparea">
-      hi
-    </div>
+    <div ng-show="focuss" ng-click="tapOff()" class="taparea"></div>
 
     <!--<button ng-click="focusInput()">Focus Test</button>-->
     
@@ -43,9 +49,9 @@
           
   </ion-content>
 
-     <div class="float-button" ng-show="hasGroup(myGroup) && !focuss">
+     <div class="float-button" ng-show="hasGroup(myGroup) && !focuss" ng-click="focusInput()">
        <span class="height-fix">
-         <a class="content"  ng-click="focusInput()">
+         <a class="content">
          <i class="ion-plus-circled"> </i>
         </a>
         </span>
@@ -76,15 +82,15 @@
    
 <div ng-show="focuss">
   <ion-footer-bar keyboard-attach class="bar-balanced item-input-inset" >
-    <label class="item-input-wrapper" >
-      <input type="text" id="myInput"
+    <label class="item-input-wrapper" ng-click="resetTextfield()">
+      <input type="text" id="myInput" is-focused="true"
              placeholder="Add to the group gorcery list"
-             ng-model="item.name" />
-    </label >
+             ng-model="item.name"/>
+    </label>
     <button class="button button-clear ion ion-arrow-right-c"
             ng-click="addItem(item)" >
     </button>
-  </ion-footer-bar 
+  </ion-footer-bar>
 </div>
 </ion-view>
 
