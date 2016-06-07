@@ -5,21 +5,22 @@
   
   <ion-content>
       <div padding>
-    	<div class="proimg">
-      		<div class="eightcon"><img id="theIcon" src="img/{{myNum}}.png"></div>
-
-    	</div>
-      <div class="row"><h2 class="center">{{myName}}</h2><i class="ion-edit" id="pencil"></i></div>
-      
+        	<div class="proimg">
+          		<div class="eightcon"><img id="theIcon" src="img/{{myNum}}.png"></div>
+        	</div>
+              <div class="row"><h2 class="center">{{myName}}</h2></div>      
   	  </div>
 
-      <div class="padding">Group Name: {{groupName}}</div>
+      <div class="padding">Group Name: {{myGroup}}</div>
           <ion-list>
-            <ion-item ng-repeat="(key, value) in myMembers">{{value.$id}}</ion-item>
+            <ion-item ng-repeat="member in members">
+                <span id="memberName">{{member.$id}}</span>
+                <span id="memberIcon"><img src="img/{{member.num}}.png"></span>
+            </ion-item>
           </ion-list>               
           <!--{{myNum}} {{myId}} -->
 
-<!--Coming soon... or later.
+<!--Coming soon... or later. <i class="ion-edit" id="pencil"></i>
     <div class="moved">
       <div class="row nopad">
         <div class="col squared br"><button class="button button-icon icon ion-ios-pulse-strong icenter"><span class="des">Expenses</span></div>

@@ -1,11 +1,14 @@
 var app = angular.module('starter.controllers', [])
 
-.controller('ListCtrl', function($scope, $ionicModal, $ionicPopup, focus, $stateParams, $firebaseArray, $rootScope, $localStorage) {
+.controller('ListCtrl', function($scope, $ionicModal, $ionicPopup, focus, $stateParams, $firebaseArray, $rootScope, $ionicListDelegate, $localStorage) {
 
   var groupRef = new Firebase("https://wesplitlist.firebaseio.com/groups");
 
   $scope.myGroup = "";
 
+    $scope.data = {
+    showDelete: false
+    };
 
 
     $ionicModal.fromTemplateUrl('templates/modal.html', {
@@ -96,7 +99,6 @@ var app = angular.module('starter.controllers', [])
 
     var today = dd+'/'+mm+'/'+yyyy;
     
-    
   console.log("test to set nynm");
     $scope.addUserToGroup = function(u){
       $localStorage.myNum = 2;
@@ -108,22 +110,12 @@ var app = angular.module('starter.controllers', [])
       console.log("added name to group");
     }
 
-    // $scope.thisUserRef = $scope.myGroupMembersRef +"/"+ $scope.myName;
-    // console.log($scope.thisUserRef);
-    
-    // thisUserRef.on("value", function(snapshot) {
-    //   console.log(snapshot.val());
-    // }, function (errorObject) {
-    //   console.log("The read failed: " + errorObject.code);
-    // });
-
     $scope.addedName = function(myName){
       if ($localStorage.usersName == undefined)
         return false;
       else
         return true;
     }
-
 
       var items = [];
 
@@ -137,16 +129,6 @@ var app = angular.module('starter.controllers', [])
             console.warn('No Group');
         }
       }
-
-      // $scope.isBought = function(item){
-
-      // }
-
-      //show insert div
-      // cordova.plugins.Keyboard.show();
-      //add item,
-      //set to empty
-      //cancel closes then hide div and keyboard
 
 })
 
@@ -204,14 +186,6 @@ app.controller('LoginCtrl', function($scope, $state, $ionicPopup, $rootScope, $l
     });
   };
 
- /* $scope.updateInfo = function(){
-    ref.child('users/'+ $scope.currentUser).push($scope.name); 
-    console.log(userData.uid); 
-    console.log("name");
-
-  }; */
-
-
 };
 });
 
@@ -226,7 +200,7 @@ app.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
 });
 
-app.controller('AccountCtrl', function($scope, $state, $localStorage, $ionicPopover, $ionicPopup, $firebaseArray) {
+app.controller('AccountCtrl', function($scope, $state, $firebaseArray, $localStorage, $ionicPopover, $ionicPopup, $firebaseArray) {
 
       $ionicPopover.fromTemplateUrl('my-popover.html', {
         scope: $scope
@@ -271,9 +245,24 @@ app.controller('AccountCtrl', function($scope, $state, $localStorage, $ionicPopo
                }
              });
            };
-  //local $torage 4 lyfe B-)
+
+
   var memRef = new Firebase("https://wesplitlist.firebaseio.com/groups/" + $localStorage.myGroup +"/members");
+    
+  $scope.members = $firebaseArray(memRef);
+  memRef.once("value", function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var key = childSnapshot.key();
+      //console.log(key);//name
+      var childData = childSnapshot.val();
+      $scope.members.num = childData.num;
+      //console.log(childData.Joined);
+    });
+  });
+
+  //local $torage 4 lyfe B-)
   $scope.myId = $localStorage.user;
+  $scope.myGroup = $localStorage.myGroup
   $scope.myNum = $localStorage.myNum;
   $scope.myName = $localStorage.usersName;
   $scope.myMembers = $firebaseArray(memRef);
