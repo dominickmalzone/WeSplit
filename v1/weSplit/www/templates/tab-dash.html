@@ -1,6 +1,6 @@
 <ion-view view-title="List">
       <ion-nav-buttons side="right">
-          <button ng-show="hasGroup(myGroup)" class="button button-icon button-clear ion-ios-trash-outline" ng-click="makeitemsshowbutton($event)"></button>
+          <button ng-show="hasGroup(myGroup)" ng-click="data.showDelete = !data.showDelete;" class="button button-icon button-clear ion-ios-trash-outline"></button>
       </ion-nav-buttons>
   <ion-content>
     
@@ -30,9 +30,14 @@
 
     <div ng-show="hasGroup(myGroup) && addedName(myName)">
       <div class="nopad">
-        <ion-list>
-          <ion-item ng-repeat="(key, value) in items | orderBy:'toString()'">{{value.$id}}
-                <input type="radio">
+        <ion-list show-delete="data.showDelete">
+          <ion-item class="item-icon-right item-remove-animate"  ng-repeat="(key, value) in items | orderBy:'toString()'">{{value.$id}}
+                
+          <ion-delete-button class=" item-icon-right ion-minus-circled" 
+                             ng-click="items.$remove(key,value)">
+          </ion-delete-button>
+
+                    
           </ion-item>
         </ion-list>
       </div>
@@ -43,13 +48,10 @@
 
     <!--<button ng-click="focusInput()">Focus Test</button>-->
     
-
-
-    <!--    <button ng-click="items.$remove(key,value)">x</button> -->
           
   </ion-content>
 
-     <div class="float-button" ng-show="hasGroup(myGroup) && !focuss" ng-click="focusInput()">
+     <div class="float-button" ng-show="hasGroup(myGroup)&& addedName(myName) && !focuss" ng-click="focusInput()">
        <span class="height-fix">
          <a class="content">
          <i class="ion-plus-circled"> </i>
@@ -83,7 +85,7 @@
 <div ng-show="focuss">
   <ion-footer-bar keyboard-attach class="bar-balanced item-input-inset" >
     <label class="item-input-wrapper" ng-click="resetTextfield()">
-      <input type="text" id="myInput" is-focused="true"
+      <input type="text" id="myInput" is-focused="true" ng-enter="addItem(item)"
              placeholder="Add to the group gorcery list"
              ng-model="item.name"/>
     </label>
