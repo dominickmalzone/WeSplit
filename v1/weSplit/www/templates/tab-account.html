@@ -17,8 +17,11 @@
                 <span id="memberName">{{member.$id}}</span>
                 <span id="memberIcon"><img src="img/{{member.num}}.png"></span>
             </ion-item>
-          </ion-list>               
-          <!--{{myNum}} {{myId}} -->
+          </ion-list>        
+
+
+
+
 
 <!--Coming soon... or later. <i class="ion-edit" id="pencil"></i>
     <div class="moved">
@@ -40,11 +43,32 @@
                 </ion-header-bar>
               <ion-content>
                 <div class="list">
-                  <a class="item" href="http://site.com/">Item</a>
-                  <a class="item" href="http://site.com/">Item</a>
-                  <a class="item" href="http://site.com/">Help</a>
+                  <a class="item" ng-click="openModal(); setRequest()">Request Feature</a>
+                  <a class="item" ng-click="openModal(); setReport()">Report Problem</a>
+                  <a class="item" href="http://wwww.twitter.com">Connect with us</a>
                   <a class="item" ng-click="showConfirm()">Signout</a>
               </ion-content>
             </ion-popover-view>
+        </script>
+        <script id="my-modal.html" type="text/ng-template">
+          <ion-modal-view>
+            <ion-header-bar class="bar-positive">
+              <h1 class="title">{{reason}}</h1>
+              <button class="button button-icon button-clear" ng-click="closeModal()">Close</button>
+              
+            </ion-header-bar>
+            <ion-content class="padding">
+                  <center><img src="img/requestimage.png"/></center>
+                  <div style="padding-bottom: 10px;">{{descrip}}</div>
+                  <div class="list">
+                    <label class="item item-input">
+                      <textarea class="textareas" ng-model="myMessage" placeholder="Thanks! We love feedback">
+                      </textarea>
+                    </label>
+                    <button class="button button-block button-positive" ng-click="sendResponse(myMessage)">Send</button>
+                  </div>
+              
+            </ion-content>
+          </ion-modal-view>
         </script>
 </ion-view>

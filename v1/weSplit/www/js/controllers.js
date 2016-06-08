@@ -196,11 +196,9 @@ app.controller('ChatsCtrl', function($scope, Chats) {
   };
 })
 
-app.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-});
+app.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {});
 
-app.controller('AccountCtrl', function($scope, $state, $firebaseArray, $localStorage, $ionicPopover, $ionicPopup, $firebaseArray) {
+app.controller('AccountCtrl', function($scope, $state, $firebaseArray, $localStorage, $ionicPopover, $ionicModal, $ionicPopup, $firebaseArray) {
 
       $ionicPopover.fromTemplateUrl('my-popover.html', {
         scope: $scope
@@ -220,12 +218,58 @@ app.controller('AccountCtrl', function($scope, $state, $firebaseArray, $localSto
           $scope.popover.remove();
         });
 
+  $ionicModal.fromTemplateUrl('my-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+  // Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  });
+
+  $scope.setRequest = function(){
+    $scope.reason = "Request a feature";
+    $scope.descrip = "We love improving! Let us know how we can make your experience better!"
+  }
+    $scope.setReport = function(){
+    $scope.reason = "Report a problem";
+    $scope.descrip = "Let us know whats wrong and well get back to you with a solution ASAP."
+  }
+
+  $scope.sendResponse = function(myMessage){
+    var responseRef = new Firebase("https://wesplitlist.firebaseio.com/responses");
+    var thedate = new Date();
+    var newResponse = responseRef.push();
+      newResponse.set({
+        user: $localStorage.user +" :" + $localStorage.usersName,
+        description: myMessage
+      });
+      myMessage = "";
+      $scope.closeModal();
+  }
+
           $scope.logout = function(){
             $localStorage.user = "";
             $localStorage.myNum = "";
             $localStorage.myGroup = undefined;
             $localStorage.usersName = undefined;
-            console.log("User Logged out"); //lol\
+            console.log("User Logged out"); 
             $state.go('login');
           }
 
